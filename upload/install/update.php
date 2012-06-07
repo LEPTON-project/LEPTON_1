@@ -273,9 +273,10 @@ if (version_compare($lepton_version, "1.1.4", "<"))
 echo '<h3>Current process : updating to LEPTON 1.2.0</h3>';
 
 /**
- *	try to remove obsolete columns from pages_table
- *  first check if the columns exist
+ *  database modification
  */
+
+//	try to remove obsolete columns from pages_table, first check if the columns exist
 $checkDbTable = $database->query("SHOW COLUMNS FROM `".TABLE_PREFIX."pages` LIKE 'page_icon'");
 $column_exists = $checkDbTable->numRows() > 0 ? TRUE : FALSE;
 
@@ -295,6 +296,22 @@ $column_exists = $checkDbTable->numRows() > 0 ? TRUE : FALSE;
 
 if (true === $column_exists ) {
  $database->query('ALTER TABLE `' . TABLE_PREFIX . 'pages` DROP COLUMN `menu_icon_1`');
+}
+  // drop obsolete sik_news_tables for backword compatibility, new xsik_news_tables are created with upgrade.php of news module
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_posts`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_groups`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_comments`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_settings`");
+
+// insert backend_title in settings table
+$checkField = $database->query("SELECT * FROM ".TABLE_PREFIX."settings WHERE 'name' = 'backend_title'");
+$field_exists = $checkField->numRows() > 0 ? TRUE : FALSE;
+
+if (false === $field_exists ) {
+ echo "backend_title already exists, no new entry";
+}
+else {
+$database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('backend_title', 'LEPTON-CMS')");
 }
 
 /**
@@ -321,90 +338,13 @@ foreach ($upgrade_modules as $module)
 
 /**
  *  reload all addons
- *  Modules first
  */
-// first remove addons entrys for modules that don't exist
-$sql = 'SELECT `directory` FROM `' . TABLE_PREFIX . 'addons` WHERE `type` = \'module\' ';
-if ($res_addons = $database->query($sql))
-{
-    while ($value = $res_addons->fetchRow(MYSQL_ASSOC))
-    {
-        if (!file_exists(WB_PATH . '/modules/' . $value['directory']))
-        {
-            $sql = "DELETE FROM `" . TABLE_PREFIX . "addons` WHERE `directory` = '" . $value['directory'] . "'";
-            $database->query($sql);
-        }
-    }
+if (file_exists('reload.php')) {
+    include 'reload.php';
 }
 
-// now check modules folder with entries in addons
-$modules = scan_current_dir(WB_PATH . '/modules');
-if (count($modules['path']) > 0)
-{
-    foreach ($modules['path'] as $value)
-    {
-        $code_version = get_modul_version($value);
-        $db_version   = get_modul_version($value, false);
-        if (($db_version != null) && ($code_version != null))
-        {
-            require(WB_PATH . '/modules/' . $value . "/info.php");
-            load_module(WB_PATH . '/modules/' . $value);
-        }
-    }
-}
-
-/**
- *  Reload Templates
- *
- */
-if ($handle = opendir(WB_PATH . '/templates'))
-{
-    // delete not existing templates from database
-    $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'template\'';
-    $database->query($sql);
-    // loop over all templates
-    while (false !== ($file = readdir($handle)))
-    {
-        if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
-        {
-            require(WB_PATH . '/templates/' . $file . "/info.php");
-            load_template(WB_PATH . '/templates/' . $file);
-        }
-    }
-    closedir($handle);
-}
-
-/**
- *  Reload Languages
- *
- */
-if ($handle = opendir(WB_PATH . '/languages/'))
-{
-    // delete  not existing languages from database
-    $sql = 'DELETE FROM  `' . TABLE_PREFIX . 'addons`  WHERE `type` = \'language\'';
-    $database->query($sql);
-    // loop over all languages
-    while (false !== ($file = readdir($handle)))
-    {
-        if ($file != '' && substr($file, 0, 1) != '.' && $file != 'index.php')
-        {
-            load_language(WB_PATH . '/languages/' . $file);
-        }
-    }
-    closedir($handle);
-}
-
-  // drop obsolete sik_news_tables for backword compatibility, new xsik_news_tables are created with upgrade.php of news module
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_posts`");
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_groups`");
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_comments`");
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_settings`");
-/**
- *  database modification
- */
+// at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.0\' WHERE `name` =\'lepton_version\'');
-
-$database->query('INSERT INTO `' . TABLE_PREFIX . 'settings` SET (name,value) VALUES (\'backend_title\',\'LEPTON CMS\')';
 
 /**
  *  success message

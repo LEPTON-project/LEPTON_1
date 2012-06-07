@@ -35,7 +35,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'form';
 $module_name      = 'Form';
 $module_function  = 'page';
-$module_version   = '3.0.2';
+$module_version   = '3.0.3';
 $module_platform  = '1x';
 $module_author    = 'Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke ';
 $module_license   = 'GNU General Public License';

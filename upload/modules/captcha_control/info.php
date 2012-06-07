@@ -48,7 +48,7 @@ if (defined('WB_PATH')) {
 $module_directory 	= 'captcha_control';
 $module_name 		  	= 'Captcha and Advanced-Spam-Protection (ASP) Control';
 $module_function 		= 'tool';
-$module_version 		= '1.01';
+$module_version 		= '1.02';
 $module_platform 		= '1.x';
 $module_author 	  	= 'Thomas Hornik (thorn),LEPTON Project';
 $module_license 		= 'GNU General Public License';

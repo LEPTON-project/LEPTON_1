@@ -15,7 +15,7 @@
 $module_directory       = 'code2';
 $module_name            = 'Code2';
 $module_function        = 'page';
-$module_version         = '2.2.4';
+$module_version         = '2.2.5';
 $module_platform        = '1.x';
 $module_author          = 'Ryan Djurovich, Chio Maisriml, Thorn, Aldus.';
 $module_license         = 'GNU General Public License';

@@ -304,10 +304,10 @@ if (true === $column_exists ) {
   $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_settings`");
 
 // insert backend_title in settings table
-$checkField = $database->query("SELECT * FROM ".TABLE_PREFIX."settings WHERE 'name' = 'backend_title'");
+$checkField = $database->query("SELECT * FROM ".TABLE_PREFIX."settings WHERE name = 'backend_title'");
 $field_exists = $checkField->numRows() > 0 ? TRUE : FALSE;
 
-if (false === $field_exists ) {
+if (true === $field_exists ) {
  echo "backend_title already exists, no new entry";
 }
 else {
@@ -319,13 +319,20 @@ $database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('bac
  *
  */
 $upgrade_modules = array(
-    "tiny_mce_jq",
     "addon_file_editor",
-    "news",
-    "wrapper",
+    "captcha_control",
+    "code2",
     "droplets",
-    "phpmailer",
-    "lib_jquery"
+    "form",
+    "lib_jquery", 
+    "menu_link",
+    "news", 
+    "phpmailer", 
+    "show_menu2",              
+    "tiny_mce_jq",
+    "wrapper",
+    "wysiwyg",    
+    "wysiwyg_admin"    
 );
 
 foreach ($upgrade_modules as $module)

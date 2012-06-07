@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -93,7 +93,7 @@ $TEXT = array(
 	'ADMINISTRATORS' 		=> 'Administratoren',
 	'ADVANCED' 				=> 'Erweitert',
 	'ALLOWED_FILETYPES_ON_UPLOAD' => 'Erlaubte Dateitypen f&uuml;r Hochladen',
-	'ALLOWED_VIEWERS' 		=> 'genehmigter Besucher',
+	'ALLOWED_VIEWERS' 		=> 'genehmigte Besucher',
 	'ALLOW_MULTIPLE_SELECTIONS' => 'Mehrfachauswahl',
 	'ALL_WORDS' 			=> 'Alle W&ouml;rter',
 	'ANCHOR' 				=> 'Anker',
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'nur WB Tabellen sichern',
 	'BASIC' 				=> 'Einfach',
 	'BLOCK' 				=> 'Block',
+	'BACKEND_TITLE'	=>	'Backendtitel',
 	'CALENDAR' 				=> 'Kalender',
 	'CANCEL' 				=> 'Abbrechen',
 	'CAN_DELETE_HIMSELF' 	=> 'Kann sich selber l&ouml;schen',
@@ -245,14 +246,14 @@ $TEXT = array(
 	'NAME' 					=> 'Name',
 	'NEED_CURRENT_PASSWORD' => 'mit aktuellem Passwort best&auml;tigen',
 	'NEED_PASSWORD_TO_CONFIRM' => 'Bitte die &Auml;nderungen mit aktuellem Passwort best&auml;tigen',
-	'NEED_TO_LOGIN' 		=> 'M&uuml;ssen Sie sich einloggen?',
+	'NEED_TO_LOGIN' 		=> 'M&ouml;chten Sie sich einloggen?',
 	'NEW_PASSWORD' 			=> 'Neues Passwort',
 	'NEW_USER_HINT'			=> 'Mindestl&auml;nge Benutzername: %d Buchstaben, Mindestl&auml;nge Passwort: %d Buchstaben!',
 	'NEW_WINDOW' 			=> 'Neues Fenster',
 	'NEXT' 					=> 'n&auml;chste',
 	'NEXT_PAGE' 			=> 'n&auml;chste Seite',
 	'NO' 					=> 'Nein',
-	'NO_LEPTON_ADDON'  => 'Dieses Addon ist nicht f&uuml;r LEPTON geeignet',  
+	'NO_LEPTON_ADDON'  => 'Dieses Addon ist nicht f&uuml;r LEPTON geeignet',
 	'NONE' 					=> 'Keine',
 	'NONE_FOUND' 			=> 'Keine gefunden',
 	'NOT_FOUND' 			=> 'Nicht gefunden',
@@ -391,7 +392,7 @@ $TEXT = array(
 	'USERS_DELETED' 		=> 'Benutzer ist als gel&ouml;scht markiert',
 	'USERS_FLAGS' 			=> 'Benutzerflags',
 	'USERS_PROFILE_ALLOWED' => 'Benutzer kann erweitertes Profil anlegen',
-	'VERIFICATION' 			=> 'Pr&uuml;fziffer',
+	'VERIFICATION' 			=> 'Spamschutz',
 	'VERSION' 				=> 'Version',
 	'VIEW' 					=> 'Ansicht',
 	'VIEW_DELETED_PAGES' 	=> 'gel&ouml;schte Seiten anschauen',
@@ -461,8 +462,8 @@ $HEADING = array(
 	'MANAGE_SECTIONS' 		=> 'Abschnitte verwalten',
 	'MODIFY_ADVANCED_PAGE_SETTINGS' => 'Erweiterte Seitenoptionen &auml;ndern',
 	'MODIFY_DELETE_GROUP' 	=> '&Auml;ndern/L&ouml;schen von Gruppen',
-	'MODIFY_DELETE_PAGE' 	=> 'Seite &auml;ndern/Seite l&ouml;schen',
-	'MODIFY_DELETE_USER' 	=> '&Auml;ndern/L&ouml;schen von Benutzern',
+	'MODIFY_DELETE_PAGE' 	=> 'Seite &auml;ndern / Seite l&ouml;schen',
+	'MODIFY_DELETE_USER' 	=> '&Auml;ndern / L&ouml;schen von Benutzern',
 	'MODIFY_GROUP' 			=> 'Gruppe &auml;ndern',
 	'MODIFY_GROUPS' 		=> 'Gruppen &auml;ndern',
 	'MODIFY_INTRO_PAGE' 	=> 'Eingangsseite &auml;ndern',
@@ -474,6 +475,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Passwort',
 	'MY_SETTINGS' 			=> 'Einstellungen',
 	'SEARCH_SETTINGS' 		=> 'Suchoptionen',
+	'SEARCH_PAGE' 			=> 'Seite suchen',
 	'SECURITY_SETTINGS'		=> 'Sicherheitseinstellungen',
 	'SERVER_SETTINGS' 		=> 'Servereinstellungen',
 	'TEMPLATE_DETAILS' 		=> 'Details zur Designvorlage',
@@ -491,9 +493,9 @@ $MESSAGE = array(
 	'ADDON_GROUPS_MARKALL' => 'Alle markieren',
 	'ADDON_LANGUAGES_RELOADED' 	=> 'Sprachen erfolgreich geladen',
 	'ADDON_MANUAL_FTP_LANGUAGE' => '<strong>ACHTUNG!</strong> &Uuml;berspielen Sie Sprachdateien aus Sicherheitsgr&uuml;nden nur &uuml;ber FTP in den Ordner /languages/ und benutzen die Upgrade Funktion zum Registrieren oder Aktualisieren.',
-	'ADDON_MANUAL_FTP_WARNING' 	=> 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. ',
+	'ADDON_MANUAL_FTP_WARNING' 	=> 'Warnung: <br />Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. ',
 	'ADDON_MANUAL_INSTALLATION' => 'Beim Hochladen oder L&ouml;schen von Modulen per FTP (nicht empfohlen), werden eventuell vorhandene Modulfunktionen <tt>install</tt>, <tt>upgrade</tt> oder <tt>uninstall</tt> nicht automatisch ausgef&uuml;hrt. Solche Module funktionieren daher meist nicht richtig, oder hinterlassen Datenbankeintr&auml;ge beim L&ouml;schen per FTP.<br /><br /> Nachfolgend k&ouml;nnen die Modulfunktionen von per FTP hochgeladenen Modulen manuell ausgef&uuml;hrt werden.',
-	'ADDON_MANUAL_INSTALLATION_WARNING' => 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. Bitte nur bei Problemen mit per FTP hochgeladenen Modulen verwenden. ',
+	'ADDON_MANUAL_INSTALLATION_WARNING' => 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren.<br />Bitte nur bei Problemen mit per FTP hochgeladenen Modulen verwenden. ',
 	'ADDON_MANUAL_RELOAD_WARNING' => 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. ',
 	'ADDON_MODULES_RELOADED' 	=> 'Module erfolgreich geladen',
 	'ADDON_PRECHECK_FAILED' 	=> 'Installation fehlgeschlagen. Ihr System erf&uuml;llt nicht alle Voraussetzungen die f&uuml;r diese Erweiterung ben&ouml;tigt werden. Um diese Erweiterung nutzen zu k&ouml;nnen, m&uuml;ssen nachfolgende Updates durchgef&uuml;hrt werden.',
@@ -577,7 +579,7 @@ $MESSAGE = array(
 	'MEDIA_FILE_NOT_FOUND' 		=> 'Die Datei konnte nicht gefunden werden.',
 	'MEDIA_NAME_DOT_DOT_SLASH' 	=> 'Der Name darf nicht ../ enthalten!',
 	'MEDIA_NAME_INDEX_PHP' 		=> 'Der Dateiname index.php kann nicht verwendet werden.',
-	'MEDIA_NONE_FOUND' 			=> 'Im aktuellen Verzeichnis konnten keine Dateien (z.B. Bilder) gefunden werden',
+	'MEDIA_NONE_FOUND' 			=> 'Keine Dateien im aktuellen Verzeichnis',
 	'MEDIA_RENAMED' 			=> 'Das Umbenennen war erfolgreich',
 	'MEDIA_SINGLE_UPLOADED' 	=> 'Datei wurde erfolgreich &uuml;bertragen',
 	'MEDIA_TARGET_DOT_DOT_SLASH' => 'Der Name des Zielverzeichnisses darf nicht ../ enthalten',
@@ -596,11 +598,11 @@ $MESSAGE = array(
 	'PAGES_DELETED' 			=> 'Die Seite wurde erfolgreich gel&ouml;scht',
 	'PAGES_DELETE_CONFIRM' 		=> 'Sind Sie sicher, dass Sie die ausgew&auml;hlte Seite &raquo;%s&laquo; l&ouml;schen m&ouml;chten',
 	'PAGES_INSUFFICIENT_PERMISSIONS' => 'Sie haben keine Berechtigung, diese Seite zu &auml;ndern',
-	'PAGES_INTRO_EMPTY' 		=> 'Bitte Content einf&uuml;gen, eine leere Introseite kann nicht gespeichert werden.',    
+	'PAGES_INTRO_EMPTY' 		=> 'Bitte Content einf&uuml;gen, eine leere Introseite kann nicht gespeichert werden.',
 	'PAGES_INTRO_LINK' 			=> 'Bitte klicken Sie HIER um die Eingangsseite zu &auml;ndern',
 	'PAGES_INTRO_NOT_WRITABLE' 	=> 'Es konnte nicht in die Datei intro.php im Seitenverzeichnis (page) geschrieben werden (ungen&uuml;gende Zugangsrechte)',
 	'PAGES_INTRO_SAVED' 		=> 'Eingangsseite wurde erfolgreich gespeichert',
-	'PAGES_LAST_MODIFIED' 		=> 'Die letzte &Auml;nderung wurde durchgef&uuml;hrt von',
+	'PAGES_LAST_MODIFIED' 		=> 'Letzte &Auml;nderung:',
 	'PAGES_NOT_FOUND' 			=> 'Die Seite konnte nicht gefunden werden',
 	'PAGES_NOT_SAVED' 			=> 'Beim Speichern der Seite ist ein Fehler aufgetreten',
 	'PAGES_PAGE_EXISTS' 		=> 'Eine Seite mit einem &auml;hnlichen oder demselben Titel existiert bereits',
@@ -672,7 +674,7 @@ Wenn Sie dieses E-Mail versehentlich erhalten haben, l&ouml;schen Sie bitte dies
 ----------------------------------------
 Diese E-Mail wurde automatisch erstellt!
 ',
-	
+
 	'SIGNUP2_SUBJECT_LOGIN_INFO' => 'Deine LEPTON Logindaten ...',
 	'SIGNUP_NO_EMAIL' 			=> 'Bitte geben Sie Ihre E-Mail Adresse an',
 	'START_CURRENT_USER' 		=> 'Sie sind momentan angemeldet als:',
@@ -715,9 +717,9 @@ $OVERVIEW = array(
 	'VIEW' 						=> 'Ansicht Ihrer Webseite in einem neuen Fenster...'
 ); // OVERVIEW
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

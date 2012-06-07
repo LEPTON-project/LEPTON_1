@@ -2,12 +2,12 @@
 	<input type="hidden" name="action" value="show"  />
 	<input type="hidden" name="up" value="{PARENT_DIR_LINK}"  />
 	<input type="hidden" name="current_dir" value="{PARENT_PATH}" />
-	<table summary="{PARENT_DIR_LINK}" class="browse_header" cellpadding="4" cellspacing="0">
+	<table summary="{PARENT_DIR_LINK}" class="browse_header" cellpadding="4" cellspacing="0" width="100%">
 	<tr>
 	<!-- BEGIN up_link_block -->
 		<td class="up_link_img">
 			<button class="href_link" type="submit" name="parent" value="{PARENT_PATH}">
-				<img src="{THEME_URL}/images/up_folder_16.png" width="16" alt="^" />
+				<img src="{THEME_URL}/images/up_folder_16.png" width="24" alt="^" />
 			</button>
 		</td>
 	<!-- END up_link_block -->
@@ -20,7 +20,7 @@
 
 <div class="table_list">
 	<p class="table_list_info{DISPLAY_NONE_FOUND}"><br />{NONE_FOUND}</p>
-	<table summary="{TEXT_CURRENT_FOLDER}: {ROOT_DIRECTORY}{CURRENT_PATH}" cellpadding="4" cellspacing="0" class="browse_list{DISPLAY_LIST_TABLE}">
+	<table summary="{TEXT_CURRENT_FOLDER}: {ROOT_DIRECTORY}{CURRENT_PATH}" cellpadding="4" cellspacing="0" width="100%" class="browse_list{DISPLAY_LIST_TABLE}">
 <!-- BEGIN file_list_block -->
 	<tr class="row_{ROW_ID}{ENABLE_OVERLIB} hover">
 		<td class="image_link{CLASS_PREVIEW}">
@@ -42,14 +42,14 @@
 				<input type="hidden" name="fileext" value="{EXTENSION}"  />
 				<input type="hidden" name="filetype" value="{FILETYPE}"  />
 	<!-- BEGIN media_rename_block -->
-				<button class="href_link" type="submit" name="action" value="media_rename" onclick="this.form.onsubmit=function(){};">
-					<img src="{THEME_URL}/images/modify_16.png" alt="{TEXT_RENAME}" />
+				<button class="href_link" type="submit" name="action" value="media_rename" onclick="this.form.onsubmit=function(){};" title="{TEXT_RENAME}">
+					<img src="{THEME_URL}/images/modify_16.png" alt="{TEXT_RENAME}" title="{TEXT_RENAME}" />
 				</button>
 	<!-- END media_rename_block -->
 				{RENHAME_CONTENT}
 	<!-- BEGIN media_delete_block -->
-				<button class="href_link" type="submit" name="action" value="media_delete">
-					<img src="{THEME_URL}/images/delete_16.png" alt="{TEXT_DELETE}" />
+				<button class="href_link" type="submit" name="action" value="media_delete" title="{TEXT_DELETE}">
+					<img src="{THEME_URL}/images/delete_16.png" alt="{TEXT_DELETE}" title="{TEXT_DELETE}" />
 				</button>
 	<!-- END media_delete_block -->
 				{DELETE_CONTENT}

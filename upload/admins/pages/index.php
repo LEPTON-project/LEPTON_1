@@ -77,7 +77,16 @@ function set_node ($parent,& $par)
 
 	return $retval;
 }
-
+?>
+<div class="container">
+  <h2>
+    <?php echo $HEADING['SEARCH_PAGE']; ?>
+   </h2>
+<?php
+  print_search_form( 'search_page_form', '' );
+ ?>
+</div>
+<?php
 function make_list($parent = 0, $editable_pages = 0) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE, $HEADING, $par;
@@ -223,7 +232,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true && $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/settings.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['SETTINGS']; ?>">
-							<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['SETTINGS']; ?>" />
+							<img src="<?php echo THEME_URL; ?>/images/settings_16.png" alt="<?php echo $TEXT['SETTINGS']; ?>" />
 						</a>
 						<?php } ?>
 					<?php } else { ?>
@@ -310,7 +319,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 				<td class="list_actions">
 					<?php if(($admin->get_permission('pages_add')) == (true && $can_modify == true) && ($page['visibility'] != 'deleted')) { ?>
 					<a href="javascript:add_child_page('<?php echo $page['page_id']; ?>');" title="<?php echo $HEADING['ADD_PAGE']; ?>">
-						<img src="<?php echo THEME_URL; ?>/images/siteadd.png" name="addpage_<?php echo $page['page_id']; ?>" alt="Add Child Page" />
+						<img src="<?php echo THEME_URL; ?>/images/siteadd_16.png" name="addpage_<?php echo $page['page_id']; ?>" alt="Add Child Page" />
 					</a>
 					<?php } ?>
 				</td>
@@ -348,12 +357,13 @@ if($admin->get_permission('pages_view') == true) {
 	echo $html;
 ?>
 	<div class="jsadmin hide"></div>
+	<div class="container">
 	<table summary="<?php echo $HEADING['MODIFY_DELETE_PAGE']; ?>" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
 		<td>
 			<h2><?php echo $HEADING['MODIFY_DELETE_PAGE']; ?></h2>
 		</td>
-		<td align="right"><?php print_search_form( 'search_form_top', 'block' ); ?></td>
+		
 	</tr>
 	</table>
 	<div class="pages_list">
@@ -366,7 +376,7 @@ if($admin->get_permission('pages_view') == true) {
 			<?php echo $TEXT['PAGE_TITLE']; ?>:
 		</td>
     <td class="header_list_page_URL">
-	    URL
+	    URL:
     </td>
 		<td class="header_list_page_id">
 			ID:
@@ -400,19 +410,8 @@ $template->set_block('page', 'main_block', 'main');
 // ----- BlackBird Search ID Hack Part I ----
 
 ?>
-
-<br /><br />
-<div id="search_page_form_toggle">
-  <h2>
-    <?php echo $TEXT['SEARCH']; ?>
-    <a href="#" onclick="search_form_toggle(); return false;">
-      <img id="search_form_toggle_img" src="<?php echo THEME_URL; ?>/images/down_16.png" alt="<?php echo $TEXT['OPEN']; ?>" />
-    </a>
-  </h2>
 </div>
 <?php
-  print_search_form( 'search_page_form', 'none' );
-
 // ----- BlackBird Search ID Hack End Part I ----
 
 // Insert values into the add page form
@@ -731,8 +730,14 @@ function handle_search () {
 #                         . "<a href=\"#\" onclick=\"find_and_open('".$data['page_id']."');\">"
 #                         . "<img src=\"".THEME_URL."/images/visible_16_1.png\" alt=\"".$TEXT['SHOW']."\" />"
 #                         . "</a>"
+						 . "<a href=\"".ADMIN_URL."/pages/modify.php?page_id=".$data['page_id']."\" title=\"".$TEXT['MODIFY']."\">"
+                         . "<img src=\"".THEME_URL."/images/modify_16.png\" alt=\"".$TEXT['MODIFY']."\" />"
+                         . "</a>&nbsp;"
                          . "<a href=\"".ADMIN_URL."/pages/settings.php?page_id=".$data['page_id']."\" title=\"".$TEXT['SETTINGS']."\">"
-                         . "<img src=\"".THEME_URL."/images/modify_16.png\" alt=\"".$TEXT['SETTINGS']."\" />"
+                         . "<img src=\"".THEME_URL."/images/settings_16.png\" alt=\"".$TEXT['SETTINGS']."\" />"
+                         . "</a>&nbsp;"
+                          . "<a href=\"".ADMIN_URL."/pages/sections.php?page_id=".$data['page_id']."\" title=\"".$TEXT['SECTION']."\">"
+                         . "<img src=\"".THEME_URL."/images/noclock_16.png\" alt=\"".$TEXT['SECTION']."\" />"
                          . "</a>"
                          . "</span>"
                        : ""

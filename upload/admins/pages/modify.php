@@ -185,10 +185,11 @@ if($query_sections->numRows() > 0)
 							$block_name = '#' . (int) $section['block'];
 						}
 					}
-					$html  = '<div id="'.SEC_ANCHOR.$section['section_id'].'"><b>' . $TEXT['BLOCK'] . ': </b>' . $block_name;
-					$html .= '<b>  Modul: </b>' . $section['module']." ";
-					$html .= '<b>  ID: </b>' . $section_id." ";
-					$html .= '<b>  NAME: </b>' . $section['name']."</div>\n";
+					$html  = '<div class="section_info" id="'.SEC_ANCHOR.$section['section_id'].'">';
+					$html .= '<strong>'.$TEXT['BLOCK'].': </strong> '.$block_name.' | ';
+					$html .= '<strong>Modul: </strong>' . $section['module'].' | ';
+					$html .= '<strong>ID: </strong>' . $section_id.' | ';
+					$html .= '<strong>NAME: </strong>' . $section['name'].'</div>'."\n";
 					
 					echo $html;
 				} else {
@@ -199,7 +200,9 @@ if($query_sections->numRows() > 0)
 		}
 	}
 }
-
+?>
+</div>
+<?php
 // Print admin footer
 $admin->print_footer();
 

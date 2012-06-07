@@ -80,7 +80,7 @@ if(!isset($wysiwyg_editor_loaded)) {
 if (isset($preview) && $preview == true) return false;
 
 ?>
-
+<div>
 <form name="wysiwyg<?php echo $section_id; ?>" action="<?php echo WB_URL; ?>/modules/wysiwyg/save.php" method="post">
 
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
@@ -94,9 +94,7 @@ if (isset($preview) && $preview == true) return false;
 <tr>
 	<td align="left">
 		<input type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-	</td>
-	<td align="right">
-		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+		<input class="cancel" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>

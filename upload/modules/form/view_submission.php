@@ -59,6 +59,7 @@ if($get_user->numRows() != 0) {
 }
 
 ?>
+<div class="container">
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td><?php echo $TEXT['SUBMISSION_ID']; ?>:</td>
@@ -87,7 +88,8 @@ if($get_user->numRows() != 0) {
 <br />
 
 <input type="button" value="<?php echo $TEXT['CLOSE']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 150px; margin-top: 5px;" />
-<input type="button" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission_id; ?>');" style="width: 150px; margin-top: 5px;" />
+<input class="delete" type="button" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission_id; ?>');" style="width: 150px; margin-top: 5px;" />
+</div>
 <?php
 
 // Print admin footer

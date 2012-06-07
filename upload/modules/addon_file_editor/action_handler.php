@@ -45,7 +45,7 @@ $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] :
 	(isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '');
 
 // if referer is set, check if script was invoked from "tool.php" or "action_handler.php"
-if ($referer != '' && (!(strpos($referer, $url_admintools) !== false))) 
+if ($referer != '' && (!(strpos($referer, $url_admintools) !== false || strpos($referer, $url_action_handler) !== false))) 
 	die(header('Location: ' . $url_admintools));
 
 /**

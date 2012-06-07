@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Backup van alleen LETON-gerelateerde tabellen',
 	'BASIC' 				=> 'Basis',
 	'BLOCK' 				=> 'Blok',
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Kalender',
 	'CANCEL' 				=> 'Annuleren',
 	'CAN_DELETE_HIMSELF' 	=> 'Kan zichzelf verwijderen',
@@ -152,7 +153,7 @@ $TEXT = array(
 	'EMAIL' 				=> 'E-mail',
 	'EMAIL_ADDRESS' 		=> 'E-mailadres',
 	'EMPTY_TRASH' 			=> 'Prullenbak legen',
-	'ENABLE_JAVASCRIPT'		=> 'Javascript moet aan staan om dit formulier te gebruiken.',	
+	'ENABLE_JAVASCRIPT'		=> 'Javascript moet aan staan om dit formulier te gebruiken.',
 	'ENABLED' 				=> 'Aan',
 	'END' 					=> 'Einde',
 	'ERROR' 				=> 'Fout',
@@ -252,7 +253,7 @@ $TEXT = array(
 	'NEXT' 					=> 'Volgende',
 	'NEXT_PAGE' 			=> 'Volgende pagina',
 	'NO' 					=> 'Nee',
-	'NO_LEPTON_ADDON'  		=> 'Deze add-on kan niet gebruikt worden met LEPTON',    
+	'NO_LEPTON_ADDON'  		=> 'Deze add-on kan niet gebruikt worden met LEPTON',
 	'NONE' 					=> 'Geen',
 	'NONE_FOUND' 			=> 'Geen gevonden',
 	'NOT_FOUND' 			=> 'Niet gevonden',
@@ -474,7 +475,8 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Mijn wachtwoord',
 	'MY_SETTINGS' 			=> 'Mijn gegevens',
 	'SEARCH_SETTINGS' 		=> 'Zoekinstellingen',
-		'SECURITY_SETTINGS'		=> 'Security Setting',
+	'SEARCH_PAGE' 			=> 'Search Page',
+	'SECURITY_SETTINGS'		=> 'Security Setting',
 	'SERVER_SETTINGS' 		=> 'Serverinstellingen',
 	'TEMPLATE_DETAILS' 		=> 'Templategegevens',
 	'UNINSTALL_LANGUAGE' 	=> 'Verwijderen taalbestand',
@@ -596,7 +598,7 @@ $MESSAGE = array(
 	'PAGES_DELETED' 					=> 'Pagina verwijderd',
 	'PAGES_DELETE_CONFIRM' 				=> 'Weet u zeker dat u deze pagina &laquo;%s&raquo; wilt verwijderen (en al zijn subpagina&rsquo;s)',
 	'PAGES_INSUFFICIENT_PERMISSIONS' 	=> 'U heeft niet de rechten om deze pagina aan te passen',
-	'PAGES_INTRO_EMPTY' 		=> 'Please insert content, an empty intro page cannot be saved.',   
+	'PAGES_INTRO_EMPTY' 		=> 'Please insert content, an empty intro page cannot be saved.',
 	'PAGES_INTRO_LINK' 					=> 'Klik hier om de introductiepagina aan te passen',
 	'PAGES_INTRO_NOT_WRITABLE' 			=> 'Kan instellingen niet opslaan in het bestand pages-map (page)/intro.php (onvoldoende rechten)',
 	'PAGES_INTRO_SAVED' 				=> 'Introductiepagina opgeslagen',
@@ -715,9 +717,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Bekijk uw website zoals deze voor bezoekers te zien is (in een nieuw venster).'
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

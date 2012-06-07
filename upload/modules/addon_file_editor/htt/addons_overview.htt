@@ -21,20 +21,19 @@
 <div id="mod_addon_file_editor">
 
 <div class="help_file">
-<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 </div>
 
-<h2><a href="{URL_ADMIN_TOOL}">{TXT_HEADING}</a></h2>
+
 
 <p>{TXT_DESCRIPTION}</p>
 
 <div class="info {CLASS_SHOW_FTP_INFO}">{TXT_FTP_NOTICE}</div>
 
-<div class="box" id="modules">
-	<a href="{URL_ADMIN_TOOL}&amp;reload">[ {TXT_RELOAD} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#modules">[ {TXT_MODULES} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#templates">[ {TXT_TEMPLATES} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#languages">[ {TXT_LANGUAGES} ]</a> 
+
+	
+<div style="width: 97.4%; text-align: right; font-size: x-small; margin-bottom: 10px;">
+	<span class="button reload"><a href="{URL_ADMIN_TOOL}&amp;reload"> {TXT_RELOAD} </a></span>
 </div>
 
 <table width="98%" border="0" cellspacing="0" cellpadding="5">
@@ -66,10 +65,10 @@
 <br />
 
 <div class="box" id="templates">
-	<a href="{URL_ADMIN_TOOL}&amp;reload">[ {TXT_RELOAD} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#modules">[ {TXT_MODULES} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#templates">[ {TXT_TEMPLATES} ]</a>&nbsp;&nbsp;
-	<a href="{URL_ADMIN_TOOL}#languages">[ {TXT_LANGUAGES} ]</a> 
+	<span class="my_button"><a href="{URL_ADMIN_TOOL}&amp;reload">[ {TXT_RELOAD} ]</a></span>
+	<span class="my_button"><a href="{URL_ADMIN_TOOL}#modules">[ {TXT_MODULES} ]</a></span>
+	<span class="my_button"><a href="{URL_ADMIN_TOOL}#templates">[ {TXT_TEMPLATES} ]</a></span>
+	<span class="my_button"><a href="{URL_ADMIN_TOOL}#languages">[ {TXT_LANGUAGES} ]</a></span>
 </div>
 
 <table width="98%" border="0" cellspacing="0" cellpadding="5">

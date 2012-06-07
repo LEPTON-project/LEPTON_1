@@ -93,7 +93,8 @@ if ( ( $whatis == 4) AND (!in_array(1, $groups)) ) {
 			'MODE'	=> $mode_options,
 			'MODE_' => $mode,
 			'LANGUAGE' => LANGUAGE,
-			'MODES'	=> $MOD_CODE2['MODE']
+			'MODES'	=> $MOD_CODE2['MODE'],
+			'THEME_URL' => THEME_URL
 		)
 	);
 

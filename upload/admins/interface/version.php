@@ -43,5 +43,6 @@ if (defined('WB_PATH')) {
  */
 if (!defined('CORE')) define('CORE', 'LEPTON');
 if (!defined('VERSION')) define('VERSION', '1.2.0');
+if (!defined('SUBVERSION')) define('SUBVERSION', '');
 
 ?>

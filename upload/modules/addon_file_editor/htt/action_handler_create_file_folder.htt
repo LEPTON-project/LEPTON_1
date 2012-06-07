@@ -28,21 +28,16 @@
 		}
 	}
 </script>
-
+<div class="container">
 <div id="mod_addon_file_editor">
-	<h4 class="admintools">
-		<a href="{URL_WB_ADMIN_TOOLS}">{TXT_HEADING_ADMINTOOLS}</a> -> {NAME_FILE_EDITOR}
-	</h4>
-
-	<div class="help_file">
-		<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+	<h2 class="admintools">{NAME_FILE_EDITOR}</h2>
+	<div class="help_file" style="float:right;">
+		<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 	</div>
-
-	<h2><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h2>
-	<a class="backlink" href="{URL_FILEMANAGER}">{TXT_BACK}</a>
-
+	<span class="button back"><a href="{URL_FILEMANAGER}">{TXT_BACK}</a></span>
+	<h4><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h4>	
 	<form class="formbox" action="{URL_FORM_SUBMIT}" method="post">
-		<h3>{TXT_ACTION}: {TXT_ACTION_CREATE_FILE}</h3>
+		<h5>{TXT_ACTION}: {TXT_ACTION_CREATE_FILE}</h5>
 
 		<div class="{CLASS_HIDDEN}">
 		<label for="file_folder">{TXT_CREATE}:</label>
@@ -66,11 +61,10 @@
 		</select>
 
 		<br /><br />
-		<input class="submit" type="submit" name="create_file_folder" value="{TXT_SUBMIT_CREATE}" />
-		<a class="submit" href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a>
-		</div>
-
+		<input type="submit" name="create_file_folder" value="{TXT_SUBMIT_CREATE}" />&nbsp;
+		<span class="button reset"><a href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a></span>
 		<br style="clear: both;" />
+		</div>
 	</form>
 
 	{STATUS_MESSAGE}

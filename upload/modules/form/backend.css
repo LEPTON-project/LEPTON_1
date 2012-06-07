@@ -26,13 +26,16 @@
   Required CSS class name: input.mod_moduledirectory_edit_css
 */
 input.mod_form_edit_css {
-  color: #000;
-  background-color: #F0F0F0;
-  border: 1px solid gray;
-  padding: 2px;
-  margin: 0;
-  margin-left: 625px;
-  margin-top: -20px;
-  margin-bottom: 5px;
-  width: 110px;
+	padding: 2px;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	background-color: #ddd;
+	background-image: none;
+	cursor: pointer;
+ 	border: 1px solid #999;
+	border-radius: 5px;
+	position: relative;
+	top: -39px;
+	width: 110px;
+	float: right;
 }

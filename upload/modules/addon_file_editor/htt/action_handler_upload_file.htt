@@ -17,21 +17,17 @@
  * @platform	Website Baker 2.8
 */
 <!-- END comment_block -->
-
-<div id="mod_addon_file_editor">
-	<h4 class="admintools">
-		<a href="{URL_WB_ADMIN_TOOLS}">{TXT_HEADING_ADMINTOOLS}</a> -> {NAME_FILE_EDITOR}
-	</h4>
-
+<div class="container">
+	<div id="mod_addon_file_editor">
+	<h2 class="admintools">{NAME_FILE_EDITOR}</h2>
 	<div class="help_file">
-		<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+		<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 	</div>
-
-	<h2><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h2>
-	<a class="backlink" href="{URL_FILEMANAGER}">{TXT_BACK}</a>
-
+	
+	<span class="button back"><a href="{URL_FILEMANAGER}">{TXT_BACK}</a></span>
+	<h4><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h4>
 	<form class="formbox" action="{URL_FORM_SUBMIT}" method="post" enctype="multipart/form-data">
-		<h3>{TXT_ACTION}: {TXT_ACTION_UPLOAD_FILE}</h3>
+		<h5>{TXT_ACTION}: {TXT_ACTION_UPLOAD_FILE}</h5>
 
 		<input type="hidden" name="MAX_FILE_SIZE" value="{MAX_FILE_SIZE}" />
 
@@ -46,8 +42,8 @@
 		<br /><br />
 
 		<div class="{CLASS_HIDDEN}">
-			<input class="submit" type="submit" name="upload_file" value="{TXT_SUBMIT_UPLOAD}" />
-			<a class="submit" href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a>
+			<input type="submit" name="upload_file" value="{TXT_SUBMIT_UPLOAD}" />&nbsp;
+			<span class="button reset"><a href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a></span>
 		</div>
 		<br style="clear: both;" />
 	</form>

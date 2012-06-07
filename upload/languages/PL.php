@@ -14,14 +14,14 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
  * @version         $Id: PL.php 1586 2012-01-03 09:49:34Z erpe $
- * @Translation     ksocial 
+ * @Translation     ksocial
  *
  */
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -30,8 +30,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -111,6 +111,7 @@ $TEXT = array(
 'BACKUP_WB_SPECIFIC' =>  'Kopia zapasowa tylko tabel LP_',
 'BASIC' =>  'Podstawowe',
 'BLOCK' =>  'Blokuj',
+'BACKEND_TITLE'	=>	'Backendtitle',
 'CALENDAR' =>  'Kalendarz',
 'CANCEL' =>  'Anuluj',
 'CAN_DELETE_HIMSELF' =>  'Można usunąć siebie',
@@ -475,6 +476,7 @@ $HEADING = array(
 'MY_PASSWORD' =>  'Moje hasło',
 'MY_SETTINGS' =>  'Moje ustawienia',
 'SEARCH_SETTINGS' =>  'Ustawienia wyszukiwania',
+'SEARCH_PAGE' 			=> 'Search Page',
 'SECURITY_SETTINGS'		=> 'Ustawienia bezpieczeństwa',
 'SERVER_SETTINGS' =>  'Ustawienia serwera',
 'TEMPLATE_DETAILS' =>  'Szczegóły szablonu',
@@ -557,7 +559,7 @@ $MESSAGE = array(
 'LOGIN_PASSWORD_TOO_SHORT' =>  'Wprowadzone hasło jest zbyt krótkie',
 'LOGIN_USERNAME_BLANK' =>  'Proszę wprowadzić login',
 'LOGIN_USERNAME_TOO_LONG' =>  'Nazwa loginu jest zbyt długa',
-'LOGIN_USERNAME_TOO_SHORT' =>  'Nazwa loginu jest zbyt krótka',	
+'LOGIN_USERNAME_TOO_SHORT' =>  'Nazwa loginu jest zbyt krótka',
 'MEDIA_BLANK_EXTENSION' =>  'Nie wprowadzono rozszerzenia pliku',
 'MEDIA_BLANK_NAME' =>  'Nie wprowadzono nazwy użytkownika',
 'MEDIA_CANNOT_DELETE_DIR' =>  'Nie można usunąć wybranego folderu',
@@ -597,7 +599,7 @@ $MESSAGE = array(
 'PAGES_DELETED' =>  'Strona została usunięta',
 'PAGES_DELETE_CONFIRM' 	=> 'Czy aby na pewno usunac wybrana strone &laquo;%s&raquo; (i wszystkie jej podstrony)',
 'PAGES_INSUFFICIENT_PERMISSIONS' =>  'Nie masz uprawnien do modyfikowania tej strony',
-'PAGES_INTRO_EMPTY' 		=> 'Proszę wprowadzić zawartość, pusta intro page nie możesz zapisać.', 
+'PAGES_INTRO_EMPTY' 		=> 'Proszę wprowadzić zawartość, pusta intro page nie możesz zapisać.',
 'PAGES_INTRO_LINK' =>  'Kliknij TUTAJ by zmienić stronę wprowadzającą',
 'PAGES_INTRO_NOT_WRITABLE' =>  'Nie można zapisać pliku page-directory/intro.php (niewystarczajace uprawnienia)',
 'PAGES_INTRO_SAVED' =>  'Strona wprowadzająca została zapisana',
@@ -649,7 +651,7 @@ hasło: {LOGIN_PASSWORD}
 
 Powyżej zostało podane twoje hasło.
 Oznacza to, ze stare hasło nie będzie już działać!
-Jeśli masz pytania badz problemy z nowym loginem lub hasłem skontaktuj 
+Jeśli masz pytania badz problemy z nowym loginem lub hasłem skontaktuj
 się z administratorem \'{LOGIN_WEBSITE_TITLE}\'.
 Aby uniknąć nieoczekiwanych awarii proszę pamiętać o czyszczeniu pamięci podręcznej cache przeglądarki
 
@@ -716,9 +718,9 @@ $OVERVIEW = array(
 'VIEW' =>  'Podgląd witryny w nowym oknie...'
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

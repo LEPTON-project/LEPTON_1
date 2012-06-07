@@ -1,4 +1,6 @@
 <!-- BEGIN main_block -->
+
+<fieldset class="container">
 <h2 style="{DISPLAY_EXTRA}">{HEADING_MODIFY_GROUP}</h2>
 
 <form name="group" action="{ACTION_URL}" method="post" class="{DISPLAY_ADD}">
@@ -74,7 +76,7 @@
 
 <table cellpadding="0" cellspacing="0" border="0" width="330">
 <tr>
-	<td colspan="4"><h3>{SECTION_PAGES}</h3></td>
+	<td colspan="4"><h2>{SECTION_PAGES}</h2></td>
 </tr>
 <tr>
 	<td><input name="pages_view" id="pages_view" type="checkbox" value="1" {pages_view_checked} /></td>
@@ -99,8 +101,9 @@
 	<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {pages_delete_checked} /></td>
 	<td><label for="pages_delete">{TEXT_DELETE}</label></td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_MEDIA}</h3></td>
+	<td colspan="4"><h2>{SECTION_MEDIA}</h2></td>
 </tr>
 <tr>
 	<td><input name="media_view" id="media_view" type="checkbox" value="1" {media_view_checked} /></td>
@@ -120,8 +123,9 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_MODULES}</h3></td>
+	<td colspan="4"><h2>{SECTION_MODULES}</h2></td>
 </tr>
 <tr>
 	<td><input name="modules_view" id="modules_view" type="checkbox" value="1" {modules_view_checked} /></td>
@@ -135,8 +139,9 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_TEMPLATES}</h3></td>
+	<td colspan="4"><h2>{SECTION_TEMPLATES}</h2></td>
 </tr>
 <tr>
 	<td><input name="templates_view" id="templates_view" type="checkbox" value="1" {templates_view_checked} /></td>
@@ -150,8 +155,9 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_LANGUAGES}</h3></td>
+	<td colspan="4"><h2>{SECTION_LANGUAGES}</h2></td>
 </tr>
 <tr>
 	<td><input name="languages_view" id="languages_view" type="checkbox" value="1" {languages_view_checked} /></td>
@@ -165,8 +171,9 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_SETTINGS}</h3></td>
+	<td colspan="4"><h2>{SECTION_SETTINGS}</h2></td>
 </tr>
 <tr>
 	<td><input name="settings_basic" id="settings_basic" type="checkbox" value="1" {settings_basic_checked} /></td>
@@ -174,8 +181,9 @@
 	<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {settings_advanced_checked} /></td>
 	<td><label for="settings_advanced">{TEXT_ADVANCED}</label></td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_USERS}</h3></td>
+	<td colspan="4"><h2>{SECTION_USERS}</h2></td>
 </tr>
 <tr>
 	<td><input name="users_view" id="users_view" type="checkbox" value="1" {users_view_checked} /></td>
@@ -189,9 +197,9 @@
 	<td><input name="users_delete" id="users_delete" type="checkbox" value="1" {users_delete_checked} /></td>
 	<td><label for="users_delete">{TEXT_DELETE}</label></td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
-	<td colspan="4"><h3>{SECTION_GROUPS}</h3></td>
-
+	<td colspan="4"><h2>{SECTION_GROUPS}</h2></td>
 </tr>
 <tr>
 	<td><input name="groups_view" id="groups_view" type="checkbox" value="1" {groups_view_checked} /></td>
@@ -205,9 +213,10 @@
 	<td><input name="groups_delete" id="groups_delete" type="checkbox" value="1" {groups_delete_checked} /></td>
 	<td><label for="groups_delete">{TEXT_DELETE}</label></td>
 </tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr>
 	<td colspan="4">
-		<h3>{SECTION_ADMINTOOLS}</h3>
+		<h2>{SECTION_ADMINTOOLS}</h2>
 	</td>
 </tr>
 <tr>
@@ -222,7 +231,7 @@
 	</td>
 </tr>
 </table>
-
+<hr />
 <table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 5px; padding-bottom: 5px;">
 <tr>
 	<td valign="top" align="left" width="150">{TEXT_MODULE_PERMISSIONS}:</td>
@@ -257,14 +266,13 @@
 		</ul>
 	</td>
 </tr>
-<tr style="text-align:center;width:100%">
+<tr style="text-align:center; width:100%;">
     <td>&nbsp;</td>
-	<td style="text-align:right;">
+	<td style="text-align:left; padding-top: 10px;">
 		<input type="submit" name="submit" value="{SUBMIT_TITLE}" />
-	</td>
-	<td style="text-align:left;">
 		<input type="reset" name="reset" value="{TEXT_RESET}" />
 	</td>
+	<td>&nbsp;</td>
     <td>&nbsp;</td>
 </tr>
 </table>
@@ -276,14 +284,15 @@
 <input type="hidden" name="action" value="modify" />
 <table cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
-    <td>&nbsp;</td>
-	<td style="text-align:center;">
-		<input type="submit" name="advanced" onclick="window.location = '{ADVANCED_LINK}';" value="{ADVANCED_BUTTON}" />
+    <td style="width: 150px;">&nbsp;</td>
+	<td >
+		<input class="advanced" type="submit" name="advanced" onclick="window.location = '{ADVANCED_LINK}';" value="{ADVANCED_BUTTON}" />
 	</td>
     <td>&nbsp;</td>
 </tr>
 </table>
 </form>
+</div>
 <script type="text/javascript">
 var admin_checkbox = document.getElementById("admintools");
 var admin_settings = document.getElementById("admintools_settings");

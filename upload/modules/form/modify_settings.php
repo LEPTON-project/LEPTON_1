@@ -62,6 +62,7 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 }
 
 ?>
+<div class="container">
 <h2><?php echo $MOD_FORM['SETTINGS']; ?></h2>
 <?php
 // include the button to edit the optional module CSS files
@@ -76,8 +77,8 @@ if(function_exists('edit_module_css')) {
 
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
-
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<div class="container">
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
 		<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 	</tr>
@@ -121,8 +122,9 @@ if(function_exists('edit_module_css')) {
 		</td>
 	</tr>
 </table>	
-
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%" style="margin-top: 3px;">
+</div>
+<div class="container">
+<table cellpadding="2" cellspacing="0" border="0" width="100%" style="margin-top: 3px;">
 	<tr>
 		<td colspan="2"><strong><?php echo $TEXT['EMAIL'].' '.$TEXT['SETTINGS']; ?></strong></td>
 	</tr>
@@ -167,8 +169,9 @@ if(function_exists('edit_module_css')) {
 		</td>
 	</tr>
 </table>	
-
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%" style="margin-top: 3px;">
+</div>
+<div class="container">
+<table cellpadding="2" cellspacing="0" border="0" width="100%" style="margin-top: 3px;">
 	<tr>
 		<td colspan="2"><strong><?php echo $TEXT['SUCCESS'].' '.$TEXT['SETTINGS']; ?></strong></td>
 	</tr>
@@ -243,18 +246,17 @@ if(function_exists('edit_module_css')) {
 		</td>
 	</tr>
 </table>
-
+</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 	<tr>
 		<td align="left">
 			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;">
-		</td>
-		<td align="right">
-			<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
+			<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 		</td>
 	</tr>
 </table>
 </form>
+</div>
 <?php
 
 // Print admin footer

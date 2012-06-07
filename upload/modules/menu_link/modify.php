@@ -173,6 +173,7 @@ $target = $page['target'];
 
 /*]]>*/
 </script>
+<div>
 <form name="menulink" action="<?php echo WB_URL ?>/modules/menu_link/save.php" method="post">
 <input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
@@ -201,7 +202,7 @@ $target = $page['target'];
 		<?php echo $TEXT['ANCHOR'].':' ?>
 	</td>
 	<td>
-		<select name="page_target" id="page_target" onfocus="populate()" style="width:250px;" >
+		<select name="page_target" id="page_target" onfocus="populate()" style="width:250px;">
 			<option value="<?php echo $anchor ?>" selected="selected"><?php echo $anchor=='0'?' ':'#'.$anchor ?></option>
 		</select>
 	</td>
@@ -216,7 +217,7 @@ $target = $page['target'];
 			<option value="_self"<?php if($target=='_self') echo ' selected="selected"'; ?>><?php echo $TEXT['SAME_WINDOW'] ?></option>
 			<option value="_top"<?php if($target=='_top') echo ' selected="selected"'; ?>><?php echo $TEXT['TOP_FRAME'] ?></option>
 		</select><br />
-		<?php echo $MOD_MENU_LINK['XHTML_EXPLANATION'] ?>
+		<div class="info"><?php echo $MOD_MENU_LINK['XHTML_EXPLANATION'] ?></div>
 	</td>
 </tr>
 <tr>
@@ -228,7 +229,7 @@ $target = $page['target'];
 			<option value="301"<?php if($r_type=='301') echo ' selected="selected"'; ?>>301 (Moved permanently)</option>
 			<option value="302"<?php if($r_type=='302') echo ' selected="selected"'; ?>>302 (Moved temporarily)</option>
 		</select><br /><br />
-		<?php echo $MOD_MENU_LINK['REDIRECT_EXPLANATION']; ?>
+		<div class="info" style="background-position:top left;"><?php echo $MOD_MENU_LINK['REDIRECT_EXPLANATION']; ?></div>
 	</td>
 </tr>
 </table>
@@ -239,9 +240,7 @@ $target = $page['target'];
 <tr>
 	<td align="left">
 		<input type="submit" value="<?php echo $TEXT['SAVE'] ?>" style="width: 100px; margin-top: 5px;" />
-	</td>
-	<td align="right">
-		<input type="button" value="<?php echo $TEXT['CANCEL'] ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+		<input class="reset" type="button" value="<?php echo $TEXT['CANCEL'] ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>

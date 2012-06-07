@@ -476,7 +476,7 @@ if (defined('WB_PATH')) {
           $rename_file = WB_PATH . MEDIA_DIRECTORY . $directory . '/' . $rename_file;
           if (($type == 'dir'))
           {
-              //$rename_file = str_replace('.', '_', $rename_file);
+              $rename_file = str_replace('.', '_', $rename_file);
           }
           elseif (!preg_match("/\." . $allowed_file_types . "$/i", $rename_file))
           {

@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Backup only WB-specific tables',
 	'BASIC' 				=> 'Basic',
 	'BLOCK' 				=> 'Block',
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Calendar',
 	'CANCEL' 				=> 'Cancel',
 	'CAN_DELETE_HIMSELF' 	=> 'Can delete himself',
@@ -252,7 +253,7 @@ $TEXT = array(
 	'NEXT' 					=> 'Next',
 	'NEXT_PAGE' 			=> 'Next Page',
 	'NO' 					=> 'No',
-	'NO_LEPTON_ADDON'  => 'This addon cannot be used with LEPTON',    
+	'NO_LEPTON_ADDON'  => 'This addon cannot be used with LEPTON',
 	'NONE' 					=> 'None',
 	'NONE_FOUND' 			=> 'None Found',
 	'NOT_FOUND' 			=> 'Not Found',
@@ -474,6 +475,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'My Password',
 	'MY_SETTINGS' 			=> 'My Settings',
 	'SEARCH_SETTINGS' 		=> 'Search Settings',
+	'SEARCH_PAGE' 			=> 'Search Page',
 	'SECURITY_SETTINGS'		=> 'Security Setting',
 	'SERVER_SETTINGS' 		=> 'Server Settings',
 	'TEMPLATE_DETAILS' 		=> 'Template Details',
@@ -596,7 +598,7 @@ $MESSAGE = array(
 	'PAGES_DELETED' 		=> 'Page deleted successfully',
 	'PAGES_DELETE_CONFIRM' 	=> 'Are you sure you want to delete the selected page &laquo;%s&raquo; (and all of its sub-pages)',
 	'PAGES_INSUFFICIENT_PERMISSIONS' => 'You do not have permissions to modify this page',
-	'PAGES_INTRO_EMPTY' 		=> 'Please insert content, an empty intro page cannot be saved.',    
+	'PAGES_INTRO_EMPTY' 		=> 'Please insert content, an empty intro page cannot be saved.',
 	'PAGES_INTRO_LINK' 		=> 'Click HERE to modify the intro page',
 	'PAGES_INTRO_NOT_WRITABLE' => 'Cannot write to file page-directory/intro.php, (insufficient privileges)',
 	'PAGES_INTRO_SAVED' 	=> 'Intro page saved successfully',
@@ -715,9 +717,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Quickly view and browse your website in a new window...'
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

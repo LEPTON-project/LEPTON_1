@@ -50,7 +50,12 @@ $field_id = $database->get_one("SELECT LAST_INSERT_ID()");
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
-	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	//$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+?>
+<script type="text/javascript">
+		setTimeout("top.location.href ='<?php echo WB_URL; ?>/modules/form/modify_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&field_id=<?php echo $field_id; ?>'", 0);
+	</script>
+<?php
 }
 
 // Print admin footer

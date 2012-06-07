@@ -38,6 +38,9 @@ $admintool_link = ADMIN_URL .'/admintools/index.php';
 $module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 $template_edit_link = ADMIN_URL .'/admintools/tool.php?tool=templateedit';
 
+// And... action
+$admintool_url = ADMIN_URL .'/admintools/index.php';
+
 // file to delete?
 if ( isset( $_GET['del'] ) ) {
     if ( $_GET['del'] !== 'all' ) {
@@ -62,47 +65,61 @@ if ( ! count( $backup_files ) > 0 ) {
 }
 
 ?>
+<link media="screen" type="text/css" rel="stylesheet" href="<?php echo WB_URL; ?>/modules/droplets/backend.css" />
+<div class="container">
+<h2>Droplets</h2>
 
-<h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
-	<a href="<?php echo $admintool_link;?>"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
-	->
-	<a href="<?php echo $module_edit_link;?>">Droplets</a>
-</h4>
-
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
-
-<button style="float: right; border: outset 1px #315e8d; padding: 5px; background-color: #e6eeee; width: 15em;"
-        type="button"
-        name="backup_mgmt"
+<span class="button back" style="float:left;"><a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets"><?php echo $TEXT['BACK'];?></a></span>
+<button class="warn" style="float: right;" type="button" name="backup_mgmt"
         onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']?>', '<?php echo WB_URL; ?>/modules/droplets/manage_backups.php?del=all');">
-        <?php echo $DR_TEXT['DELETE_ALL']; ?></button><br style="clear: right" /><br />
+        <?php echo $DR_TEXT['DELETE_ALL']; ?></button><br style="clear: right" />
+<br />
 
 <?php
-
+// include jQuery TableSorter Plugin if available
+    if ( file_exists( WB_PATH.'/modules/jqueryadmin' ) && file_exists( WB_PATH.'/modules/jqueryadmin/plugins/tablesorter' ) ) {
+        include_once( WB_PATH.'/modules/jqueryadmin/include.php' );
+        echo jQueryAdmin_backendPreset( 'droplets' );
+    }
+    
 if ( count( $backup_files ) > 0 ) {
     // sort by name
     sort($backup_files);
-    echo "<table class=\"droplets\" style=\"width: 100%;\">\n",
-         "<tr><th>",$TEXT['NAME'],"</th><th>",$TEXT['SIZE']," (Byte)</th><th>",$TEXT['DATE'],"</th><th>",$TEXT['FILES'],"</th><th></th></tr>";
-    foreach ( $backup_files as $file ) {
+    echo '<table class="droplets" style="width: 100%;" id="myTable">',
+         "<thead><tr class=\"row_b\"><th align=\"left\">",$TEXT['NAME'],"</th><th align=\"right\">",$TEXT['SIZE']," (Byte)</th><th align=\"left\">",$TEXT['DATE'],"</th><th align=\"right\">",$TEXT['FILES'],"</th><th align=\"left\"></th></tr></thead><tbody>";
+	$row = 'a';
+	foreach ( $backup_files as $file ) {
         // stat
         $stat  = stat(WB_PATH.'/modules/droplets/export/'.$file);
         // get zip contents
         $zip   = new PclZip(WB_PATH.'/modules/droplets/export/'.$file);
         $count = $zip->listContent();
-        echo "<tr>",
-             "<td><a href=\"#\" title=\"",
-             implode( ", ", array_map( create_function('$cnt', 'return $cnt["filename"];'), $count ) ),
-             "\"><img src=\"".WB_URL."/modules/droplets/img/list.png\" alt=\"\" /> $file</a></td>",
-             "<td>", $stat['size'], "</td>",
+        echo '<tr class="row_'.$row.'">',
+             '<td><a class="tooltip" href="#"><img src="'.WB_URL.'/modules/droplets/img/list.png" alt="Content" />',
+             '<span>'.implode( "<br />", array_map( create_function('$cnt', 'return $cnt["filename"];'), $count ) ).'</span> '.$file.'</a>',
+             '</td>',
+             "<td align=\"right\">", $stat['size'], "</td>",
              "<td>", strftime( '%c', $stat['ctime'] ), "</td>",
-             "<td>", count($count), "</td>",
+             "<td align=\"right\">", count($count), "</td>",
              "<td><a href=\"".WB_URL."/modules/droplets/export/$file\" title=\"Download\"><img src=\"".WB_URL."/modules/droplets/img/download.png\" alt=\"Download\" /></a>",
              "    <a href=\"javascript: confirm_link('".$TEXT['ARE_YOU_SURE']."', '".ADMIN_URL."/admintools/tool.php?tool=droplets&amp;recover=$file');\" title=\"Recover\"><img src=\"".WB_URL."/modules/droplets/img/import.png\" alt=\"Recover\" /></a>",
              "    <a href=\"javascript: confirm_link('".$TEXT['ARE_YOU_SURE']."', '".WB_URL."/modules/droplets/manage_backups.php?del=$file');\" title=\"Delete\"><img src=\"".THEME_URL."/images/delete_16.png\" alt=\"X\" /></a></td></tr>\n";
-    }
-    echo "</table>\n";
+  // Alternate row color
+		if($row == 'a') {
+			$row = 'b';
+		} else {
+			$row = 'a';
+		}
+		}
+   
+    echo "</tbody></table>\n";
 }
 ?>
+<div>&nbsp;</div>
+<span class="button back"><a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets"> <?php echo $TEXT['BACK'];?></a></span>
+<?php
 
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
+// Print admin footer
+$admin->print_footer();
+
+?>

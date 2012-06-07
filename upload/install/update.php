@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -38,7 +38,7 @@ if (!is_object($admin))
 <body>
 <div id="top">
   <div id="top-logo"></div>
-  <div id="top-text">LEPTON update script</div>  
+  <div id="top-text">LEPTON update script</div>
 </div>
 <div id="update-script">
 <?php
@@ -81,7 +81,7 @@ $upgrade_modules = array(
 foreach ($upgrade_modules as $module)
 {
     $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-    
+
     if (file_exists($temp_path))
         require($temp_path);
 }
@@ -129,23 +129,23 @@ $upgrade_modules = array(
     "news",
     "initial_page",
     "tiny_mce_jq",
-    "addon_file_editor",    
-    "edit_area",  
-    "jsadmin",  
-    "menu_link", 
-    "output_interface",  
-    "pclzip",  
-    "show_menu2", 
-    "wrapper",                         
-    "phpmailer",    
-    "wysiwyg_admin",     
+    "addon_file_editor",
+    "edit_area",
+    "jsadmin",
+    "menu_link",
+    "output_interface",
+    "pclzip",
+    "show_menu2",
+    "wrapper",
+    "phpmailer",
+    "wysiwyg_admin",
     "lib_jquery"
 );
 
 foreach ($upgrade_modules as $module)
 {
     $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-    
+
     if (file_exists($temp_path))
         require($temp_path);
 }
@@ -172,15 +172,15 @@ echo '<h3>Current process : updating to LEPTON 1.1.3</h3>';
  */
 $upgrade_modules = array(
     "tiny_mce_jq",
-    "news",    
-    "code2",       
+    "news",
+    "code2",
     "lib_jquery"
 );
 
 foreach ($upgrade_modules as $module)
 {
     $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-    
+
     if (file_exists($temp_path))
         require($temp_path);
 }
@@ -235,18 +235,18 @@ $upgrade_modules = array(
     "tiny_mce_jq",
     "news",
     "form",
-    "wrapper",            
-    "wysiwyg",  
-    "code2",    
-    "droplets",       
-    "captcha_control",    
+    "wrapper",
+    "wysiwyg",
+    "code2",
+    "droplets",
+    "captcha_control",
     "lib_jquery"
 );
 
 foreach ($upgrade_modules as $module)
 {
     $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-    
+
     if (file_exists($temp_path))
         require($temp_path);
 }
@@ -303,18 +303,18 @@ if (true === $column_exists ) {
  */
 $upgrade_modules = array(
     "tiny_mce_jq",
-    "addon_file_editor",     
+    "addon_file_editor",
     "news",
-    "wrapper",   
-    "droplets",  
-    "phpmailer",            
+    "wrapper",
+    "droplets",
+    "phpmailer",
     "lib_jquery"
 );
 
 foreach ($upgrade_modules as $module)
 {
     $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
-    
+
     if (file_exists($temp_path))
         require($temp_path);
 }
@@ -395,14 +395,16 @@ if ($handle = opendir(WB_PATH . '/languages/'))
 }
 
   // drop obsolete sik_news_tables for backword compatibility, new xsik_news_tables are created with upgrade.php of news module
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_posts`");   
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_groups`");   
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_comments`");  
-  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_settings`"); 
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_posts`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_groups`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_comments`");
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."sik_news_settings`");
 /**
  *  database modification
  */
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.0\' WHERE `name` =\'lepton_version\'');
+
+$database->query('INSERT INTO `' . TABLE_PREFIX . 'settings` SET (name,value) VALUES (\'backend_title\',\'LEPTON CMS\')';
 
 /**
  *  success message

@@ -63,6 +63,7 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 }
 
 ?>
+<div class="container">
 <h2><?php echo $MOD_NEWS['SETTINGS']; ?></h2>
 <?php
 // include the button to edit the optional module CSS files (function added with WB 2.7)
@@ -83,7 +84,7 @@ $leptoken_add = (isset($_GET['leptoken']) ? $_GET['leptoken'] : "");
 if ( strlen( $leptoken_add ) > 0 ) {
 	echo "\n\t<input type='hidden' name='leptoken' value='".$leptoken_add."' />\n";
 } ?>
-	<table class="row_a" cellpadding="2" cellspacing="0" width="100%">
+	<table cellpadding="2" cellspacing="0" width="100%">
 		<tr>
 			<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 		</tr>
@@ -153,7 +154,8 @@ if ( strlen( $leptoken_add ) > 0 ) {
 		</tr>
 		<?php } ?>    
 	</table>
-	<table class="row_a" cellpadding="2" cellspacing="0" width="100%" style="margin-top: 3px;">
+	<div style="margin-bottom: 10px;">&nbsp;</div>
+	<table  cellpadding="2" cellspacing="0" width="100%" style="margin-top: 3px;">
 		<tr>
 			<td colspan="2"><strong><?php echo $TEXT['COMMENTS']; ?></strong></td>
 		</tr>
@@ -206,14 +208,12 @@ if ( strlen( $leptoken_add ) > 0 ) {
 		<tr>
 			<td class="left">
 				<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-			</td>
-			<td class="right">
-				<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
+				<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 			</td>
 		</tr>
 	</table>
 </form>
-
+</div>
 <?php
 
 // Print admin footer

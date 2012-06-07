@@ -345,8 +345,8 @@ if($query_sections->numRows() > 0)
 			
 			// Insert icon and images
 			$template->set_var(array(
-				'CLOCK_16_PNG' => 'clock_16.png',
-				'CLOCK_DEL_16_PNG' => 'clock_del_16.png',
+				'CLOCK_16_PNG' => 'calendar_add_16.png',
+				'CLOCK_DEL_16_PNG' => 'calendar_del_16.png',
 				'DELETE_16_PNG' => 'delete_16.png'
 				) 
 			);
@@ -487,6 +487,21 @@ $template->set_var(array(
 	'TEXT_ADD_SECTION'		=> $TEXT['ADD_SECTION'],
 	'TEXT_MOVE_UP'			=> $TEXT['MOVE_UP'],
 	'TEXT_MOVE_DOWN'		=> $TEXT['MOVE_DOWN']
+	)
+);
+
+// Get display name of person who last modified the page
+$user=$admin->get_user_details($results_array['modified_by']);
+
+$modified_ts = ($results_array['modified_when'] != 0)
+        ? $modified_ts = date(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when'])
+        : 'Unknown';
+
+$template->set_var(array(
+			'MODIFIED_BY' => $user['display_name'],
+			'MODIFIED_BY_USERNAME' => $user['username'],
+			'MODIFIED_WHEN' => $modified_ts,
+			'LAST_MODIFIED' => $MESSAGE['PAGES_LAST_MODIFIED'],
 	)
 );
 $template->parse('main', 'main_block', false);

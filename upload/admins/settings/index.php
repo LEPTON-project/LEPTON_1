@@ -156,6 +156,8 @@ function build_settings( &$admin, &$database )
     {
         while ( $row = $res_settings->fetchRow() )
         {
+				// if backend_title is empty replace it with website_title
+
             // read all settings into $settings array, except password
             $settings[ $row[ 'name' ] ]
 				= ( $row[ 'name' ] != 'wbmailer_smtp_password' )

@@ -1,12 +1,12 @@
 <!-- BEGIN main_block -->
-
+<div class="container">
 <h2 style="{DISPLAY_EXTRA}">{HEADING_MODIFY_USER}</h2>
 
 <form name="user" action="{ACTION_URL}" method="post" class="{DISPLAY_ADD}">
 <input type="hidden" name="user_id" value="{USER_ID}" />
 <input type="hidden" name="username_fieldname" value="{USERNAME_FIELDNAME}" />
 <p>{NEWUSERHINT}</p>
-<table cellpadding="5" cellspacing="0" border="0" width="100%">
+<table cellpadding="0 cellspacing="0" border="0" width="100%">
 <tr>
 	<td width="150">{TEXT_USERNAME}:</td>
 	<td class="value_input">
@@ -27,8 +27,8 @@
 </tr>
 <tr style="{DISPLAY_EXTRA}">
 	<td>&nbsp;</td>
-	<td style="font-size: 10px;">
-		{CHANGING_PASSWORD}
+	<td valign="middle" style="font-size: 10px;">
+		<div class="info" style="margin-bottom: 10px; color: #b3422b;">{CHANGING_PASSWORD}</div>
 	</td>
 </tr>
 <tr>
@@ -83,5 +83,5 @@
 </table>
 
 </form>
-
+</div>
 <!-- END main_block -->

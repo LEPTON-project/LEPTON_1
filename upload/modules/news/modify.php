@@ -46,16 +46,17 @@ $js_delete_msg = (array_key_exists( 'CONFIRM_DELETE', $MOD_NEWS))
 	;
 	
 ?>
+<div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left" width="33%">
-		<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['POST']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/add_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
+		<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['POST']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/add_post.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
 	</td>
 	<td align="left" width="33%">
-		<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['GROUP']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/add_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
+		<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['GROUP']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/add_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
 	</td>
 	<td align="right" width="33%">
-		<input type="button" value="<?php echo $TEXT['SETTINGS']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/modify_settings.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
+		<input class="settings" type="button" value="<?php echo $TEXT['SETTINGS']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/news/modify_settings.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
 	</td>
 </tr>
 </table>
@@ -244,15 +245,13 @@ if($query_posts->numRows() > 0) {
  *
  */
 $setting_footer = '
-<br />
 <table cellpadding="2" cellspacing="0" border="0" width="70%">
  <tr>
    <td class="news_prev_link">[PREVIOUS_PAGE_LINK]</td>
    <td class="news_of" >[OF]</td>
    <td class="news_next_link" >[NEXT_PAGE_LINK]</td>
  </tr>
-</table>
-<br />';
+</table>';
 
 $values = ($display_previous_next_links == 'none')
 	? array (
@@ -291,7 +290,7 @@ if($query_groups->numRows() > 0) {
 			</td>		
 			<td>
 				<a href="<?php echo WB_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;group_id=<?php echo $group['group_id']; ?>">
-          <?php echo $group['title'].' ('.$group['group_id'].')'; ?>
+          <?php echo $group['title'].' (ID: '.$group['group_id'].')'; ?>
 				</a>
 			</td>
 			<td width="80">

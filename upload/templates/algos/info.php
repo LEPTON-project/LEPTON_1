@@ -31,14 +31,14 @@ if (defined('WB_PATH')) {
 
 
 // OBLIGATORY VARIABLES
-$template_directory			= 'algos';
+$template_directory		= 'algos';
 $template_name				= 'Algos Theme';
-$template_function			= 'theme';
-$template_version			= '1.2.2';
-$template_platform			= '1.0.x';
-$template_author			= 'Jurgen Nijhuis, Dietrich Roland Pehlke (last)';
+$template_function		= 'theme';
+$template_version			= '1.3.3';
+$template_platform		= '1.x';
+$template_author			= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna (last)';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
 $template_license_terms		= '-';
-$template_description		= 'default backend theme for LEPTON CMS';
+$template_description	= 'default backend theme for LEPTON CMS';
 $template_guid				= 'AD6296ED-31BD-49EB-AE23-4DD76B7ED778';
 ?>

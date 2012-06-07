@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Varmista vain j&auml;rjestelm&auml;n taulut', //Backup only WB-specific tables
 	'BASIC' 				=> 'Perusn&auml;kym&auml;', //Basic
 	'BLOCK' 				=> 'Lohko', //Block
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Kalenteri', //Calendar
 	'CANCEL' 				=> 'Peruuta', //Cancel
 	'CAN_DELETE_HIMSELF' 	=> 'Voi poistaa itsens&auml;', //Can delete himself
@@ -178,7 +179,7 @@ $TEXT = array(
 	'GROUP' 				=> 'Ryhm&auml;', //Group
 	'HEADER' 				=> 'Yl&auml;tunniste', //Header
 	'HEADING' 				=> 'Otsikko', //Heading
-	'HEADING_CSS_FILE' 		=> 'Moduulin css-tiedosto: ', //Actual module file: 
+	'HEADING_CSS_FILE' 		=> 'Moduulin css-tiedosto: ', //Actual module file:
 	'HEIGHT' 				=> 'Korkeus', //Height
 	'HELP_LEPTOKEN_LIFETIME'		=> 'sekunneissa, 0 = ei CSRF-suojausta!', //in seconds, 0 means no CSRF protection!
 	'HELP_MAX_ATTEMPTS'		=> 'T&auml;m&auml; on enimm&auml;ism&auml;&auml;r&auml; kirjautumisyrityksi&auml; yhden istunnon aikana.', //When reaching this number, more login attempts are not possible for this session.
@@ -476,6 +477,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Salasana', //My Password
 	'MY_SETTINGS' 			=> 'Omat asetukset', //My Settings
 	'SEARCH_SETTINGS' 		=> 'Hakuasetukset', //Search Settings
+	'SEARCH_PAGE' 			=> 'Search Page',
 	'SECURITY_SETTINGS'		=> 'Turva-asetukset', //Security Setting
 	'SERVER_SETTINGS' 		=> 'Palvelinasetukset', //Server Settings
 	'TEMPLATE_DETAILS' 		=> 'Sivumallin tiedot', //Template Details
@@ -494,12 +496,12 @@ $MESSAGE = array(
 	'ADDON_LANGUAGES_RELOADED' => 'Kielten lataus onnistui', //Languages reloaded successfully
 	'ADDON_MANUAL_FTP_LANGUAGE' => '<strong>HUOMIO!</strong> Tietoturvasyist&auml; kielitiedostot tulee ladata FTP:t&auml; k&auml;ytt&auml;en kansioon /languages/ ja rekister&ouml;id&auml; tai p&auml;ivitt&auml;&auml; P&auml;ivit&auml; -toiminnolla.',
 								// <strong>ATTENTION!</strong> For safety reasons uploading languages files in the folder/languages/ only by FTP and use the Upgrade function for registering or updating.
-	'ADDON_MANUAL_FTP_WARNING' => 'Varoitus: Moduuliin liittyv&auml;t tietokantataulut tyhjennet&auml;&auml;n. ', //Warning: Existing module database entries will get lost. 
+	'ADDON_MANUAL_FTP_WARNING' => 'Varoitus: Moduuliin liittyv&auml;t tietokantataulut tyhjennet&auml;&auml;n. ', //Warning: Existing module database entries will get lost.
 	'ADDON_MANUAL_INSTALLATION' => 'Uusien moduulien lataamista FTP:ll&auml; ei suositella, koska moduulien asennukseen liittyv&auml;t toiminnot <tt>install</tt>, <tt>upgrade</tt> ja <tt>uninstall</tt> eiv&auml;t t&auml;ll&ouml;in tapahdu automaattisesti. Manuaalisesti asennettuna moduulin toiminta tai sen poistaminen v&auml;ltt&auml;m&auml;tt&auml; toimi suunnitellusti.<br /><br />Alla voit erityistapauksessa k&auml;ynnist&auml;&auml; FTP:ll&auml; ladattujen moduulien toiminnot manuaalisesti.',
 								// When modules are uploaded via FTP (not recommended), the module installation functions <tt>install</tt>, <tt>upgrade</tt> or <tt>uninstall</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module functions manually for modules uploaded via FTP below.
 	'ADDON_MANUAL_INSTALLATION_WARNING' => 'Varoitus: Moduuliin liittyv&auml;t tietokantataulut tyhjennet&auml;&auml;n. K&auml;yt&auml; t&auml;t&auml; toimintoa vain, jos olet ladannut moduulin FTP:ll&auml; ja havaitset siin&auml; ongelmia.',
 								// Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.
-	'ADDON_MANUAL_RELOAD_WARNING' => 'Varoitus: Moduuliin liittyv&auml;t tietokantataulut tyhjennet&auml;&auml;n. ', //Warning: Existing module database entries will get lost. 
+	'ADDON_MANUAL_RELOAD_WARNING' => 'Varoitus: Moduuliin liittyv&auml;t tietokantataulut tyhjennet&auml;&auml;n. ', //Warning: Existing module database entries will get lost.
 	'ADDON_MODULES_RELOADED' => 'Moduulien lataus onnistui', // Modules reloaded successfully
 	'ADDON_PRECHECK_FAILED' => 'Liit&auml;nn&auml;isen asentaminen ep&auml;onnistui. J&auml;rjestelm&auml; ei t&auml;yt&auml; liit&auml;nn&auml;isen minimivaatimuksia. Korjaa alla mainitut ep&auml;kohdat liit&auml;nn&auml;isen oikean toiminnan varmistamiseksi:',
 								//Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.
@@ -537,7 +539,7 @@ $MESSAGE = array(
 	'GENERIC_IN_USE' 		=> ' mutta on k&auml;yt&ouml;ss&auml; kohteessa ', // but used in
 	'GENERIC_MODULE_VERSION_ERROR' => 'Moduulia ei ole asennettu oikein!', // The module is not installed properly!
 	'GENERIC_NOT_COMPARE' 	=> 'ei ole mahdollinen', //  not possibly
-	'GENERIC_NOT_INSTALLED' => 'Ei asennettu', // Not installed 
+	'GENERIC_NOT_INSTALLED' => 'Ei asennettu', // Not installed
 	'GENERIC_NOT_UPGRADED' 	=> 'P&auml;ivitys ei ole mahdollinen', // Actualization not possibly
 	'GENERIC_PLEASE_BE_PATIENT' => 'T&auml;m&auml; saattaa kest&auml;&auml; hetken. Ole hyv&auml; ja odota!', // Please be patient, this might take a while.
 	'GENERIC_PLEASE_CHECK_BACK_SOON' => 'Tervetuloa piakkoin uudelleen...', // Please check back soon...
@@ -601,8 +603,8 @@ $MESSAGE = array(
 	'PAGES_ADDED_HEADING' 	=> 'Sivun otsikon lis&auml;ys onnistui', // Page heading added successfully
 	'PAGES_BLANK_MENU_TITLE' => 'Ole hyv&auml; ja sy&ouml;t&auml; valikkoteksti', // Please enter a menu title
 	'PAGES_BLANK_PAGE_TITLE' => 'Ole hyv&auml; ja sy&ouml;t&auml; sivun otsikko', // Please enter a page title
-	'PAGES_CANNOT_CREATE_ACCESS_FILE' => 'Suojaustiedoston luonti sivuhakemistoon (page) ep&auml;onnistui, k&auml;ytt&ouml;oikeudet eiv&auml;t riit&auml;', // 
-	'PAGES_CANNOT_DELETE_ACCESS_FILE' => 'Suojaustiedoston poisto sivuhakemistosta (page) ep&auml;onnistui, k&auml;ytt&ouml;oikeudet eiv&auml;t riit&auml;', // 
+	'PAGES_CANNOT_CREATE_ACCESS_FILE' => 'Suojaustiedoston luonti sivuhakemistoon (page) ep&auml;onnistui, k&auml;ytt&ouml;oikeudet eiv&auml;t riit&auml;', //
+	'PAGES_CANNOT_DELETE_ACCESS_FILE' => 'Suojaustiedoston poisto sivuhakemistosta (page) ep&auml;onnistui, k&auml;ytt&ouml;oikeudet eiv&auml;t riit&auml;', //
 	'PAGES_CANNOT_REORDER' 	=> 'Sivujen uudelleenj&auml;rjestely ep&auml;onnistui', // Error re-ordering page
 	'PAGES_DELETED' 		=> 'Sivun poisto onnistui', // Page deleted successfully
 	'PAGES_DELETE_CONFIRM' 	=> 'Haluatko varmasti poistaa valitun sivun &laquo;%s&raquo; (ja kaikki sen alisivut)', // Are you sure you want to delete the selected page &laquo;%s&raquo; (and all of its sub-pages)
@@ -671,7 +673,7 @@ Sinulle on luotu uusi salasana, jonka n&auml;et yll&auml;.
 Vanhalla salasanallasi ei en&auml;&auml; pysty kirjautumaan sivustolle!
 Jos sinulla on kysymyksi&auml; tai ongelmia k&auml;ytt&auml;j&auml;tietoihisi liittyen,
 ota yhteytt&auml; sivuston \'{LOGIN_WEBSITE_TITLE}\' yll&auml;pitoon.
-Mahdollisten kirjautumisongelmien v&auml;ltt&auml;miseksi suosittelemme selaimen 
+Mahdollisten kirjautumisongelmien v&auml;ltt&auml;miseksi suosittelemme selaimen
 v&auml;limuistin tyhjent&auml;mist&auml; ennen kuin kirjaudut uusilla tunnuksilla.
 
 Terveisin
@@ -710,7 +712,7 @@ Salasana: {LOGIN_PASSWORD}
 
 Terveisin
 
-Voit poistaa viestin ilman lis&auml;toimenpiteit&auml;, jos 
+Voit poistaa viestin ilman lis&auml;toimenpiteit&auml;, jos
 se on saapunut sinulle virheen tai erehdyksen vuoksi!
 --------------------------------------------
 T&auml;m&auml; on automaattinen viesti j&auml;rjestelm&auml;lt&auml;!
@@ -765,7 +767,7 @@ $OVERVIEW = array(
 	'MEDIA' 				=> 'Mediakansiossa olevien tiedostojen yll&auml;pito...', // Manage files stored in the media folder...
 	'MODULES' 				=> 'Lepton-moduulien yll&auml;pito...', // Manage Lepton modules...
 	'PAGES' 				=> 'Sivuston rakenteen yll&auml;pito...', // Manage your websites pages...
-	'PREFERENCES' 			=> 'Omien tietojen (s&auml;hk&ouml;posti, salasana jn.) yll&auml;pito...', // Change preferences such as email address, password, etc... 
+	'PREFERENCES' 			=> 'Omien tietojen (s&auml;hk&ouml;posti, salasana jn.) yll&auml;pito...', // Change preferences such as email address, password, etc...
 	'SETTINGS' 				=> 'Lepton-sivuston asetusten yll&auml;pito...', // Changes settings for Lepton...
 	'START' 				=> 'Yll&auml;pitosivuston aloitusn&auml;kym&auml;', // Administration overview
 	'TEMPLATES' 			=> 'Muokkaa sivuston ulkoasua erilaisten sivumallien avulla...', // Change the look and feel of your website with templates...
@@ -773,9 +775,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Avaa sivusto uudessa ikkunassa...' // Quickly view and browse your website in a new window...
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

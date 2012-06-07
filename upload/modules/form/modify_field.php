@@ -54,16 +54,17 @@ if($type == '') {
 $raw = array('<', '>');
 $friendly = array('&lt;', '&gt;');
 ?>
-
+<div class="container">
+	
 <form name="modify" action="<?php echo WB_URL; ?>/modules/form/save_field.php" method="post" style="margin: 0;">
 
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="field_id" value="<?php echo $field_id; ?>" />
 
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<table cellpadding="2" cellspacing="0" border="0" width="50%">
 	<tr>
-		<td colspan="2"><strong><?php echo $TEXT['MODIFY'].' '.$TEXT['FIELD']; ?></strong></td>
+		<td colspan="2"><strong><?php echo (($type == 'none') ? $TEXT['ADD'] : $TEXT['MODIFY']).' '.$TEXT['FIELD']; ?></strong></td>
 	</tr>
 	<tr>
 		<td width="20%"><?php echo $TEXT['TITLE']; ?>:</td>
@@ -200,24 +201,21 @@ $friendly = array('&lt;', '&gt;');
 	</tr>
 <?php } ?>
 </table>
-
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<table width="100%">
 	<tr>
+		<td width="10%"></td>
 		<td align="left">
 			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-		</td>
+			<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
+		
 		<?php
 		// added by John Maats, PCWacht, 12 januar 2006
 		if ($type<>'none') {
 		?>
-		<td align="center">
-			<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>';" style="width: 200px; margin-top: 5px;" />
-		</td>
+			<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>';" />
 		<?php } 
 		// end addition
 		?>
-		<td align="right">
-			<input type="button" value="<?php echo $TEXT['CLOSE']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 		</td>
 	</tr>
 </table>

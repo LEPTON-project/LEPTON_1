@@ -1,46 +1,78 @@
 <!-- BEGIN main_block -->
-<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom:10px;">
-	<tr style="background:#f0f0f0;">
-		<td valign="middle" align="left"><h2>{ADDONS_OVERVIEW}</h2></td>
-		<td align="right">{URL_ADVANCED}</td>
-	</tr>
-</table>
+<div>
+<div class="right" style="margin-bottom: 10px;"><span class="button advanced">{URL_ADVANCED}</span></div>
 
-<table cellpadding="0" cellspacing="0" border="0" width="99%" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
 	<tr>
 		<td align="center" valign="top">
+
 			<!-- BEGIN modules_block -->
-			<table cellpadding="0" cellspacing="0" border="0" class="section_2" {DISPLAY_MODULES} >
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {DISPLAY_MODULES} >
 				<tr>
-					<td class="graphic" align="center" valign="middle" rowspan="2"><a href="{ADMIN_URL}/modules/index.php"><img src="{THEME_URL}/images/modules.png" alt="0" /> </a> </td>
-					<td class="description" valign="top"><a href="{ADMIN_URL}/modules/index.php"><span class="title">{MODULES}</span></a><p>{MODULES_OVERVIEW}</p></td>
+					<td class="graphic" align="center" valign="top">
+						<a href="{ADMIN_URL}/modules/index.php">
+							<img src="{THEME_URL}/images/modules_48.png" alt="{MODULES}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{ADMIN_URL}/modules/index.php">
+							{MODULES}
+						</a>
+						<br />
+						{MODULES_OVERVIEW}
+					</td>
 				</tr>
 			</table>
 			<!-- END modules_block -->
+
 			<!-- BEGIN templates_block -->
-			<table cellpadding="0" cellspacing="0" border="0" class="section_2" {DISPLAY_TEMPLATES} >
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {DISPLAY_TEMPLATES} >
 				<tr>
-					<td class="graphic" align="center" valign="middle" rowspan="2"><a href="{ADMIN_URL}/templates/index.php"><img src="{THEME_URL}/images/templates.png" alt="{TEMPLATES}" /> </a> </td>
-					<td class="description" valign="top"><a href="{ADMIN_URL}/templates/index.php"><span class="title">{TEMPLATES}</span></a><p>{TEMPLATES_OVERVIEW}</p></td>
+					<td class="graphic" align="center" valign="top">
+						<a href="{ADMIN_URL}/templates/index.php">
+							<img src="{THEME_URL}/images/templates_48.png" alt="{TEMPLATES}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{ADMIN_URL}/templates/index.php">
+							{TEMPLATES}
+						</a>
+						<br />
+						{TEMPLATES_OVERVIEW}
+					</td>
 				</tr>
 			</table>
 			<!-- END templates_block -->
+
 			<!-- BEGIN languages_block -->
-			<table cellpadding="0" cellspacing="0" border="0" class="section_2" {DISPLAY_LANGUAGES} >
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {DISPLAY_LANGUAGES} >
 				<tr>
-					<td class="graphic" align="center" valign="middle" rowspan="2"><a href="{ADMIN_URL}/languages/index.php"><img src="{THEME_URL}/images/languages.png" alt="{LANGUAGES}" /> </a> </td>
-					<td class="description" valign="top"> <a href="{ADMIN_URL}/languages/index.php"><span class="title">{LANGUAGES}</span></a><p>{LANGUAGES_OVERVIEW}</p></td>
+					<td class="graphic" align="center" valign="top">
+						<a href="{ADMIN_URL}/languages/index.php">
+							<img src="{THEME_URL}/images/languages_50.png" alt="{LANGUAGES}" />
+						</a>
+					</td>
+					<td class="description" valign="top">
+						<a class="title" href="{ADMIN_URL}/languages/index.php">
+							{LANGUAGES}
+						</a>
+						<br />
+						{LANGUAGES_OVERVIEW}
+					</td>
 				</tr>
 			</table>
 			<!-- END languages_block -->
+
 			<!-- BEGIN reload_block -->
-			<table cellpadding="0" cellspacing="0" border="0" class="section_2" {DISPLAY_RELOAD} >
+			<table cellpadding="0" cellspacing="0" border="0" class="section" {DISPLAY_RELOAD} >
 				<tr>
-					<td class="graphic" align="center" valign="middle" rowspan="2"><img src="{THEME_URL}/images/admintools.png" alt="{TXT_ADMIN_SETTINGS}" /> </td>
-					<td class="description" valign="top"><span class="title">{TXT_ADMIN_SETTINGS}</span>
+					<td class="graphic" align="center" valign="top">
+						<img src="{THEME_URL}/images/admintools_50.png" alt="{TXT_ADMIN_SETTINGS}" />
+					</td>
+					<td class="description" valign="top">
+						<div class="title">{TXT_ADMIN_SETTINGS}</div>
+						{MESSAGE_RELOAD_ADDONS}
 						<form action="{RELOAD_URL}" method="post">
-							{MESSAGE_RELOAD_ADDONS}
-							<br style="margin-bottom: 0.5em" />
 							<input {DISPLAY_MODULES} type="checkbox" name="reload_modules" id="reload_modules" value="true" />
     						<label {DISPLAY_MODULES} for="reload_modules">{MODULES}</label>
 							<input {DISPLAY_TEMPLATES} type="checkbox" name="reload_templates" id="reload_templates" value="true" />
@@ -49,10 +81,12 @@
 							<label {DISPLAY_LANGUAGES} for="reload_languages">{LANGUAGES}</label>
 							<input type="submit" name="submit" value="{TEXT_RELOAD}" />
 						</form>
+						<br />
 					</td>
 				</tr>
 			</table>
 			<!-- END reload_block -->
+
 		</td>
 	</tr>
 </table>

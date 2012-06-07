@@ -57,11 +57,11 @@ if($result->numRows() == 0) {
 $tool = $result->fetchRow();
 
 ?>
-<h4>
-	<a href="<?php echo ADMIN_URL; ?>/admintools/index.php"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
-	&raquo;
+<div class="container">
+
+<h2>
 	<?php echo $tool['name']; ?>
-</h4>
+</h2>
 <?php
 
 if(file_exists(WB_PATH.'/modules/'.$tool['directory'].'/tool.php'))

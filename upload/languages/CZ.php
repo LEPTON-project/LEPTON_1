@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Zálohovat pouze WB specifické tabulky',
 	'BASIC' 				=> 'Základ',
 	'BLOCK' 				=> 'Blok',
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Kalendář',
 	'CANCEL' 				=> 'Zrušit',
 	'CAN_DELETE_HIMSELF' 	=> 'Chcete odtranit sám sebe',
@@ -251,7 +252,7 @@ $TEXT = array(
 	'NEXT' 					=> 'Další',
 	'NEXT_PAGE' 			=> 'Další strana',
 	'NO' 					=> 'Ne',
-	'NO_LEPTON_ADDON'  => 'Tento addon nemůže být použit LEPTON',    
+	'NO_LEPTON_ADDON'  => 'Tento addon nemůže být použit LEPTON',
 	'NONE' 					=> 'Žádná',
 	'NONE_FOUND' 			=> 'Nic nenalezeno',
 	'NOT_FOUND' 			=> 'Nenalezeno',
@@ -473,6 +474,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Moje heslo',
 	'MY_SETTINGS' 			=> 'Moje nastavení',
 	'SEARCH_SETTINGS' 		=> 'Nastavení hledání',
+	'SEARCH_PAGE' 			=> 'Search Page',
 	'SECURITY_SETTINGS'		=> 'Nastavení bezpečnosti',
 	'SERVER_SETTINGS' 		=> 'Nastavení serveru',
 	'TEMPLATE_DETAILS' 		=> 'Detail šablony',
@@ -595,7 +597,7 @@ $MESSAGE = array(
 	'PAGES_DELETED' 		=> 'Stránka byla v pořádku vymazána',
 	'PAGES_DELETE_CONFIRM' 	=> 'Chcete opravdu vymazat vybrané stránky &laquo;%s&raquo; (a všechny sub stránky)',
 	'PAGES_INSUFFICIENT_PERMISSIONS' => 'Nemáte oprávnění ke změně tohoto souboru',
-	'PAGES_INTRO_EMPTY' 		=> 'Prosím vložte obsah, prázdá titulní stránka nemůže být uložena.',    
+	'PAGES_INTRO_EMPTY' 		=> 'Prosím vložte obsah, prázdá titulní stránka nemůže být uložena.',
 	'PAGES_INTRO_LINK' 		=> 'Klikněte ZDE k editaci titulní stránky',
 	'PAGES_INTRO_NOT_WRITABLE' => 'Nelze zapisovat do page-directory/intro.php,',
 	'PAGES_INTRO_SAVED' 	=> 'Domovská stránka byla uložena v pořádku',
@@ -713,9 +715,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Rychlý náhled a prohlížet váš web v novém okně...'
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

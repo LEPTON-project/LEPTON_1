@@ -17,22 +17,22 @@
  * @platform	Website Baker 2.8
 */
 <!-- END comment_block -->
-
+<div class="container">
 <div id="mod_addon_file_editor">
-	<h4 class="admintools">
-		<a href="{URL_WB_ADMIN_TOOLS}">{TXT_HEADING_ADMINTOOLS}</a> -> {NAME_FILE_EDITOR}
-	</h4>
+	<h2 class="admintools">
+		{NAME_FILE_EDITOR}
+	</h2>
 
 	<div class="help_file">
-		<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+		<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 	</div>
-
-	<h2><a href="{URL_FILEMANAGER}">{TXT_FTP_HEADING}</a></h2>
+<span class="button back"><a href="{URL_FILEMANAGER}">{TXT_BACK}</a></span>
+	<h4><a href="{URL_FILEMANAGER}">{TXT_FTP_HEADING}</a></h4>
 	<p>{TXT_FTP_DESCRIPTION}</p>
-	<a class="backlink" href="{URL_FILEMANAGER}">{TXT_BACK}</a>
-
+	
+<div>&nbsp;</div>
 	<form class="formbox" action="{URL_FORM_SUBMIT}" method="post">
-		<h3 class="normal">{TXT_FTP_SETTINGS}:</h3>
+		<h4 class="normal">{TXT_FTP_SETTINGS}:</h4>
 
 		<label for="ftp_enabled">{TXT_FTP_SUPPORT}:</label>
 		<input id="ftp_enabled" value="1" type="radio" {ENABLED_CHECKED} name="ftp_enabled" />{TXT_ENABLE}
@@ -74,5 +74,5 @@
 		</form>
 		{STATUS_MESSAGE}
 	</div>
-	
+
 </div>

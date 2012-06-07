@@ -17,11 +17,11 @@
 */
 
 #mod_addon_file_editor thead, #mod_addon_file_editor thead tr:hover { background-color: #DFE1E5;}
-#mod_addon_file_editor td { font-size: 95%; color:#666; line-height: 0.4em; text-align: left;}
-#mod_addon_file_editor thead td { color: #666; }
+#mod_addon_file_editor td { color:#666; line-height: 16px; text-align: left;}
+#mod_addon_file_editor thead th { color: #333; line-height: 20px;}
 #mod_addon_file_editor th {text-align: left;}
-#mod_addon_file_editor table.filemanager td { font-size: 95%; line-height: 1em;}
-#mod_addon_file_editor tr.odd { background-color: #eee; }
+#mod_addon_file_editor table.filemanager td {line-height: 22px;}
+#mod_addon_file_editor tr.odd { background-color: #ddd; }
 #mod_addon_file_editor tr.permission td a { color: red; }
 #mod_addon_file_editor tr:hover { background-color: #FFFFE0}
 #mod_addon_file_editor tr.folder td { color: green; border-top: 1px solid #DDD; }
@@ -31,7 +31,7 @@
 #mod_addon_file_editor img { border: 0; }
 
 #mod_addon_file_editor a.backlink { 
-display: block;
+
 margin: 1em 0;
 padding-left: 20px;
 background: url(icons/back.png) left center no-repeat;
@@ -42,20 +42,20 @@ line-height: 1.5em;
 }
 
 #mod_addon_file_editor div.box {
-font-size: x-small;
+
 width: 97.4%;
 text-align: right;
-margin: 0.5em 0;
-border: 1px solid #AAA;
-padding: 0.2em;
-background-color: #F7F7F7;
+font-size: x-small;
+margin: 5px 0 40px 0;
+
+
 }
 
 #mod_addon_file_editor div.help_file {
-font-size: x-small;
-width: 97.4%;
-text-align: right;
-margin: -1.6em 0 1em 0;
+float: right;
+position: relative;
+top: -32px;
+
 }
 
 #mod_addon_file_editor form {
@@ -66,17 +66,9 @@ border: 1px solid #D7D7D7;
 }
 
 #mod_addon_file_editor input.submit, #mod_addon_file_editor a.submit {
-margin: 0.5em;
 width: auto;
-min-width: 120px;
-float: left;
-line-height: 1.2em;
-font-size: small;
-color: #000;
-border: 1px solid #AAA;
-background-color: #E2E2E2;
-display: block;
-text-decoration: none;
+float:left;
+
 }
 
 #mod_addon_file_editor a.submit, #mod_addon_file_editor a.submit:hover {
@@ -93,22 +85,29 @@ background-color: #E9E9E9;
 #mod_addon_file_editor a.submit {
 display: block;
 padding: 0.1em;
+padding-top: 4px;
 text-align: center;
 margin-left: 1.0em;
 cursor: default;
 }
 
 #mod_addon_file_editor label {
-font-weight: bold;
 margin-left: 0.5em;
 width: 150px;
 float: left;
 }
 
 #mod_addon_file_editor h4.admintools, h4 {
-margin: 0; 
-border-bottom: 1px solid #DDD; 
+margin: 0;
+margin-top: 10px; 
 padding-bottom: 5px;
+}
+
+h5 {
+font-size: 13px;
+color: #666;
+font-weight: bold;
+margin-bottom: 10px;
 }
 
 #mod_addon_file_editor .hidden { display: none; }
@@ -196,3 +195,5 @@ cursor:pointer;
 #mod_addon_file_editor .code_area {
 	width: 98%;
 }
+
+p { width:97.4%; }

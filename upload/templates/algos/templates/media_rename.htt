@@ -17,19 +17,19 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="text" name="name" value="{BASENAME}" style="width: 100%;" />
+				<input type="text" name="name" value="{BASENAME}" style="width: 98%;" />
 				<script type="text/javascript">
-				document.rename.name.focus();
+				document.rename.name.select();
 				</script>
 			</td>
 			<td width="50" class="{DISPlAY_EXTENSION}">
-				<label class="bold">{EXTENSION}</label>
+				<label>&nbsp;{EXTENSION}</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" name="save" value="{TEXT_RENAME}" style="width: 49%;" />
-				<input type="submit" name="cancel" value="{TEXT_CANCEL}" style="width: 49%;" />
+				<input type="submit" name="save" value="{TEXT_RENAME}" style="width:120px;" />
+				<input class="reset" type="submit" name="cancel" value="{TEXT_CANCEL}" style="width:120px;" />
 			</td>
 		</tr>
 		</table>

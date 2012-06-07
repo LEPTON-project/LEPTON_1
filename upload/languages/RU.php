@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -18,18 +18,18 @@
  */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php')) {
-	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php'); 
+	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php');
 } else {
 	$subs = explode('/', dirname($_SERVER['SCRIPT_NAME']));	$dir = $_SERVER['DOCUMENT_ROOT'];
 	$inc = false;
 	foreach ($subs as $sub) {
 		if (empty($sub)) continue; $dir .= '/'.$sub;
-		if (file_exists($dir.'/framework/class.secure.php')) { 
-			include($dir.'/framework/class.secure.php'); $inc = true;	break; 
-		} 
+		if (file_exists($dir.'/framework/class.secure.php')) {
+			include($dir.'/framework/class.secure.php'); $inc = true;	break;
+		}
 	}
 	if (!$inc) trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 }
@@ -107,6 +107,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Бэкап только программных таблиц БД',
 	'BASIC' 				=> 'Базовый',
 	'BLOCK' 				=> 'Блок',
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Календарь',
 	'CANCEL' 				=> 'Отмена',
 	'CAN_DELETE_HIMSELF' 	=> 'Может удалить себя',
@@ -249,7 +250,7 @@ $TEXT = array(
 	'NEXT' 					=> 'Следующее',
 	'NEXT_PAGE' 			=> 'Следующая страница',
 	'NO' 					=> 'Нет',
-	'NO_LEPTON_ADDON'  => 'Это добавление нвозможно использовать в LEPTON',    
+	'NO_LEPTON_ADDON'  => 'Это добавление нвозможно использовать в LEPTON',
 	'NONE' 					=> 'Ничего',
 	'NONE_FOUND' 			=> 'Ничего не найдено',
 	'NOT_FOUND' 			=> 'Не найдено',
@@ -471,6 +472,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Мой пароль',
 	'MY_SETTINGS' 			=> 'Мои настройки',
 	'SEARCH_SETTINGS' 		=> 'Настройки поиска',
+	'SEARCH_PAGE' 			=> 'Search Page',
 	'SECURITY_SETTINGS'		=> 'Настройки безопасности',
 	'SERVER_SETTINGS' 		=> 'Настройки сервера',
 	'TEMPLATE_DETAILS' 		=> 'Подробности о шаблоне',
@@ -593,7 +595,7 @@ $MESSAGE = array(
 	'PAGES_DELETED' 		=> 'Страница успешно удалена',
 	'PAGES_DELETE_CONFIRM' 	=> 'Вы уверены, что хотите удалить выбранную страницу &laquo;%s&raquo; (и всё ее содержимое)',
 	'PAGES_INSUFFICIENT_PERMISSIONS' => 'У Вас нет прав для изменения этой страницы',
-	'PAGES_INTRO_EMPTY' 		=> 'Intro-страница не может быть пустой.',    
+	'PAGES_INTRO_EMPTY' 		=> 'Intro-страница не может быть пустой.',
 	'PAGES_INTRO_LINK' 		=> 'Нажмите здесь для изменения заставки сайта',
 	'PAGES_INTRO_NOT_WRITABLE' => 'Недостаточно прав для изменения page-directory/intro.php',
 	'PAGES_INTRO_SAVED' 	=> 'Заставка сайта успешно сохранена',
@@ -706,9 +708,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Просмотр Вашего сайта в новом окне браузера...'
 	);
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

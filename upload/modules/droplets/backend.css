@@ -12,10 +12,7 @@ ul, li   {
 	border-top: 1px dashed #fff;
 }
 
-thead	{ 
-	font-weight: bold; 
-	background-color: #c7d1db !important;
-	height: 25px }
+
 
 .row_om_out   { 
 	background: #ecf4f5 inherit; 
@@ -23,14 +20,14 @@ thead	{
 }
 
 .row_om_over   { background: #ffffe0; border: outset 1px #679b38 }
-a.tooltip span {display:none; margin-left:14px; width:430px;}
+a.tooltip span {display:none; margin-left:14px; width:230px;}
 a.tooltip:hover span{display:inline; position:absolute; padding:5px; border:1px solid #000000; background:#ffffff; color:#000000;}
 
 .button {
-  border: outset 1px #315e8d;
-  padding: 5px;
-  background-color: #e6eeee;
-  width: 15em;
+ border: 1px solid #BBB;
+	padding: 3px 6px;
+	border-radius: 5px;
+	background-color: #FFF;
 }
 
 div.drok,
@@ -49,12 +46,6 @@ table.droplets {
   width: 100%;
 }
 
-table.droplets th {
-	background-color: #e6EEEE;
-	border: 1px solid #FFF;
-	font-size: 8pt;
-	padding: 4px;
-}
 
 table.droplets .newdroplet {
   background-color: #e6eeee !important;

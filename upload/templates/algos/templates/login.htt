@@ -21,9 +21,6 @@
 		<div id="main_container">
 			<div class="login_form">
 				<h2>LEPTON Login Panel</h2>
-				<a href="{FORGOTTEN_DETAILS_APP}" class="forgot_pass">{TEXT_FORGOTTEN_DETAILS}</a> 
-         <br style="clear:both"/><br />
-         <div>{MESSAGE}</div><br />
 				<form action="{ACTION_URL}" method="post" name="login">
 					<fieldset>
 						<ul>
@@ -48,6 +45,8 @@
 							</li>
 						</ul>
 						<div id="details-link">
+							<a href="{FORGOTTEN_DETAILS_APP}" class="forgot_pass">{TEXT_FORGOTTEN_DETAILS}</a> 
+							<br />
 							<a style="text-align:center;" href="{WB_URL}" target="_blank">{TEXT_HOME}</a>
 						</div>
 					</fieldset>

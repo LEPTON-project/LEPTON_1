@@ -58,7 +58,12 @@ $post_id = $database->get_one("SELECT LAST_INSERT_ID()");
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$post_id);
 } else {
-	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$post_id);
+	//$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$post_id);
+	?>
+<script type="text/javascript">
+		setTimeout("top.location.href ='<?php echo WB_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post_id; ?>'", 0);
+	</script>
+<?php
 }
 
 // Print admin footer

@@ -73,6 +73,7 @@ $jscal_use_time = true; // whether to use a clock, too
 require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 
 ?>
+<div class="container">
 <h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['POST']; ?></h2>
 <link href="<?php echo WB_URL; ?>/include/jscalendar/calendar-system.css" rel="stylesheet" type="text/css" />
 <div class="jsadmin jcalendar hide"></div> 
@@ -82,7 +83,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
 <input type="hidden" name="link" value="<?php echo $fetch_content['link']; ?>" />
 
-<table class="row_a" cellpadding="2" cellspacing="0" width="100%">
+<table cellpadding="2" cellspacing="0" width="100%">
 <tr>
 	<td><?php echo $TEXT['TITLE']; ?>:</td>
 	<td width="80%">
@@ -113,8 +114,9 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 			?>
 		</select>
 	</td>
+	</tr>
 <?php } ?>
-</tr>
+
 <tr>
 	<td><?php echo $TEXT['COMMENTING']; ?>:</td>
 	<td>
@@ -166,14 +168,14 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 	</td>
 	<?php } else { ?>
 	<td>
-		<input type="file" name="newspic" />
+		<input type="file" name="newspic" size="50" />
 	</td>
 	<?php } ?>
 </tr>
 <?php } ?>
 </table>
 
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
 </tr>
@@ -200,14 +202,12 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td align="left">
 		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
-	</td>
-	<td align="right">
-		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
+		<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>
 </form>
-
+</div>
 <script type="text/javascript">
 	Calendar.setup(
 		{
@@ -245,8 +245,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 	);
 </script>
 
-<br />
-
+<div class="container">
 <h2><?php echo $TEXT['MODIFY'].'/'.$TEXT['DELETE'].' '.$TEXT['COMMENT']; ?></h2>
 
 <?php

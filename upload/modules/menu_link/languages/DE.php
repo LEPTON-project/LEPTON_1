@@ -44,7 +44,7 @@ $module_description 	= 'Dieses Modul erm&ouml;glicht die Anzeige eines Links im 
 $MOD_MENU_LINK['TEXT']				= 'Klicken Sie HIER um zur Startseite zu gelangen';
 $MOD_MENU_LINK['EXTERNAL_LINK'] = 'Entfernte Adresse';
 $MOD_MENU_LINK['R_TYPE'] = 'Redirect-Typ';
-$MOD_MENU_LINK['XHTML_EXPLANATION'] = 'Info: diese Einstellung hat keine Auswirkungen, wenn bei show_menu2() der Schalter SM2_XHTML_STRICT verwendet wird!';
-$MOD_MENU_LINK['REDIRECT_EXPLANATION'] = 'Info: 301: Die angeforderte Ressource steht ab sofort unter der im „Location“-Header-Feld angegebenen Adresse bereit. Die alte Adresse ist nicht länger gültig.<br />302: Die angeforderte Ressource steht vorübergehend unter der im „Location“-Header-Feld angegebenen Adresse bereit. Die alte Adresse bleibt gültig.<br />(Siehe <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank">RFC2616</a>)';
+$MOD_MENU_LINK['XHTML_EXPLANATION'] = 'Diese Einstellung hat keine Auswirkungen, wenn bei show_menu2() der Schalter SM2_XHTML_STRICT verwendet wird!';
+$MOD_MENU_LINK['REDIRECT_EXPLANATION'] = '301:<br />Die angeforderte Ressource steht ab sofort unter der im „Location“-Header-Feld angegebenen Adresse bereit.<br />Die alte Adresse ist nicht länger gültig.<br />302:<br />Die angeforderte Ressource steht vorübergehend unter der im „Location“-Header-Feld angegebenen Adresse bereit.<br />Die alte Adresse bleibt gültig.<br />(Siehe <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank">RFC2616</a>)';
 
 ?>

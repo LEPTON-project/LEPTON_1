@@ -29,14 +29,13 @@ $template_edit_link = ADMIN_URL .'/admintools/tool.php?tool=templateedit';
 
 
 ?>
-<h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
-	<a href="<?php echo $admintool_link;?>"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
-	->
-	<a href="<?php echo $module_edit_link;?>">Droplets</a>
-</h4>
-
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
-
+<div class="container">
+<h2 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
+	Droplets
+</h2>
+<div>&nbsp</div>
+<span class="button back"><a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets"><?php echo $TEXT['BACK'];?></a></span>
+<div>&nbsp</div>
 <?php
 
 $temp_dir = WB_PATH.'/temp/droplets/';
@@ -63,15 +62,15 @@ if ($file_list == 0){
 	die("Error : ".$archive->errorInfo(true));
 }
 else {
-	echo '<br /><br />Backup created - <a href="'.WB_URL.$temp_file.'">Download</a>';
+	echo '<br />Backup created: <a href="'.WB_URL.$temp_file.'">Download</a>';
 }
 
 delete_directory ( $temp_dir );
 
 ?>
-
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
-
+<div>&nbsp</div>
+<span class="button back"><a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets"><?php echo $TEXT['BACK'];?></a></span>
+</div>
 <?php
 
 

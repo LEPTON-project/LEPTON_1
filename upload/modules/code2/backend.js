@@ -19,9 +19,9 @@ function gethinttext(whatis, lang) {
 					break;
 				case '2': t = "Javascript: <span class='info_not'>&lt;script type=&quot;text/javascript&quot;&gt;</span><b> Ihre Eingabe </b><span class='info_not'>&lt;/script&gt;</span>";
 					break;
-				case '3': t = "Interner Kommentar; erscheint nicht auf der Website.";
+				case '3': t = "Interner Kommentar, erscheint nicht auf der Website.";
 					break;
-				case '4': t = "<font color='#990000'>Wie interner Kommentar, aber k&ouml;nnen nur von Admins bearbeitet werden.</font>";
+				case '4': t = "<font color='#990000'>Wie interner Kommentar, aber kann nur von Admins bearbeitet werden.</font>";
 					break;
 				default:
 					t = "PHP: <span class='info_not'>&lt;?php</span><b> Ihre Eingabe </b><span class='info_not'> ?&gt;</span>";

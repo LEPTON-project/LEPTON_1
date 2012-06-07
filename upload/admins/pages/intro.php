@@ -74,9 +74,7 @@ show_wysiwyg_editor('content','content',$content,'100%','500px');
 <tr>
 	<td class="left">
 		<input type="submit" value="<?php echo $TEXT['SAVE'];?>" class="submit" />
-	</td>
-	<td class="right">
-		<input type="button" value="<?php echo $TEXT['CANCEL'];?>" onclick="javascript: window.location = 'index.php';" class="submit" />
+		<input type="button" value="<?php echo $TEXT['CANCEL'];?>" onclick="javascript: window.location = 'index.php';" class="cancel" />
 	</td>
 </tr>
 </table>

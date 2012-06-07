@@ -1,5 +1,5 @@
 <!-- BEGIN main_block -->
-
+<fieldset class="container">
 <h2>{HEADING_MODULE_DETAILS}</h2>
 
 <table cellpadding="5" cellspacing="0" border="0">
@@ -35,6 +35,6 @@
 
 <br />
 
-<button onclick="window.location = 'index.php';">{TEXT_BACK}</button>
-
+<button class="back" onclick="window.location = 'index.php';">{TEXT_BACK}</button>
+</fieldset>
 <!-- END main_block -->

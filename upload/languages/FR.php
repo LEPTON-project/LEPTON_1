@@ -3,7 +3,7 @@
 /**
  * This file is part of LEPTON Core, released under the GNU GPL
  * Please see LICENSE and COPYING files in your package for details, specially for terms and warranties.
- * 
+ *
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
@@ -19,8 +19,8 @@
 
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('WB_PATH')) {
+	include(WB_PATH.'/framework/class.secure.php');
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -29,8 +29,8 @@ if (defined('WB_PATH')) {
 		$root .= $oneback;
 		$level += 1;
 	}
-	if (file_exists($root.'/framework/class.secure.php')) { 
-		include($root.'/framework/class.secure.php'); 
+	if (file_exists($root.'/framework/class.secure.php')) {
+		include($root.'/framework/class.secure.php');
 	} else {
 		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
@@ -110,6 +110,7 @@ $TEXT = array(
 	'BACKUP_WB_SPECIFIC' 	=> 'Sauvegarder uniquement les tables li&eacute;es &agrave; WebsiteBaker',
 	'BASIC' 				=> 'Classique',
 	'BLOCK' 				=> 'Bloc',
+	'BACKEND_TITLE'	=>	'Backendtitle',
 	'CALENDAR' 				=> 'Calendrier',
 	'CANCEL' 				=> 'Annuler',
 	'CAN_DELETE_HIMSELF' 	=> 'Peut se supprimer',
@@ -253,7 +254,7 @@ $TEXT = array(
 	'NEXT' 					=> 'Suivant',
 	'NEXT_PAGE' 			=> 'Page suivante',
 	'NO' 					=> 'Non',
-	'NO_LEPTON_ADDON'		=> 'Ce module ne peut pas &ecirc;tre utilis&eacute; avec LEPTON cms',    
+	'NO_LEPTON_ADDON'		=> 'Ce module ne peut pas &ecirc;tre utilis&eacute; avec LEPTON cms',
 	'NONE' 					=> 'Aucun',
 	'NONE_FOUND' 			=> 'Aucune occurence trouv&eacute;e',
 	'NOT_FOUND' 			=> 'Introuvable',
@@ -475,6 +476,7 @@ $HEADING = array(
 	'MY_PASSWORD' 			=> 'Mon mot de passe',
 	'MY_SETTINGS' 			=> 'Mes pr&eacute;f&eacute;rences',
 	'SEARCH_SETTINGS' 		=> 'R&eacute;glages de la recherche',
+	'SEARCH_PAGE' 			=> 'Search Page',
 	'SECURITY_SETTINGS'		=> 'R&eacute;glages de la s&eacute;curit&eacute;',
 	'SERVER_SETTINGS' 		=> 'R&eacute;glages du serveur',
 	'TEMPLATE_DETAILS' 		=> 'Propri&eacute;t&eacute;s du th&egrave;me',
@@ -492,7 +494,7 @@ $MESSAGE = array(
 	'ADDON_GROUPS_MARKALL' => 'Cocher / D&eacute;cocher tous',
 	'ADDON_LANGUAGES_RELOADED' => 'Langues recharg&eacute; avec succ&egrave;s',
 	'ADDON_MANUAL_FTP_LANGUAGE' => '<strong>ATTENTION!</strong> pour des r&eacute;sons de s&eacute;curit&eacute;s, envoyez vos fichiers de langues par FTP et utilisez la fonction "mise &agrave; jour" pour faire les changements.',
-	'ADDON_MANUAL_FTP_WARNING' => 'Attention: les entr&eacute;es existantes du module seront perdues. ',	
+	'ADDON_MANUAL_FTP_WARNING' => 'Attention: les entr&eacute;es existantes du module seront perdues. ',
 	'ADDON_MANUAL_INSTALLATION' => 'Quand les extensions sont upload&eacute;s via ftp (ce qui n&apos;est pas recommand&eacute;), les fichiers d&apos;installation du module <tt>install.php</tt>, <tt>upgrade.php</tt> ou <tt>uninstall.php</tt> ne seront pas ex&eacute;cut&eacute;s automatiquement. Ces modules peuvent ne pas fonctionner ou ne pas se d&eacute;sinstaller correctement.<br /><br />Vous pouvez ex&eacute;cuter les fichiers d&apos;extension manuellement pour les extensions upload&eacute;es via ftp ci-dessous.',
 	'ADDON_MANUAL_INSTALLATION_WARNING' => 'Attention: les donn&eacute;es de la base de donn&eacute;es de l&apos;extension existante vont &ecirc;tre perdues. Utilisez cette option si vous rencontrez des probl&egrave;mes avec des modules upload&eacute;s via ftp.',
 	'ADDON_MANUAL_RELOAD_WARNING' => 'Attention: les donn&eacute;es de la base de donn&eacute;es de l&apos;extension existante vont &ecirc;tre perdues. ',
@@ -714,9 +716,9 @@ $OVERVIEW = array(
 	'VIEW' 					=> 'Aper&ccedil;u du site dans une nouvelle fen&ecirc;tre...'
 );
 
-/* 
- * Create the old languages definitions only if specified in settings 
- */ 
+/*
+ * Create the old languages definitions only if specified in settings
+ */
 if (ENABLE_OLD_LANGUAGE_DEFINITIONS) {
 	foreach ($MESSAGE as $key => $value) {
 		$x = strpos($key, '_');

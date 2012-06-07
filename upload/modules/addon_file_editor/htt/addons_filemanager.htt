@@ -21,23 +21,27 @@
 <div id="mod_addon_file_editor">
 
 <div class="help_file">
-	<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+	<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 </div>
 
-<h2><a href="{URL_EDIT_ADDON}">{TXT_ADDON_TYPE}: {ADDON_NAME}</a></h2>
 <p>{TXT_EDIT_DESCRIPTION}</p>
 
 <div class="info {CLASS_SHOW_FTP_INFO}">{TXT_FTP_NOTICE}</div>
 
-<a class="backlink" href="{URL_EDIT_ADDON}">{TXT_BACK_TO_OVERVIEW}</a>
+
 
 <div class="box">
-	<a href="{URL_RELOAD}">[ {TXT_RELOAD} ]&nbsp;</a>
-	<a class="{CLASS_HIDDEN}" href="{URL_CREATE_FILE_FOLDER}">[ {TXT_CREATE_FILE_FOLDER} ]&nbsp;</a>
-	<a class="{CLASS_HIDDEN}" href="{URL_UPLOAD_FILE}">[ {TXT_UPLOAD_FILE} ]&nbsp;</a>
+	<div style="float:left;">
+	<span class="button back"><a href="{URL_EDIT_ADDON}">{TXT_BACK_TO_OVERVIEW}</a></span>
+	</div>
+	<div style="float:right;">
+	<span class="button reload"><a href="{URL_RELOAD}"> {TXT_RELOAD} </a></span>&nbsp;
+	<span class="button newfolder"><a class="{CLASS_HIDDEN}" href="{URL_CREATE_FILE_FOLDER}"> {TXT_CREATE_FILE_FOLDER} </a></span>&nbsp;
+	<span class="button upload"><a class="{CLASS_HIDDEN}" href="{URL_UPLOAD_FILE}"> {TXT_UPLOAD_FILE} </a></span>
+	</div>
 </div>
 
-<table class="filemanager" width="98%" border="0" cellspacing="0" cellpadding="5">
+<table class="filemanager" width="98%" border="0" cellspacing="0" cellpadding="5" style="margin-bottom:15px;">
 <thead>
 	<tr>
 		<th width="65%">{ADDON_PATH}</th>
@@ -67,6 +71,6 @@
 </tbody>
 </table>
 
-<a class="backlink" href="{URL_EDIT_ADDON}">{TXT_BACK_TO_OVERVIEW}</a>
+<span class="button back"><a href="{URL_EDIT_ADDON}">{TXT_BACK_TO_OVERVIEW}</a></span>
 
 </div>

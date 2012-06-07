@@ -40,13 +40,14 @@ if(function_exists('ini_set')) {
 $database->query("DELETE FROM ".TABLE_PREFIX."mod_form_fields  WHERE page_id = '$page_id' and section_id = '$section_id' and title=''");
 
 ?>
+<div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left" width="33%">
-		<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
+		<input class="add" type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
 	</td>
 	<td align="right" width="33%">
-		<input type="button" value="<?php echo $TEXT['SETTINGS']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/modify_settings.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
+		<input class="settings" type="button" value="<?php echo $TEXT['SETTINGS']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/modify_settings.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 100%;" />
 	</td>
 </tr>
 </table>
@@ -79,7 +80,7 @@ if($query_fields->numRows() > 0) {
 			</td>
 			<td width="175">
 				<?php
-				echo $TEXT['TYPE'].':';
+				echo $TEXT['TYPE'].': ';
 				if($field['type'] == 'textfield') {
 					echo $TEXT['SHORT_TEXT'];
 				} elseif($field['type'] == 'textarea') {
@@ -97,14 +98,14 @@ if($query_fields->numRows() > 0) {
 				}
 				?>
 			</td>
-			<td width="95">		
+			<td width="110">		
 			<?php 
 			if ($field['type'] != 'group_begin') {
 				echo $TEXT['REQUIRED'].': '; if($field['required'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; }
 			}
 			?>
 			</td>
-			<td width="110">
+			<td width="150">
 			<?php
 			if ($field['type'] == 'select') {
 				$field['extra'] = explode(',',$field['extra']);
@@ -156,7 +157,7 @@ if($query_fields->numRows() > 0) {
 <?php
 
 // Query submissions table
-$query_submissions = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_form_submissions` WHERE section_id = '$section_id' ORDER BY submitted_when ASC");
+$query_submissions = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_form_submissions` WHERE section_id = '$section_id' ORDER BY submitted_when DESC");
 if($query_submissions->numRows() > 0) {
 	?>
 	<table cellpadding="2" cellspacing="0" border="0" width="100%">

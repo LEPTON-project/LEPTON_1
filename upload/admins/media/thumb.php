@@ -49,7 +49,7 @@ if (isset($_GET['img']) && isset($_GET['t'])) {
 		if ($type == 1) {
 			$img->resize_limitwh(50,50);
 		} else if ($type == 2) {
-			$img->resize_limitwh(200,200);
+			$img->resize_limitwh(400,400);
 		} 
 		$img->close();
 	} else {

@@ -85,7 +85,7 @@ function wb_handle_upload() {
             <tr>
               <td>
                 <input type="submit" class="button" value="<?php echo $DR_TEXT['UPLOAD']; ?>" name="submit" />
-                <input type="submit" class="button" value="<?php echo $TEXT['CANCEL']; ?>" name="cancel" />
+                <input type="submit" class="cancel" value="<?php echo $TEXT['CANCEL']; ?>" name="cancel" />
               </td>
             </tr>
           </tbody>

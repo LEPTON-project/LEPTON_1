@@ -55,7 +55,7 @@ $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 $backup_files = wb_find_backups( WB_PATH.'/modules/droplets/export/' );
 $backup_mgmt  = NULL;
 if ( count( $backup_files ) > 0 ) {
-    $backup_mgmt = '<button class="button" type="button" name="backup_mgmt" onclick="javascript: window.location = \''
+    $backup_mgmt = '<button class="backup_mgmt" type="button" name="backup_mgmt" onclick="javascript: window.location = \''
                  . WB_URL.'/modules/droplets/manage_backups.php\';">'
                  . $DR_TEXT['MANAGE_BACKUPS'] . '</button>';
 }
@@ -63,18 +63,17 @@ if ( count( $backup_files ) > 0 ) {
 
 ?>
 
-<br />
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td valign="bottom">
-		<button class="button" type="button" name="add_droplet" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/add_droplet.php';"><?php echo $TEXT['ADD'].' '.$DR_TEXT['DROPLETS']; ?></button>
-  	<button class="button" type="button" name="upload_droplet" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;upload=1';"><?php echo $DR_TEXT['UPLOAD']; ?></button>
-  	<button class="button" type="button" name="backup" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/backup_droplets.php';"><?php echo $DR_TEXT['BACKUP']; ?></button>
+		<button class="add" type="button" name="add_droplet" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/add_droplet.php';"><?php echo $TEXT['ADD'].' '.$DR_TEXT['DROPLETS']; ?></button>
+  	<button class="upload" type="button" name="upload_droplet" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;upload=1';"><?php echo $DR_TEXT['UPLOAD']; ?></button>
+  	<button class="backup" type="button" name="backup" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/backup_droplets.php';"><?php echo $DR_TEXT['BACKUP']; ?></button>
   	<?php echo $backup_mgmt; ?>
 	</td>
 	<td valign="top">
  	<a href="#" onclick="javascript: window.open('<?php echo WB_URL; ?>/modules/droplets/readme/<?php echo $DR_TEXT['README']; ?>','helpwindow','width=700,height=550,directories=no,location=no,menubar=no,scrollbars=yes,status=no,toolbar=no,resizable=yes');">
-		<img src="<?php echo WB_URL; ?>/modules/droplets/img/help.png" alt="<?php echo $DR_TEXT['HELP']; ?>" />
+		<img src="<?php echo THEME_URL; ?>/images/help.png" alt="<?php echo $DR_TEXT['HELP']; ?>"  title="<?php echo $DR_TEXT['HELP']; ?>" />
     </a>
 	</td>
 </tr>
@@ -144,12 +143,12 @@ if($num_droplets > 0) {
 <?php
 // ----- /added by WebBird, 2010-11-02 -----
 ?>
-	<table class="droplets row_a tablesorter" border="0" cellspacing="0" cellpadding="3" width="100%" id="myTable">
+<table class="droplets" width="100%" id="myTable">
 	<thead>
-		<tr>
+		<tr class="row_b">
 			<th width="15%"></th>
-			<th width="20%"><?php echo $TEXT['NAME']; ?></th>
-			<th width="55%"><?php echo $TEXT['DESCRIPTION']; ?></th>
+			<th width="20%" align="left"><?php echo $TEXT['NAME']; ?></th>
+			<th width="55%" align="left"><?php echo $TEXT['DESCRIPTION']; ?></th>
 			<th width="7%"><?php echo $TEXT['ACTIVE']; ?></th>
 			<th width="3%"></th>
 		</tr>
@@ -178,30 +177,32 @@ if($num_droplets > 0) {
 		?>
 		
 		<tr class="row_<?php echo $row;?>" >
-			<td<?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
-        <input type="checkbox" name="markeddroplet[]" id="markeddroplet[]" value="<?php echo $droplet['id']?>" />
-				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify" /> 
-				</a>
+			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?> >
+				<input type="checkbox" name="markeddroplet[]"  value="<?php echo $droplet['id']?>" />
+				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
+				<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify" /><span><?php echo $TEXT['MODIFY']; ?></span></a>
 				<a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;copy=<?php echo $droplet['id']?>" class="tooltip">
-          <img src="<?php echo WB_URL; ?>/modules/droplets/img/copy.png" alt="" /><span><?php echo $DR_TEXT['DUPLICATE']; ?></span>
-        </a>
-        <a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
-          <img src="<?php echo WB_URL; ?>/modules/droplets/img/info.png" alt="" /><?php echo $comments; ?>
-        </a>
+				<img src="<?php echo THEME_URL; ?>/images/copy.png" alt="" /><span><?php echo $DR_TEXT['DUPLICATE']; ?></span></a>
+				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
+				<img src="<?php echo THEME_URL; ?>/images/info_16.png" alt="" /><?php echo $comments; ?></a>
 <?php if ($valid_code && $unique_droplet) { ?><img src="<?php echo WB_URL; ?>/modules/droplets/img/droplet.png" border="0" alt=""/>
 <?php } else {  ?><img src="<?php echo WB_URL; ?>/modules/droplets/img/invalid.gif" border="0" title="" alt=""/><?php }  ?>
 			</td>
-			<td<?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
-        <?php echo $droplet['name']; ?>
+			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
+				<?php echo $droplet['name']; ?>
 			</td>
-			<td<?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
+			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
 				<small><?php echo substr($droplet['description'],0,90); ?></small>
 			</td>
-			<td<?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
-				<b><?php if($droplet['active'] == 1){ echo '<span style="color: green;">'. $TEXT['YES']. '</span>'; } else { echo '<span style="color: red;">'.$TEXT['NO'].'</span>';  } ?></b>
+			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?> align="center">
+				<?php if($droplet['active'] == 1){
+					echo '<img src="'.THEME_URL.'/images/active.png" border="0" alt="active" title="active" />';
+					} else {
+					echo '<img src="'.THEME_URL.'/images/inactive.png" border="0" alt="inactive" title="inactive" />';
+					}
+				?>
 			</td>
-			<td<?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?>>
+			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?> align="center">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/droplets/delete_droplet.php?droplet_id=<?php echo $droplet['id']?>');" title="<?php echo $TEXT['DELETE']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
@@ -216,20 +217,21 @@ if($num_droplets > 0) {
 		}
 	}
 	?>
-	</tbody>
+	
 	<tr class="row_<?php echo $row;?>">
-    <td colspan="5" style="text-align: right; border-top: 1px solid #000; border-bottom: 3px double #000;"><?php echo $num_droplets; ?></td>
-  </tr>
+    <td colspan="5" style="text-align: right; border-top: 1px solid #000; border-bottom: 1px solid #000;"><?php echo $num_droplets; ?></td>
+  </tr></tbody>
 	</table>
+	<div>&nbsp;</div>
 <?php
 // ----- added by WebBird, 2010-11-02 -----
 ?>
 	<?php echo $DR_TEXT['MARKED']; ?>:
   <input type="submit" class="button" name="export" id="export" value="<?php echo $DR_TEXT['EXPORT']; ?>" />
-  <input type="submit" class="button" name="delete" id="delete" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;delete=1');" />
-  </form><br /><br />
+  <input type="submit" class="button delete" name="delete" id="delete" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;delete=1');" />
+  </form><br /><hr />
   <div style="text-align: center;">
-    <strong>Droplets V<?php echo $module_version; ?></strong><br /><br />
+    <strong>Droplets V<?php echo $module_version; ?></strong><br />
     [ <a href="http://www.websitebakers.com/pages/droplets/module-wb2.8.php" target="_blank">Check AMASP for updates</a>
     | <a href="http://www.websitebakers.com/pages/droplets/downloads.php" target="_blank">Download Droplets at AMASP</a>
     ]

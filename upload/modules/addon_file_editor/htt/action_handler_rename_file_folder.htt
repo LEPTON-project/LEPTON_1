@@ -17,21 +17,19 @@
  * @platform	Website Baker 2.8
 */
 <!-- END comment_block -->
-
+<div class="container">
 <div id="mod_addon_file_editor">
-	<h4 class="admintools">
-		<a href="{URL_WB_ADMIN_TOOLS}">{TXT_HEADING_ADMINTOOLS}</a> -> {NAME_FILE_EDITOR}
-	</h4>
+	<h2 class="admintools">
+		{NAME_FILE_EDITOR}
+	</h2>
 
 	<div class="help_file">
-		<a href="{URL_HELP_FILE}" target="_blank">[ {TXT_HELP} ]</a>
+		<span class="button help"><a href="{URL_HELP_FILE}" target="_blank"> {TXT_HELP} </a></span>
 	</div>
-
-	<h2><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h2>
-	<a class="backlink" href="{URL_FILEMANAGER}">{TXT_BACK}</a>
-	
+	<span class="button back"><a href="{URL_FILEMANAGER}">{TXT_BACK}</a></span>
+	<h4><a href="{URL_FILEMANAGER}">{ADDON_TYPE}: {ADDON_NAME}</a></h4>
 	<form class="formbox" action="{URL_FORM_SUBMIT}" method="post">
-		<h3>{TXT_ACTION}: {TXT_ACTION_RENAME_FILE}</h3>
+		<h5>{TXT_ACTION}: {TXT_ACTION_RENAME_FILE}</h5>
 		<p class="highlight"><strong>{TXT_ACTUAL_FILE}: </strong>"{ADDON_FILE}"</p>
 
 		<div class="{CLASS_HIDDEN}">
@@ -41,10 +39,10 @@
 		<input type="text" value="{FILE_EXT}" name="file_ext" disabled="disabled" class="readonly {CLASS_HIDE}" style="width:50px;" />
 		{TXT_ALLOWED_FILE_CHARS}
 		<br /><br />
-	
-		<input class="submit" type="submit" name="rename_file_folder" value="{TXT_SUBMIT_RENAME}" />
-		<a class="submit" href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a>
 		</div>
+		<input type="submit" name="rename_file_folder" value="{TXT_SUBMIT_RENAME}" />&nbsp;
+		<span class="button reset"><a href="{URL_FORM_CANCEL}">{TXT_SUBMIT_CANCEL}</a></span>
+		
 		<br style="clear: both;" />
 	</form>
 

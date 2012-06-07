@@ -129,11 +129,8 @@ $leptoken = (isset($_GET['leptoken']) ? "?leptoken=".$_GET['leptoken'] : "" );
 	</tr>
 	<tr>
 		<td class="cka_label"></td>
-		<td><input type="submit" value="<?php echo $TEXT['SAVE']; ?>" /></td>
-	</tr>
-	<tr>
-		<td class="cka_label"></td>
-		<td><input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="document.location='<?php echo ADMIN_URL; ?>/admintools/index.php<?php echo $leptoken; ?>';" /></td>
+		<td><input type="submit" value="<?php echo $TEXT['SAVE']; ?>" />
+		<input class="reset" type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="document.location='<?php echo ADMIN_URL; ?>/admintools/index.php<?php echo $leptoken; ?>';" /></td>
 	</tr>
 
 </table>

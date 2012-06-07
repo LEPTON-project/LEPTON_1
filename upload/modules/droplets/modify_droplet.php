@@ -60,12 +60,11 @@ $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_droplets WH
 $fetch_content = $query_content->fetchRow();
 $content = (htmlspecialchars($fetch_content['code']));
 ?>
-<h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
-	<a href="<?php echo $admintool_link;?>"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
-	->
-	<a href="<?php echo $module_edit_link;?>">Droplet Edit</a>
-</h4>
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
+<div class="container">
+<h2 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
+	Droplet Edit
+</h2>
+<div>&nbsp;</div>
 <form name="modify" action="<?php echo WB_URL; ?>/modules/droplets/save_droplet.php" method="post" style="margin: 0;">
 <input type="hidden" name="data_codepress" value="" />
 <input type="hidden" name="droplet_id" value="<?php echo $droplet_id; ?>" />
@@ -154,28 +153,26 @@ if ($modified_by == 1) {
 		</td>
 	</tr>
 </table>
-<br />
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
-	<tr>
+	<tr><td align="right" style="width: 90px;"></td>
 		<td align="left">
 <?php
 // Show only save button if allowed....
 if ($modified_by == 1 OR $fetch_content['admin_edit'] == 0 ) {
 	?>
-			<button  class="save" name="save" type="submit"><?php echo $TEXT['SAVE']; ?></button>
+			<button class="button submit" name="save" type="submit"><?php echo $TEXT['SAVE']; ?></button>
 	<?php
 }
 ?>
+<button class="reset" type="button" onclick="javascript: window.location = '<?php echo $module_edit_link; ?>';"><?php echo $TEXT['CANCEL']; ?></button>
 
 		</td>
-		<td align="right">
-			<button class="cancel" type="button" onclick="javascript: window.location = '<?php echo $module_edit_link; ?>';"><?php echo $TEXT['CANCEL']; ?></button>
-		</td>
+		
 	</tr>
 </table>
 </form>
+<div>&nbsp;</div>
 
-<br /><br />[ <a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets">&laquo; <?php echo $TEXT['BACK'];?></a> ]<br /><br />
 <?php
 
 // Print admin footer

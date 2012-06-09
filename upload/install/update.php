@@ -263,7 +263,7 @@ echo "<h3>update to LEPTON 1.1.4 successfull!</h3><br /><hr /><br />";
 
 
 /**
- *  update LEPTON to 1.1.5 , check release
+ *  update LEPTON to 1.2.0 , check release
  */
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.4", "<"))
@@ -343,12 +343,6 @@ foreach ($upgrade_modules as $module)
         require($temp_path);
 }
 
-/**
- *  reload all addons
- */
-if (file_exists('reload.php')) {
-    include 'reload.php';
-}
 
 // at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.0\' WHERE `name` =\'lepton_version\'');
@@ -357,6 +351,52 @@ $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.0\' W
  *  success message
  */
 echo "<h3>update to LEPTON 1.2.0 successfull!</h3>";
+
+
+/**
+ *  update LEPTON to 1.2.1 , check release
+ */
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "1.2.0", "<"))
+{
+    die("<h4>'>ERROR:UNABLE TO UPDATE, LEPTON Version : " . LEPTON_VERSION . " </h4>");
+}
+echo '<h3>Current process : updating to LEPTON 1.2.1</h3>';
+
+/**
+ *  database modification
+ */
+
+/**
+ *  run upgrade.php of all modified modules
+ *
+ */
+$upgrade_modules = array(
+    "lib_jquery",               
+    "tiny_mce_jq"   
+);
+
+foreach ($upgrade_modules as $module)
+{
+    $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
+
+    if (file_exists($temp_path))
+        require($temp_path);
+} 
+
+/**
+ *  reload all addons
+ */
+if (file_exists('reload.php')) {
+    include 'reload.php';
+} 
+// at last: set db to current release-no
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.1\' WHERE `name` =\'lepton_version\'');
+
+/**
+ *  success message
+ */
+echo "<h3>update to LEPTON 1.2.1 successfull!</h3>"; 
 echo "<br /><h3><a href=\"../admins/login/index.php\">please login and check update</></h3>";
 ?>
 </div>

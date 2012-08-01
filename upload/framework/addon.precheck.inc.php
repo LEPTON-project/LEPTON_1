@@ -109,6 +109,9 @@ function getVersion2 ($version="") {
 
 	$version = strtolower($version);
 	
+	foreach($states as $value=>$keys)
+		$version = str_replace($keys, $value, $version);
+
 	/**
 	 *	Short test if there are any chars. If not, we're handling the version as "stable".
 	 *	E.g. 1.0.1 will become 1.0.1stable
@@ -119,9 +122,6 @@ function getVersion2 ($version="") {
 		$version .= "stable";
 	}
 	
-	foreach($states as $value=>$keys)
-		$version = str_replace($keys, $value, $version);
-
 	$version = str_replace(" ", "", $version);
 
 	/**

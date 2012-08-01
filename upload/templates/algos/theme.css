@@ -21,11 +21,13 @@ html {
 }
 body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 12px;
 	color: #333;
 	background: #F9F9F9 url(images/background.jpg) 0 0 repeat-x;
 	margin: 0;
 }
+td,p { padding: 2px; }
+p { margin-bottom: 10px; }
 a {
 	color: #6da327;
 	text-decoration: none;
@@ -48,7 +50,7 @@ h2 {
 	text-shadow: 1px 1px 0 #fff;
 	letter-spacing: 0.1em;
 	color: #345707;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ececec;
 }
 h3 {
 	font-size: 14px;
@@ -80,7 +82,7 @@ select {
 	margin: 2px 0;
 }
 option {
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ececec;
 	padding: 1px 5px;
 }
 input[type="text"], textarea {
@@ -103,16 +105,20 @@ input[type="button"], button, span.button { /* generic button without icon */
 	margin: 2px 0;
 	border: 1px solid #aaa;
 	border-radius: 4px;
-	background: #ddd;
+	background: #ececec;
 	cursor: pointer;
+    min-width: 170px;
+    text-align:center;
 }
 input[type="submit"], button[type="submit"], input.submit, button.submit {
 	padding: 3px 3px 3px 22px;
 	margin: 2px 0;
 	border: 1px solid #aaa;
 	border-radius: 4px;
-	background: #ddd url(images/ok_16.png) 5px center no-repeat;
+	background: #ececec url(images/ok_16.png) 5px center no-repeat;
 	cursor: pointer;
+    min-width: 170px;
+    text-align:center;
 }
 input[type="reset"], button[type="reset"],
 input[type="button"].reset, input.reset, button.reset, span.button.reset,
@@ -122,8 +128,10 @@ input[type="button"].delete, input.delete, button.delete, span.button.delete {
 	margin: 2px 0;
 	border: 1px solid #aaa;
 	border-radius: 4px;
-	background: #ddd url(images/cancel_16.png) 5px center no-repeat;
+	background: #ececec url(images/cancel_16.png) 5px center no-repeat;
 	cursor: pointer;
+    min-width: 170px;
+    text-align:center;
 }
 input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover, span.button:hover {
 	border: 1px solid #666;
@@ -132,100 +140,103 @@ span.button a {
 	color: #333;
 	display: inline-block;
 	font-size: 12px;
+    min-width: 170px;
+    text-align:center;
 }
 span.button a:hover {
 	text-decoration: none;
 }
 button.href_link { /* media: edit & delete */
 	padding: 1px;
-	background: #ddd;
+	background: #ececec;
+    min-width: 10px;
 }
 button#checkmail { /* settings: send testmail */
-	background: #ddd url(images/mail_16.png) 5px center no-repeat;
+	background: #ececec url(images/mail_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.backup_mgmt, span.button.backupmgmt { /* droplets: backup handling */
-	background: #ddd url(images/backups_16.png) 5px center no-repeat;
+	background: #ececec url(images/backups_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 
 /* misc button classes */
 
 button.add, span.button.add, input[type="button"].add, input[type="submit"].add {
-	background: #ddd url(images/plus_16.png) 5px center no-repeat;
+	background: #ececec url(images/plus_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.advanced, span.button.advanced, input[type="button"].advanced, input[type="submit"].advanced {
-	background: #ddd url(images/advanced_16.png) 5px center no-repeat;
+	background: #ececec url(images/advanced_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.back, span.button.back, input[type="button"].back, input[type="submit"].back {
-	background: #ddd url(images/back_16.png) 5px center no-repeat;
+	background: #ececec url(images/back_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.backup, span.button.backup, input[type="button"].backup, input[type="submit"].backup {
-	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	background: #ececec url(images/modules_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.groups, span.button.groups, input[type="button"].groups, input[type="submit"].groups {
-	background: #ddd url(images/groups_16.png) 5px center no-repeat;
+	background: #ececec url(images/groups_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.help, span.button.help, input[type="button"].help, input[type="submit"].help {
-	background: #ddd url(images/help_16.png) 5px center no-repeat;
+	background: #ececec url(images/help_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.infobtn, span.button.infobtn, input[type="button"].infobtn, input[type="submit"].infobtn {
-	background: #ddd url(images/info_16.png) 5px center no-repeat;
+	background: #ececec url(images/info_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.languages, span.button.languages, input[type="button"].languages, input[type="submit"].languages {
-	background: #ddd url(images/languages_16.png) 5px center no-repeat;
+	background: #ececec url(images/languages_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.modify, span.button.modify, input[type="button"].modify, input[type="submit"].modify,
 button.edit, span.button.edit, input[type="button"].edit, input[type="submit"].edit {
-	background: #ddd url(images/modify_16.png) 5px center no-repeat;
+	background: #ececec url(images/modify_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.modules, span.button.modules, input[type="button"].modules, input[type="submit"].modules {
-	background: #ddd url(images/modules_16.png) 5px center no-repeat;
+	background: #ececec url(images/modules_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.newfolder, span.button.newfolder, input[type="button"].newfolder, input[type="submit"].newfolder {
-	background: #ddd url(images/folder_16.png) 5px center no-repeat;
+	background: #ececec url(images/folder_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.reload, span.button.reload, input[type="button"].reload, input[type="submit"].reload {
-	background: #ddd url(images/reload_16.png) 5px center no-repeat;
+	background: #ececec url(images/reload_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.sections, span.button.sections, input[type="button"].sections, input[type="submit"].sections {
-	background: #ddd url(images/sections_16.png) 5px center no-repeat;
+	background: #ececec url(images/sections_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.search, span.button.search, input[type="button"].search, input[type="submit"].search {
-	background: #ddd url(images/search_16.png) 5px center no-repeat;
+	background: #ececec url(images/search_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.settings, span.button.settings, input[type="button"].settings, input[type="submit"].settings {
-	background: #ddd url(images/settings_16.png) 5px center no-repeat;
+	background: #ececec url(images/settings_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.templates, span.button.templates, input[type="button"].templates, input[type="submit"].templates {
-	background: #ddd url(images/templates_16.png) 5px center no-repeat;
+	background: #ececec url(images/templates_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.upload, span.button.upload, input[type="button"].upload, input[type="submit"].upload {
-	background: #ddd url(images/upload_16.png) 5px center no-repeat;
+	background: #ececec url(images/upload_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.users, span.button.users, input[type="button"].users, input[type="submit"].users {
-	background: #ddd url(images/users_16.png) 5px center no-repeat;
+	background: #ececec url(images/users_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].warn {
-	background: #ddd url(images/warning_16.png) 5px center no-repeat;
+	background: #ececec url(images/warning_16.png) 5px center no-repeat;
 	padding-left: 22px;
 }
 
@@ -240,6 +251,7 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 #container {
 	width: 900px;
 	margin: 0 auto 50px;
+    overflow:hidden;
 }
 
 /* header */
@@ -252,7 +264,7 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 	font-size: 18px;
 	font-weight: bold;
 	float: left;
-	text-shadow: -1px -1px 0 #ccc, 1px 1px 0 #fff;
+	text-shadow: -1px -1px 0 #ececec, 1px 1px 0 #fff;
 }
 #website_title a:hover {
 	text-decoration: none;
@@ -293,7 +305,7 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 	padding: 4px 8px 6px 8px;
 	background-color: #aaa;
 	border-radius: 5px 5px 0 0;
-	border-bottom: 3px solid #ccc;
+	border-bottom: 3px solid #ececec;
 	text-shadow: 1px 1px 1px #333;
 	box-shadow: 1px -1px 1px #666;
 }
@@ -317,10 +329,10 @@ button.warn, span.button.warn, input[type="button"].warn, input[type="submit"].w
 /* pages */
 table.pages_view {
 	width: 878px;
-	background-color: #ddd;
+	background-color: #ececec;
 }
 table.pages_view tr:hover {
-	background-color: #ccc;
+	background-color: #ececec;
 }
 .pages_list_header {
 	font-weight: bold;
@@ -380,7 +392,7 @@ table.pages_view tr:hover {
 	vertical-align: middle;
 }
 .page_info_head {
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ececec;
 	padding-bottom: 5px;
 }
 .page_info {
@@ -388,13 +400,13 @@ table.pages_view tr:hover {
 }
 .page_info_settings {
 	padding: 10px 0;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ececec;
 }
 .section_info {
 	border: 1px solid #345707;
 	border-radius: 5px;
 	padding: 4px 0 4px 20px;
-	background: #ccc url(images/info_16.png) left no-repeat;
+	background: #ececec url(images/info_16.png) left no-repeat;
 	margin: 6px 0 6px 0 ;
 }
 .header_sections_list {
@@ -462,7 +474,7 @@ td.browse_media {
 	padding: 0;
 	border: 1px solid #bbb;
 	width: 100%;
-	background-color: #eee;
+	background-color: #f6f6f6;
 	height: 60px;
 	overflow: hidden;
 	border-radius: 8px;
@@ -475,6 +487,7 @@ td.browse_media {
 .description {
 	padding: 2px 8px;
 	text-align: left;
+    vertical-align: middle;
 }
 .title {
 	margin-bottom: 5px;
@@ -491,7 +504,7 @@ td.browse_media {
 .container {
 	border: 1px solid #bbb;
 	border-radius: 10px;
-	background-color: #eee;
+	background-color: #f6f6f6;
 	padding: 10px;
 	margin-bottom: 6px;
 }
@@ -560,7 +573,7 @@ td.browse_media {
 	background: url(images/info_16.png) left no-repeat;
 }
 .row_a, .row_0 {
-	background-color : #eee;
+	background-color : #f6f6f6;
 	line-height: 20px;
 }
 .row_b, .row_1 {

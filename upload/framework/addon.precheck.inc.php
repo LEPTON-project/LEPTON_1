@@ -112,16 +112,6 @@ function getVersion2 ($version="") {
 	foreach($states as $value=>$keys)
 		$version = str_replace($keys, $value, $version);
 
-	/**
-	 *	Short test if there are any chars. If not, we're handling the version as "stable".
-	 *	E.g. 1.0.1 will become 1.0.1stable
-	 */
-	$c = preg_match_all("/([a-z])/", $version, $matches);
-	if (0 == $c)
-	{
-		$version .= "stable";
-	}
-	
 	$version = str_replace(" ", "", $version);
 
 	/**
@@ -135,7 +125,17 @@ function getVersion2 ($version="") {
 	{
 		for($i = 0; $i < (4-$n); $i++) $version = $version.".0";
 	}
-	
+
+	/**
+	 *	Short test if there are any chars. If not, we're handling the version as "stable".
+	 *	E.g. 1.0.1 will become 1.0.1stable
+	 */
+	$c = preg_match_all("/([a-z])/", $version, $matches);
+	if (0 == $c)
+	{
+		$version .= "stable";
+	}
+		
 	return $version;
 }
 

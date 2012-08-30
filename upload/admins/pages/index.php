@@ -317,7 +317,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 				// eggsurplus: Add action to add a page as a child
 				?>
 				<td class="list_actions">
-					<?php if(($admin->get_permission('pages_add')) == (true && $can_modify == true) && ($page['visibility'] != 'deleted')) { ?>
+					<?php if(($admin->get_permission('pages_add') == true) && ($can_modify == true) && ($page['visibility'] != 'deleted')) { ?>
 					<a href="javascript:add_child_page('<?php echo $page['page_id']; ?>');" title="<?php echo $HEADING['ADD_PAGE']; ?>">
 						<img src="<?php echo THEME_URL; ?>/images/siteadd_16.png" name="addpage_<?php echo $page['page_id']; ?>" alt="Add Child Page" />
 					</a>

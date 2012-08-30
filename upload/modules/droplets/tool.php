@@ -182,7 +182,7 @@ if($num_droplets > 0) {
 				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
 				<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify" /><span><?php echo $TEXT['MODIFY']; ?></span></a>
 				<a href="<?php echo ADMIN_URL; ?>/admintools/tool.php?tool=droplets&amp;copy=<?php echo $droplet['id']?>" class="tooltip">
-				<img src="<?php echo THEME_URL; ?>/images/copy.png" alt="" /><span><?php echo $DR_TEXT['DUPLICATE']; ?></span></a>
+				<img src="<?php echo THEME_URL; ?>/images/copy_16.png" alt="" /><span><?php echo $DR_TEXT['DUPLICATE']; ?></span></a>
 				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
 				<img src="<?php echo THEME_URL; ?>/images/info_16.png" alt="" /><?php echo $comments; ?></a>
 <?php if ($valid_code && $unique_droplet) { ?><img src="<?php echo WB_URL; ?>/modules/droplets/img/droplet.png" border="0" alt=""/>
@@ -196,9 +196,9 @@ if($num_droplets > 0) {
 			</td>
 			<td <?php if(isset($new[$droplet['name']])) { echo ' class="newdroplet"'; }?> align="center">
 				<?php if($droplet['active'] == 1){
-					echo '<img src="'.THEME_URL.'/images/active.png" border="0" alt="active" title="active" />';
+					echo '<img src="'.THEME_URL.'/images/active_16.png" border="0" alt="active" title="active" />';
 					} else {
-					echo '<img src="'.THEME_URL.'/images/inactive.png" border="0" alt="inactive" title="inactive" />';
+					echo '<img src="'.THEME_URL.'/images/inactive_16.png" border="0" alt="inactive" title="inactive" />';
 					}
 				?>
 			</td>

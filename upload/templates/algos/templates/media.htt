@@ -158,6 +158,7 @@ var ADMIN_URL = '{ADMIN_URL}';
 						<input type="hidden" name="current_dir" value="{CURRENT_DIR}"  />
 						<div class="option_box">
 							<!-- BEGIN media_settings_block -->
+                                                        <button class="href_link" type="submit" name="media_settings" value="true" >{CHANGE_SETTINGS}</button>
 							<!-- END media_settings_block -->
 							<button class="reload" type="submit" name="media_reload" value="true" >{TEXT_RELOAD}</button>
 						</div>

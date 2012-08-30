@@ -21,6 +21,8 @@
 		<div id="main_container">
 			<div class="login_form">
 				<h2>LEPTON Login Panel</h2>
+				<br style="clear:both;" />
+				<div style="text-align:center;">{MESSAGE}</div><br />
 				<form action="{ACTION_URL}" method="post" name="login">
 					<fieldset>
 						<ul>

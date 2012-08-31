@@ -108,21 +108,26 @@ function getVersion2 ($version="") {
 	);
 
 	$version = strtolower($version);
+	$version = str_replace(" ", "", $version);
 	
 	/**
 	 *	Short test if there are any chars. If not, we're handling the version as "stable".
-	 *	E.g. 1.0.1 will become 1.0.1stable
+	 *	E.g. "1.0.1" will become "1.0.1.0stable".
 	 */
 	$c = preg_match_all("/([a-z])/", $version, $matches);
 	if (0 == $c)
 	{
+		// four digits?
+		$temp = explode(".", $version);
+		$n = count($temp);
+		if ($n < 4) {
+			for($i = 0; $i < (4-$n); $i++) $version = $version.".0";
+		}
 		$version .= "stable";
 	}
 	
 	foreach($states as $value=>$keys)
 		$version = str_replace($keys, $value, $version);
-
-	$version = str_replace(" ", "", $version);
 
 	/**
 	 *	Force the version-string to get at least 4 terms.

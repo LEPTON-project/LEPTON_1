@@ -49,17 +49,20 @@ function wb_handle_copy() {
  
 function wb_find_backups( $dir ) {
     $files = array();
-    if ( $dh = opendir($dir) ) {
-        while ( false !== ( $file = readdir($dh) ) )
-        {
-            if ( $file != "." && $file != ".." )
-            {
-                if ( preg_match( '/\.zip$/i', $file ) ) {
-                    $files[] = $file;
-                }
-            }
-        }
-    }
+    if(is_dir($dir)) 
+    {
+		if ( $dh = opendir($dir) ) {
+			while ( false !== ( $file = readdir($dh) ) )
+			{
+				if ( $file != "." && $file != ".." )
+				{
+					if ( preg_match( '/\.zip$/i', $file ) ) {
+						$files[] = $file;
+					}
+				}
+			}
+		}
+	}
     return $files;
 }   // end function wb_find_backups()
 
@@ -194,6 +197,8 @@ function wb_unpack_and_import( $temp_file, $temp_unzip ) {
                     else {
                         $errors[$name] = $database->get_error();
                     }
+                    // try to remove the temp file
+                    unlink( $temp_unzip.'/'.$file);
                 }
             }
         }

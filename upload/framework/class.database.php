@@ -9,11 +9,10 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2012, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.database.php 1666 2012-01-22 06:18:20Z phpmanufaktur $
  *
  */
 
@@ -153,7 +152,7 @@ class database {
 			$this->set_db_handle(false);
 			$pass = DB_PASSWORD;
 			$pass = (empty($pass)) ? '- not set -' : DB_PASSWORD;
-			$this->set_error(sprintf('[MySQL Error] Got no handle for database connection! Please check DB_HOST <b>%s</b>, DB_PORT <b>%s</b>, DB_USERNAME <b>%s</b> and DB_PASSWORD <b>%s</b>!', DB_HOST, DB_PORT, DB_USERNAME, $pass));
+			$this->set_error('[MySQL Error] Got no handle for database connection! Please check your database settings!');
 			trigger_error($this->get_error(), E_USER_ERROR);
 		}
 		return $this->is_connected();

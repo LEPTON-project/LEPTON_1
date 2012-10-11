@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1309 2011-11-07 08:57:42Z aldus $
  *
  */
 

@@ -29,14 +29,11 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
- 
-
 $module_directory = 'form';
 $module_name      = 'Form';
 $module_function  = 'page';
-$module_version   = '3.0.3';
-$module_platform  = '1x';
+$module_version   = '3.0.4';
+$module_platform  = '1.x';
 $module_author    = 'Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke ';
 $module_license   = 'GNU General Public License';
 $module_description = 'This module allows you to create customised online forms, such as a feedback form.';

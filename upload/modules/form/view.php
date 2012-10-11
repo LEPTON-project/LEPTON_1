@@ -29,8 +29,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // check if frontend.css file needs to be included into the <body></body> of view.php
 if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&
 	file_exists(WB_PATH .'/modules/form/frontend.css')) {
@@ -326,7 +324,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 		// Get list of fields
 		$query_fields = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_form_fields` WHERE section_id = '$section_id' ORDER BY position ASC");
 		if($query_fields->numRows() > 0) {
-			while($field = $query_fields->fetchRow()) {
+			while($field = $query_fields->fetchRow( MYSQL_ASSOC )) {
 				// Add to message body
 				if($field['type'] != '') {
 					if(!empty($_POST['field'.$field['field_id']])) {
@@ -436,7 +434,14 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 						$submitted_by = 0;
 					}
 					$email_body = $wb->add_slashes($email_body);
-					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".time()."','$submitted_by','$email_body')");
+					
+					$query 	= "INSERT INTO `".TABLE_PREFIX."mod_form_submissions`";
+					$query .= "(`page_id`,`section_id`,`submitted_when`,`submitted_by`,`body`) ";
+					$query .= "VALUES ('".PAGE_ID."','".$section_id."','".time()."','";
+					$query .= mysql_real_escape_string($submitted_by)."','".mysql_real_escape_string($email_body)."')";
+					
+					$database->query( $query );
+					
 					// Make sure submissions table isn't too full
 					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
 					$num_submissions = $query_submissions->numRows();

@@ -100,3 +100,4 @@ if (isset($preview) && $preview == true) return false;
 </table>
 
 </form>
+</div>

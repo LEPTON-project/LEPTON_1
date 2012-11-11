@@ -74,13 +74,10 @@ if($admin->get_permission('templates') != true)	$tpl->set_var('DISPLAY_TEMPLATES
 if($admin->get_permission('languages') != true)	$tpl->set_var('DISPLAY_LANGUAGES', $display_none);
 if($admin->get_permission('admintools') != true)$tpl->set_var('DISPLAY_ADVANCED', $display_none);
 
-if( ($admin->get_permission('admintools') != true) &&
-    ($admin->get_permission('admintools') != true) &&
-	($admin->get_permission('admintools') != true) &&
-	($admin->get_permission('admintools') != true)   )
-	{
-		$tpl->set_var('DISPLAY_ALL', $display_none);
-	}
+if($admin->get_permission('admintools') != true)
+{
+	$tpl->set_var('DISPLAY_ALL', $display_none);
+}
 
 $tpl->parse('show_advanced', 'show_advanced_block', true);
 if(!isset($_GET['advanced']) || $admin->get_permission('admintools') != true)
@@ -105,12 +102,13 @@ $tpl->set_var(array(
 	'TEXT_RELOAD' => $TEXT['RELOAD'],
 	'RELOAD_URL' => ADMIN_URL . '/addons/reload.php',
 	'URL_ADVANCED' => $admin->get_permission('admintools')
-                ? '<a href="' . ADMIN_URL . '/addons/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',
+                ? '<a href="' . ADMIN_URL . '/addons/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' 
+                : ''
+                ,
 	'ADVANCED_URL' => $admin->get_permission('admintools') ? ADMIN_URL . '/addons/index.php' : '',
     'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 	'ADDON_MANUAL_INSTALLATION_WARNING' => $MESSAGE['ADDON_RELOAD'].'<br /><span class="red">'.$TEXT['REQUIRED'].'!! '.$TEXT['BACKUP_DATABASE'].'.</span> '.$MESSAGE['ADDON_MANUAL_INSTALLATION_WARNING'],
 	'RELOAD_ALL' => $TEXT['OTHERS'].' '.$MENU['ADDONS']
-
 	)
 );
 

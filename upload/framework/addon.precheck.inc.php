@@ -109,6 +109,21 @@ function getVersion2 ($version="") {
 
 	$version = strtolower($version);
 	$version = str_replace(" ", "", $version);
+
+	/**
+	 *	Transform e.g. "1.23" to "1.2.3.0.0". We need this for older modules pre WB 2.8.1 to get
+	 *	them run under lepton.
+	 */
+	$a = explode(".", $version);
+	if (count($a) == 2) {
+		$a[1] = ( (int)$a[1] > 10 ) 
+			? floor($a[1]/10).".".($a[1] % 10)
+			: $a[1].".0.0"
+			;
+			
+		$version = $a[0].".".$a[1];
+
+	}
 	
 	/**
 	 *	Short test if there are any chars. If not, we're handling the version as "stable".

@@ -37,8 +37,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.wb.php');
 
 // Include PHPLIB template class
@@ -88,7 +86,7 @@ class admin extends wb {
 		 */
 		ob_start();
 		
-		$this->db_handle = clone($database);
+		$this->db_handle = &$database;
 		
 		// Specify the current applications name
 		$this->section_name = $section_name;

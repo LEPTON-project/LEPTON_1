@@ -7,19 +7,17 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2012, LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
- * @license_terms   please see LICENSE and COPYING files in your package
+ * @author		Website Baker Project, LEPTON Project
+ * @copyright	2004-2010, Website Baker Project
+ * @copyright	2010-2012, LEPTON Project
+ * @link		http://www.LEPTON-cms.org
+ * @license		http://www.gnu.org/licenses/gpl.html
+ * @license_terms	please see LICENSE and COPYING files in your package
  *
- * 
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
+if (defined('WB_PATH')) {
 	include(WB_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
@@ -37,34 +35,32 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/functions.php');
-	
+
 global $database;
-	
+
 class database {
-	
+
 	private $error = '';
-	private $connected = false;     
+	private $connected = false;	 
 	private	$db_handle = false;
 	private	$prompt_on_error = false;
 	private	$override_session_check = false;
-	
+
 	/**
 	 * Constructor of the class database
 	 */
 	public function __construct() {
 		$this->connect();
 	} // __construct()
-	
+
 	/**
 	 * Destructor of the class database
 	 */
 	public function __destruct() {
-		
-	} // __desctruct()
 	
+	} // __desctruct()
+
 	/**
 	 * Set error
 	 * @param string
@@ -72,15 +68,15 @@ class database {
 	protected function set_error($error = '') {
 		$this->error = $error;
 	} // set_error()
-	
+
 	/**
 	 * Return the last error
 	 * @return string
 	 */
 	public function get_error() {
-	    return $this->error;
+		return $this->error;
 	} // get_error()
-	
+
 	/**
 	 * Check if there occured any error
 	 * @return boolean
@@ -88,43 +84,43 @@ class database {
 	public function is_error() {
 		return (!empty($this->error)) ? true : false;
 	} // is_error()
-	
+
 	/**
 	 * Set the MySQL DB handle
 	 * 
 	 * @param resource $db_handle
 	 */
 	protected function set_db_handle($db_handle) {
-	    $this->db_handle = $db_handle;
+		$this->db_handle = $db_handle;
 	} // set_db_handle()
-	
+
 	/**
 	 * Get the MySQL DB handle
 	 * 
 	 * @return resource or boolean false if no connection is established
 	 */
 	protected function get_db_handle() {
-	    return $this->db_handle;
+		return $this->db_handle;
 	} // get_db_handle()
-	
+
 	/**
 	 * Set the connection state
 	 * 
 	 * @param boolean $connected
 	 */
 	protected function set_connected($connected) {
-	    $this->connected = $connected;
+		$this->connected = $connected;
 	} // set_connected()
-	
+
 	/**
 	 * Check if the connection is established
 	 * 
 	 * @return boolean
 	 */
 	protected function is_connected() {
-	    return $this->connected;
+		return $this->connected;
 	} // is_connected()
-	
+
 	/**
 	 * Establish the connection to the desired database defined in /config.php
 	 * 
@@ -151,14 +147,12 @@ class database {
 		else {
 			// error, got no handle - beware, password may be empty!
 			$this->set_db_handle(false);
-			$pass = DB_PASSWORD;
-			$pass = (empty($pass)) ? '- not set -' : DB_PASSWORD;
 			$this->set_error('[MySQL Error] Got no handle for database connection! Please check your database settings!');
 			trigger_error($this->get_error(), E_USER_ERROR);
 		}
 		return $this->is_connected();
 	} // connect()
-	
+
 	/**
 	 * Disconnect the established database connection.
 	 * 
@@ -175,7 +169,7 @@ class database {
 		}
 		return true;
 	} // disconnect()
-	
+
 	/**
 	 * Switch prompting of errors on or off
 	 * If $switch=true the database will trigger each error.
@@ -185,7 +179,7 @@ class database {
 	public function prompt_on_error($switch=true) {
 		$this->prompt_on_error = $switch;
 	} // prompt_on_error()
-	
+
 	/**
 	 * Exec a SQL query and return a handle to queryMySQL
 	 * @param STR $SQL - the query string to execute
@@ -212,7 +206,7 @@ class database {
 			return null;
 		}
 	} // query()
-	
+
 	/**
 	 *	Execute a SQL query and return the first row of the result array
 	 *
@@ -227,28 +221,28 @@ class database {
 	public function get_one($SQL, $type=MYSQL_BOTH) {
 		$query = $this->query($SQL);
 		if (($query !== null) && ($query->numRows() > 0)) {
-			
-			switch( $type ) {				
+		
+			switch( $type ) {			
 				case MYSQL_BOTH:
 				case MYSQL_NUM:
 				case MYSQL_ASSOC:
-					break;			
+					break;		
 				default:
 					$type = MYSQL_BOTH;
 			}
-			
+		
 			$rows = $query->fetchRow($type);
-			
+		
 			if ($type === MYSQL_ASSOC) {
 				$temp = array_values($rows);
 				return $temp[0];
 			} else {
 				return $rows[0];
 			}
-		}	
+		}
 		return null;
 	} // get_one()
-	
+
 	/**
 	 * Read GUID from database
 	 * Don't use the LEPTON_GUID because GUID may change while runtime!
@@ -262,7 +256,7 @@ class database {
 		$this->override_session_check = false;
 		return $result;
 	} // getLeptonGUID()
-	
+
 	/**
 	 * Check the Lepton GUID
 	 * 
@@ -280,7 +274,7 @@ class database {
 		}
 		return true;
 	} // __checkGUID()
-	
+
 	private function __initSession() {
 		if (defined('SESSION_STARTED') && !isset($_SESSION['LEPTON_SESSION'])) {
 			// $_SESSION for class.database.php
@@ -288,13 +282,68 @@ class database {
 			$_SESSION['LEPTON_SESSION'] = true;
 		}
 	} // __initSession()
+
+	/**
+	 *	Get more than one result in an assoc. array. E.g. "Select * form [TP]pages" if you want
+	 *	to get all informations about all pages.
+	 *
+	 *	@param	string	The query itself
+	 *	@param	array	The array to store the results. Pass by reference!
+	 *
+	 */
+	public function get_all( $query, &$storrage = array() ) {
+		$r = $this->query( $query );
+		if ($r) {
+			while( false !== ($data = $r->fetchRow( MYSQL_ASSOC ))) {
+				$storrage[] = $data;
+			}
+		}
+	}
+	
+	/**
+	 *	Returns a linear array within the tablenames of the current database
+	 *
+	 *	@param	string	Optional string to 'strip' chars from the tablenames, e.g. the prefix.
+	 *	@return	array	An array within the tablenames of the current database.
+	 *
+	 */
+	public function list_tables(&$strip="" ) {
+		$result = $this->query("SHOW tables");
+		if (!$result) return array( $db->get_error() );
+		$ret_value = array();
+		while(false != ($data = $result->fetchRow())) {
+			$ret_value[] = $data[0];
+		}
+		if ($strip != "") {
+			foreach($ret_value as &$ref) $ref = str_replace($strip, "", $ref);
+		}
+		return $ret_value;
+	}
+	
+	/**
+	 *	Placed for all fields from a given table(-name) an assocc. array
+	 *	inside a given storrage-array.
+	 *
+	 *	@param	string	The tablename.
+	 *	@param	array	An array to store the results. Pass by reference!
+	 *	@return	bool	True if success, otherwise false.
+	 *
+	 */
+	public function describe_table($tablename, &$storrage = array() ) {
+		$result = $this->query("DESCRIBE `".$tablename."`");
+		if (!$result) return false;
+		while(false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
+			$storrage[] = $data;
+		}
+		return true;
+	}
 	
 } // class database
 
 final class queryMySQL {
-	
+
 	private $query_result = false;
-	
+
 	/**
 	 * Execute a MySQL query statement and return the resource or false on error
 	 * 
@@ -307,7 +356,7 @@ final class queryMySQL {
 		$this->query_result = mysql_query($SQL, $db_handle);
 		return $this->query_result;
 	} // query()
-	
+
 	/**
 	 * Return the number of rows of the query result
 	 * @return INT
@@ -315,7 +364,7 @@ final class queryMySQL {
 	public function numRows() {
 		return mysql_num_rows($this->query_result);
 	} // numRows()
-	
+
 	/**
 	 * Fetch a Row from the result array
 	 * 
@@ -327,6 +376,6 @@ final class queryMySQL {
 	public function fetchRow($array_type = MYSQL_BOTH) {
 		return mysql_fetch_array($this->query_result, $array_type);
 	} // fetchRow()
-	
+
 } // class queryMySQL
 ?>

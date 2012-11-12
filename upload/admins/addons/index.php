@@ -31,12 +31,15 @@ if (defined('WB_PATH')) {
 	if (file_exists($root.'/framework/class.secure.php')) { 
 		include($root.'/framework/class.secure.php'); 
 	} else {
-		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+		trigger_error(sprintf(
+			"[ <b>%s</b> ] Can't include class.secure.php!",
+			$_SERVER['SCRIPT_NAME']
+		),
+			E_USER_ERROR
+		);
 	}
 }
 // end include class.secure.php
-
-
 
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'addons');
@@ -51,8 +54,7 @@ $tpl->set_var(array(
 		'ADMIN_URL' => ADMIN_URL,
 		'THEME_URL' => THEME_URL,
 		'WB_URL' => WB_URL
-	)
-);
+	));
 
 /**
  *	Setting up the blocks
@@ -102,9 +104,9 @@ $tpl->set_var(array(
 	'TEXT_RELOAD' => $TEXT['RELOAD'],
 	'RELOAD_URL' => ADMIN_URL . '/addons/reload.php',
 	'URL_ADVANCED' => $admin->get_permission('admintools')
-                ? '<a href="' . ADMIN_URL . '/addons/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' 
-                : ''
-                ,
+		? '<a href="' . ADMIN_URL . '/addons/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' 
+		: ''
+		,
 	'ADVANCED_URL' => $admin->get_permission('admintools') ? ADMIN_URL . '/addons/index.php' : '',
     'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 	'ADDON_MANUAL_INSTALLATION_WARNING' => $MESSAGE['ADDON_RELOAD'].'<br /><span class="red">'.$TEXT['REQUIRED'].'!! '.$TEXT['BACKUP_DATABASE'].'.</span> '.$MESSAGE['ADDON_MANUAL_INSTALLATION_WARNING'],

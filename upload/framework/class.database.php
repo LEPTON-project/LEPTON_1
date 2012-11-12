@@ -338,6 +338,121 @@ class database {
 		return true;
 	}
 	
+	/**
+	 *
+	 *	Build a query-string.
+	 *
+	 *	@param	string	The type, e.g. "update", "insert" or "delete"
+	 *	@param	string	The tablename
+	 *	@param	array	Assoc. array, that holds the field names corr. to the values
+	 *	@param	string	The condition
+	 *
+	 *	@return	string	The mySQL query-string or NULL if no type march.
+	 *
+	 *	@example
+	 *	$values = 	array(
+	 *		'page_title' => 'example',
+	 *		'menu_title' => 'example'
+	 *	);
+	 *		
+	 *	$query = $database_instance->build_mysql_query(
+	 *		'update',
+	 *		TABLE_PREFIX."pages",
+	 *		$values,
+	 *		'page_id = '.$page_id
+	 *	);
+	 */
+	public function build_mysql_query ($type, $table_name, &$table_values, $condition="") {
+		
+		switch( strtolower($type) ) {
+			
+			case 'update':
+				$q = "UPDATE `".$table_name."` set ";
+				foreach($table_values as $field => $value) $q .= "`".$field."`='".$value."',";
+				$q = substr($q, 0, -1).( ($condition != "") ? " WHERE ".$condition : "" );
+				
+				break;
+			
+			case 'insert':
+				$q  = "INSERT into `".$table_name."` (`";
+				$q .= implode("`,`", array_keys($table_values))."`) VALUES ('";
+				$q .= implode("','", array_values($table_values))."')";
+				
+				break;
+			
+			case 'delete':
+				$q  = "DELETE from `".$table_name."`".( ($condition != "") ? " WHERE ".$condition : "" );
+				
+				break;
+			
+			case 'select':
+				$q  = "SELECT `";
+				$q .= implode("`,`", $table_values)."` ";
+				$q .= "FROM `".$table_name."`".( ($condition != "") ? " WHERE ".$condition : "" );
+				
+				break;
+			
+			/**
+			 *	Alter a table
+			 *
+			 *	On this one, we're using the $table_values in a differ way than normal:
+			 *	The array has to be formed as
+			 * 
+			 *	'fieldname' => array(
+			 *		'operation'	=> add | delete | set	!required
+			 *		'type'		=> field type e.g. VARCHAR(255)	!required
+			 *		'charset'	=> optional charset
+			 *		'collate'	=> optional collate
+			 *		'params'	=> optional any additional params like "not NULL"
+			 *	);
+			 *
+			 *	e.g.:
+			 *
+			 *	$upgrade_fields = array(
+			 *		'plan'	=> array(
+			 *			'operation'	=> "add",
+			 *			'type'		=> "varchar(255)",
+			 *			'charset'	=> "utf8",
+			 *			'collate'	=> "utf8_general_ci",
+			 *			'params'	=> "not NULL default ''"
+			 *		),
+			 *		'sort'	=> array(
+			 *			'operation' => "add",
+			 *			'type'		=> "varchar(255)",
+			 *			'charset'	=> "utf8",
+			 *			'collate'	=> "utf8_general_ci",
+			 *			'params'	=> "not NULL default ''"
+			 *		)
+			 *	);
+			 *
+			 */
+			case 'alter':
+				$q = "ALTER TABLE `".$table_name."`";
+				
+				foreach($table_values as $name => &$options) {
+				
+					if ( (!isset($options['operation']) ) || (!isset($options['type']) ) ) continue;
+					
+					$q .= " ".strtoupper($options['operation'])." `".$name."` ".$options['type'];
+					
+					if( isset($options['charset'])) $q .= " CHARACTER SET ".$options['charset'];
+					if( isset($options['collate'])) $q .= " COLLATE ".$options['collate'];
+					if( isset($options['params'])) $q .= " ".$options['params'];
+					
+					$q .= ",";
+				}
+				$q = substr($q, 0, -1);
+				
+				break;
+				
+			default:
+				$q  = NULL; // "Error: type doesn't match to 'update', 'insert', or 'delete'!";
+				
+		}
+		
+		return $q;
+	}
+	
 } // class database
 
 final class queryMySQL {

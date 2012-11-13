@@ -46,7 +46,7 @@ class database {
 	private	$db_handle = false;
 	private	$prompt_on_error = false;
 	private	$override_session_check = false;
-
+	
 	/**
 	 * Constructor of the class database
 	 */
@@ -58,7 +58,7 @@ class database {
 	 * Destructor of the class database
 	 */
 	public function __destruct() {
-	
+
 	} // __desctruct()
 
 	/**
@@ -292,12 +292,13 @@ class database {
 	 *
 	 */
 	public function get_all( $query, &$storrage = array() ) {
-		$r = $this->query( $query );
+		$r = mysql_query( $query );
 		if ($r) {
-			while( false !== ($data = $r->fetchRow( MYSQL_ASSOC ))) {
+			while( false !== ($data = mysql_fetch_array( $r,  MYSQL_ASSOC ))) {
 				$storrage[] = $data;
 			}
 		}
+		mysql_free_result( $r );
 	}
 	
 	/**

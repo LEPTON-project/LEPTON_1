@@ -7,13 +7,13 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
+ * @author		  Website Baker Project, LEPTON Project
+ * @copyright	   2004-2010, Website Baker Project
+ * @copyright	   2010-2011, LEPTON Project
+ * @link			http://www.LEPTON-cms.org
+ * @license		 http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: frontend.functions.php 1818 2012-03-23 09:17:42Z erpe $
+ * @version		 $Id: frontend.functions.php 1818 2012-03-23 09:17:42Z erpe $
  *
  */
 
@@ -37,8 +37,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // references to objects and variables that changed their names
 
 $admin = &$wb;
@@ -50,17 +48,6 @@ $page_description=&$wb->page_description;
 $page_keywords=&$wb->page_keywords;
 $page_link=&$wb->link;
 
-/**
- * @internal ralf 2011-08-05 - these vars are very old and seems to be no longer used - 
- * see also @internal remark at the end of this file! Block will be removed with LEPTON 1.2 
-
-// extra_sql is not used anymore - this is basically a register_globals exploit prevention...
-$extra_sql=&$wb->extra_sql;
-$extra_where_sql=&$wb->extra_where_sql;
-
- *
- */
-
 $include_head_link_css = '';
 $include_body_links = '';
 $include_head_links = '';
@@ -68,7 +55,7 @@ $include_head_links = '';
 $query="SELECT directory FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'snippet'";
 $query_result=$database->query($query);
 if ($query_result->numRows()>0) {
-	while ($row = $query_result->fetchRow()) {
+	while ($row = $query_result->fetchRow( MYSQL_ASSOC )) {
 		$module_dir = $row['directory'];
 		if (file_exists(WB_PATH.'/modules/'.$module_dir.'/include.php')) {
 			include(WB_PATH.'/modules/'.$module_dir.'/include.php');
@@ -104,132 +91,55 @@ if (!function_exists('page_link'))
 
 if (!function_exists('get_page_link'))
 {
-    function get_page_link( $id )
-    {
-        global $database;
-        // Get link
-        $sql = 'SELECT `link` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$id;
-        $link = $database->get_one( $sql );
-        return $link;
-    }
+	function get_page_link( $id )
+	{
+		global $database;
+		// Get link
+		$sql = 'SELECT `link` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$id;
+		$link = $database->get_one( $sql );
+		return $link;
+	}
 }
 
 //function to highlight search results
 if(!function_exists('search_highlight')) {
-function search_highlight($foo='', $arr_string=array()) {
-	require_once(WB_PATH.'/framework/functions.php');
-	static $string_ul_umlaut = FALSE;
-	static $string_ul_regex = FALSE;
-	if($string_ul_umlaut===FALSE || $string_ul_regex===FALSE)
-		require(WB_PATH.'/search/search_convert.php');
-	$foo = entities_to_umlauts($foo, 'UTF-8');
-	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'~\');'));
-	$search_string = implode("|", $arr_string);
-	$string = str_replace($string_ul_umlaut, $string_ul_regex, $search_string);
-	// the highlighting
-	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
-	// Also droplet tags are now excluded from highlighting.
-	// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
-	// we have to cut <pre> and <code> as well.
-	// for HTML-Tags use <(?:[^<]|<.*>)*> which will match strings like <input ... value="<b>value</b>" >
-	$matches = preg_split("~(\[\[.*\]\]|<style.*</style>|<script.*</script>|<pre.*</pre>|<code.*</code>|<!--.*-->|<(?:[^<]|<.*>)*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b)~iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
-	if(is_array($matches) && $matches != array()) {
-		$foo = "";
-		foreach($matches as $match) {
-			if($match{0}!="<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i', $match) && !preg_match('~\[\[.*\]\]~', $match)) {
-				$match = str_replace(array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'), array('<', '>', '&', '"', '\'', "\xC2\xA0"), $match);
-				$match = preg_replace('~('.$string.')~ui', '_span class=_highlight__$1_/span_',$match);
-				$match = str_replace(array('&', '<', '>', '"', '\'', "\xC2\xA0"), array('&amp;', '&lt;', '&gt;', '&quot;', '&#039;', '&nbsp;'), $match);
-				$match = str_replace(array('_span class=_highlight__', '_/span_'), array('<span class="highlight">', '</span>'), $match);
+	function search_highlight($foo='', $arr_string=array()) {
+		require_once(WB_PATH.'/framework/functions.php');
+		static $string_ul_umlaut = FALSE;
+		static $string_ul_regex = FALSE;
+		if($string_ul_umlaut===FALSE || $string_ul_regex===FALSE)
+			require(WB_PATH.'/search/search_convert.php');
+		$foo = entities_to_umlauts($foo, 'UTF-8');
+		array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'~\');'));
+		$search_string = implode("|", $arr_string);
+		$string = str_replace($string_ul_umlaut, $string_ul_regex, $search_string);
+		// the highlighting
+		// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
+		// Also droplet tags are now excluded from highlighting.
+		// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
+		// we have to cut <pre> and <code> as well.
+		// for HTML-Tags use <(?:[^<]|<.*>)*> which will match strings like <input ... value="<b>value</b>" >
+		$matches = preg_split("~(\[\[.*\]\]|<style.*</style>|<script.*</script>|<pre.*</pre>|<code.*</code>|<!--.*-->|<(?:[^<]|<.*>)*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b)~iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
+		if(is_array($matches) && $matches != array()) {
+			$foo = "";
+			foreach($matches as $match) {
+				if($match{0}!="<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i', $match) && !preg_match('~\[\[.*\]\]~', $match)) {
+					$match = str_replace(array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'), array('<', '>', '&', '"', '\'', "\xC2\xA0"), $match);
+					$match = preg_replace('~('.$string.')~ui', '_span class=_highlight__$1_/span_',$match);
+					$match = str_replace(array('&', '<', '>', '"', '\'', "\xC2\xA0"), array('&amp;', '&lt;', '&gt;', '&quot;', '&#039;', '&nbsp;'), $match);
+					$match = str_replace(array('_span class=_highlight__', '_/span_'), array('<span class="highlight">', '</span>'), $match);
+				}
+				$foo .= $match;
 			}
-			$foo .= $match;
 		}
+	
+		if(DEFAULT_CHARSET != 'utf-8') {
+			$foo = umlauts_to_entities($foo, 'UTF-8');
+		}
+		return $foo;
 	}
+}
 
-	if(DEFAULT_CHARSET != 'utf-8') {
-		$foo = umlauts_to_entities($foo, 'UTF-8');
-	}
-	return $foo;
-}
-}
-
-// Old menu call invokes new menu function
-/* can be totally removed with 2.x
-if (!function_exists('page_menu')) {
-	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a] [menu_title] [/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
-		
-		/**
-		 * @deprecated page_menu() is deprecated and will be removed in LEPTON 1.2
-		 */
-/*     
-		trigger_error('The function page_menu() is deprecated and will be removed in LEPTON 1.2. Please use the function show_menu2() instead!', E_USER_NOTICE);
-		
-		global $wb;
-		$wb->menu_number=$menu_number;
-		$wb->menu_item_template=$item_template;
-		$wb->menu_item_footer='';
-		$wb->menu_parent = $parent;
-		$wb->menu_header = $menu_header;
-		$wb->menu_footer = $menu_footer;
-		$wb->menu_default_class = $default_class;
-		$wb->menu_current_class = $current_class;
-		$wb->menu_recurse = $recurse+2;
-		$wb->menu();
-		unset($wb->menu_parent);
-		unset($wb->menu_number);
-		unset($wb->menu_item_template);
-		unset($wb->menu_item_footer);
-		unset($wb->menu_header);
-		unset($wb->menu_footer);
-		unset($wb->menu_default_class);
-		unset($wb->menu_current_class);
-		unset($wb->menu_start_level);
-		unset($wb->menu_collapse);
-		unset($wb->menu_recurse);
-	}
-}
-*/
-
-/* can be totally removed with 2.x
-if (!function_exists('show_menu')) {
-	function show_menu($menu_number = NULL, $start_level=NULL, $recurse = NULL, $collapse = NULL, $item_template = NULL, $item_footer = NULL, $menu_header = NULL, $menu_footer = NULL, $default_class = NULL, $current_class = NULL, $parent = NULL) {
-		
-		/**
-		 * @deprecated show_menu() is deprecated and will be removed in LEPTON 1.2
-		 */
-/*     
-		trigger_error('The function show_menu() is deprecated and will be removed in LEPTON 1.2. Please use the function show_menu2() instead!', E_USER_NOTICE);
-		
-		global $wb;
-		if (isset($menu_number))
-			$wb->menu_number=$menu_number;
-		if (isset($start_level))
-			$wb->menu_start_level=$start_level;
-		if (isset($recurse))
-			$wb->menu_recurse=$recurse;
-		if (isset($collapse))
-			$wb->menu_collapse=$collapse;
-		if (isset($item_template))
-			$wb->menu_item_template=$item_template;
-		if (isset($item_footer))
-			$wb->menu_item_footer=$item_footer;
-		if (isset($menu_header))
-			$wb->menu_header=$menu_header;
-		if (isset($menu_footer))
-			$wb->menu_footer=$menu_footer;
-		if (isset($default_class))
-			$wb->menu_default_class=$default_class;
-		if (isset($current_class))
-			$wb->menu_current_class=$current_class;
-		if (isset($parent))
-			$wb->menu_parent=$parent;
-		$wb->menu();
-		unset($wb->menu_recurse);
-		unset($wb->menu_parent);
-		unset($wb->menu_start_level);
-	}
-}
-*/
 if (!function_exists('page_content')) {
 	function page_content($block = 1) {
 		// Get outside objects
@@ -239,35 +149,35 @@ if (!function_exists('page_content')) {
 		global $wb;
 		$admin = & $wb;
 		if ($wb->page_access_denied==true)
-        {
-	        echo $MESSAGE['FRONTEND_SORRY_NO_VIEWING_PERMISSIONS'];
+		{
+			echo $MESSAGE['FRONTEND_SORRY_NO_VIEWING_PERMISSIONS'];
 			return;
 		}
 		if ($wb->page_no_active_sections==true)
-        {
-	        echo $MESSAGE['FRONTEND_SORRY_NO_ACTIVE_SECTIONS'];
+		{
+			echo $MESSAGE['FRONTEND_SORRY_NO_ACTIVE_SECTIONS'];
 			return;
 		}
 		if(isset($globals) AND is_array($globals))
-        {
-            foreach($globals AS $global_name)
-            {
-                global $$global_name;
-                }
-        }
+		{
+			foreach($globals AS $global_name)
+			{
+				global $$global_name;
+				}
+		}
 		// Make sure block is numeric
 		if(!is_numeric($block)) { $block = 1; }
 		// Include page content
 		if(!defined('PAGE_CONTENT') OR $block!=1)
-        {
+		{
 			$page_id = intval($wb->page_id);
-            // set session variable to save page_id only if PAGE_CONTENT is empty
-            $_SESSION['PAGE_ID'] = !isset($_SESSION['PAGE_ID']) ? $page_id : $_SESSION['PAGE_ID'];
-            // set to new value if page_id changed and not 0
-            if(($page_id != 0) && ($_SESSION['PAGE_ID'] <> $page_id))
-            {
-            $_SESSION['PAGE_ID'] = $page_id;
-            }
+			// set session variable to save page_id only if PAGE_CONTENT is empty
+			$_SESSION['PAGE_ID'] = !isset($_SESSION['PAGE_ID']) ? $page_id : $_SESSION['PAGE_ID'];
+			// set to new value if page_id changed and not 0
+			if(($page_id != 0) && ($_SESSION['PAGE_ID'] <> $page_id))
+			{
+			$_SESSION['PAGE_ID'] = $page_id;
+			}
 
 			// First get all sections for this page
 			$query_sections = $database->query("SELECT section_id,module,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
@@ -300,7 +210,7 @@ if (!function_exists('page_content')) {
 				if(defined('SEC_ANCHOR') && SEC_ANCHOR!='') {
 					echo '<a class="section_anchor" id="'.SEC_ANCHOR.$section_id.'"></a>';
 				}
-         // check if module exists - feature: write in errorlog
+		 // check if module exists - feature: write in errorlog
 				if(file_exists(WB_PATH.'/modules/'.$module.'/view.php')) {
 				// fetch content -- this is where to place possible output-filters (before highlighting)
 					ob_start(); // fetch original content
@@ -323,9 +233,8 @@ if (!function_exists('page_content')) {
 				}
 			}
 		}
-        else
-        {
-
+		else
+		{
 			require(PAGE_CONTENT);
 		}
 	}
@@ -337,72 +246,6 @@ if (!function_exists('show_content')) {
 	}
 }
 
-/* can be totally removed with 2.x
-if (!function_exists('show_breadcrumbs'))
-{
-	function show_breadcrumbs($sep = ' &raquo; ',$level = 0, $links = true, $depth = -1, $title = '')
-    {
-    
-    /**
-		 * @deprecated show_breadcrumbs() is deprecated and will be removed in LEPTON 1.2
-		 */
-/*     
-		trigger_error('The function show_breadcrumbs() is deprecated and will be removed in LEPTON 1.2. Please use the function show_menu2() instead!', E_USER_NOTICE);
-		
-		global $wb,$database,$MENU;
-		$page_id = $wb->page_id;
-        $title = (trim($title) == '') ? $MENU['BREADCRUMB'] : $title;
-		if ($page_id != 0)
-		{
-			$counter = 0;
-            // get links as array
-            $bread_crumbs = $wb->page_trail;
-            $count = sizeof($bread_crumbs);
-            // level can't be greater than sum of links
-            $level = ($count <= $level ) ? $count-1 : $level;
-            // set level from which to show, delete indexes in array
-			$crumbs = array_slice($bread_crumbs, $level );
-            $depth = ($depth <= 0) ? sizeof($crumbs) : $depth;
-            // if empty array, set orginal links
-            $crumbs = (!empty($crumbs)) ?  $crumbs : $wb->page_trail;
-            $total_crumbs = ( ($depth <= 0) || ($depth > sizeof($crumbs)) ) ? sizeof($crumbs) : $depth;
-            print '<div class="breadcrumb"><span class="title">'.$title.'</span>';
-
-			foreach ($crumbs as $temp)
-            {
-                if($counter == $depth) { break; }
-				// set links and separator
-				$query_menu = $database->query("SELECT `menu_title`,`link` FROM `".TABLE_PREFIX."pages` WHERE page_id =".$temp);
-				$page = $query_menu->fetchRow( MYSQL_ASSOC );
-
-                    $show_crumb = (($links == true) && ($temp != $page_id))
-                            ? '<a href="'.page_link($page['link']).'" class="link">'.$page['menu_title'].'</a>'
-                            : '<span class="crumb">'.$page['menu_title'].'</span>';
-
-				// Permission
-				switch ($page['visibility'])
-				{
-					case 'none' :
-					case 'hidden' :
-						// if show, you know there is an error in a hidden page
-						print $show_crumb.'&nbsp;';
-						break;
-					default :
-						print $show_crumb;
-					break;
-				}
-
-				if ( ( $counter <> $total_crumbs-1 ) )
-				{
-					print '<span class="separator">'.$sep.'</span>';
-				}
-	            $counter++;
-            }
-            print "</div>\n";
-		}
-	}
-}
-*/
 /**
  *	Function to get or display the current page title
  *
@@ -525,7 +368,7 @@ function bind_jquery ($file_id='jquery')
 			? '<script src="'.$jquery_frontend_file.'" type="text/javascript"></script>'."\n"
 			: '';
 	}
-    return $jquery_links;
+	return $jquery_links;
 }
 
 
@@ -533,62 +376,62 @@ function bind_jquery ($file_id='jquery')
 if(!function_exists('register_frontend_modfiles_body'))
 {
 	function register_frontend_modfiles_body($file_id="js")
-    {
+	{
 		// sanity check of parameter passed to the function
 		$file_id = strtolower($file_id);
 		if($file_id !== "css" && $file_id !== "javascript" && $file_id !== "js" && $file_id !== "jquery")
-        {
+		{
 			return;
 		}
 
-       // define constant indicating that the register_frontent_files was invoked
-       if(!defined('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED', true);
+	   // define constant indicating that the register_frontent_files was invoked
+	   if(!defined('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED', true);
 		global $wb, $database, $include_body_links;
 		// define default baselink and filename for optional module javascript files
 		$body_links = "";
 
 		/* include the Javascript jquery api  */
-        $body_links .= bind_jquery($file_id);
+		$body_links .= bind_jquery($file_id);
 
 		if($file_id !== "css" && $file_id == "js" && $file_id !== "jquery")
-        {
-    		$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend_body.js" type="text/javascript"></script>';
-    		$base_file = "frontend_body.js";
+		{
+			$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend_body.js" type="text/javascript"></script>';
+			$base_file = "frontend_body.js";
 
 			// ensure that frontend_body.js is only added once per module type
-    		if(!empty($include_body_links))
-            {
-    			if(strpos($body_links, $include_body_links) === false)
-                {
-    				$body_links .= $include_body_links;
-    			}
-    			$include_body_links = '';
-    		}
+			if(!empty($include_body_links))
+			{
+				if(strpos($body_links, $include_body_links) === false)
+				{
+					$body_links .= $include_body_links;
+				}
+				$include_body_links = '';
+			}
 
-    		// gather information for all models embedded on actual page
-    		$page_id = $wb->page_id;
-    		$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
-    				WHERE page_id=$page_id AND module<>'wysiwyg'");
+			// gather information for all models embedded on actual page
+			$page_id = $wb->page_id;
+			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
+					WHERE page_id=$page_id AND module<>'wysiwyg'");
 
-    		while($row = $query_modules->fetchRow())
-            {
-    			// check if page module directory contains a frontend_body.js file
-    			if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file"))
-                {
-    			// create link with frontend_body.js source for the current module
-    				$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
+			while($row = $query_modules->fetchRow())
+			{
+				// check if page module directory contains a frontend_body.js file
+				if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file"))
+				{
+				// create link with frontend_body.js source for the current module
+					$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
 
-    				// define constant indicating that the register_frontent_files_body was invoked
-    					if(!defined('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED')) { define('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED', true);}
+					// define constant indicating that the register_frontent_files_body was invoked
+						if(!defined('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED')) { define('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED', true);}
 
-    				// ensure that frontend_body.js is only added once per module type
-    				if(strpos($body_links, $tmp_link) === false)
-                    {
-    					$body_links .= $tmp_link;
-    				}
-    			}
-    		}
-        }
+					// ensure that frontend_body.js is only added once per module type
+					if(strpos($body_links, $tmp_link) === false)
+					{
+						$body_links .= $tmp_link;
+					}
+				}
+			}
+		}
 
 		print $body_links."\n"; ;
 	}
@@ -599,11 +442,11 @@ if(!function_exists('register_frontend_modfiles_body'))
 if(!function_exists('register_frontend_modfiles'))
 {
 	function register_frontend_modfiles($file_id="css")
-    {
+	{
 		// sanity check of parameter passed to the function
 		$file_id = strtolower($file_id);
 		if($file_id !== "css" && $file_id !== "javascript" && $file_id !== "js" && $file_id !== "jquery")
-        {
+		{
 			return;
 		}
 
@@ -611,101 +454,75 @@ if(!function_exists('register_frontend_modfiles'))
 		// define default baselink and filename for optional module javascript and stylesheet files
 		$head_links = "";
 
-        switch ($file_id)
-        {
-            case 'css':
+		switch ($file_id)
+		{
+			case 'css':
 			$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.css"';
 			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
 			$base_file = "frontend.css";
-    		if(!empty($include_head_link_css))
-            {
-              $head_links .=  !strpos($head_links, $include_head_link_css) ? $include_head_link_css : '';
-              $include_head_link_css = '';
-            }
-            break;
-            case 'jquery':
-            $head_links .= bind_jquery($file_id);
-            break;
-            case 'js':
+			if(!empty($include_head_link_css))
+			{
+			  $head_links .=  !strpos($head_links, $include_head_link_css) ? $include_head_link_css : '';
+			  $include_head_link_css = '';
+			}
+			break;
+			case 'jquery':
+			$head_links .= bind_jquery($file_id);
+			break;
+			case 'js':
 			$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.js" type="text/javascript"></script>';
 			$base_file = "frontend.js";
-    		if(!empty($include_head_links))
-            {
-              $head_links .= !strpos($head_links, $include_head_links) ? $include_head_links : '';
-              $include_head_links = '';
-            }
-            break;
-            default:
-            break;
+			if(!empty($include_head_links))
+			{
+			  $head_links .= !strpos($head_links, $include_head_links) ? $include_head_links : '';
+			  $include_head_links = '';
+			}
+			break;
+			default:
+			break;
 		}
 
-        if( $file_id != 'jquery')
-        {
-    		// gather information for all models embedded on actual page
-    		$page_id = $wb->page_id;
-    		$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
-    				WHERE page_id=$page_id AND module<>'wysiwyg'");
+		if( $file_id != 'jquery')
+		{
+			// gather information for all models embedded on actual page
+			$page_id = $wb->page_id;
+			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
+					WHERE page_id=$page_id AND module<>'wysiwyg'");
 
-    		while($row = $query_modules->fetchRow())
-            {
-    			// check if page module directory contains a frontend.js or frontend.css file
-    			if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file"))
-                {
-    			// create link with frontend.js or frontend.css source for the current module
-    				$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
+			while($row = $query_modules->fetchRow())
+			{
+				// check if page module directory contains a frontend.js or frontend.css file
+				if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file"))
+				{
+				// create link with frontend.js or frontend.css source for the current module
+					$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
 
-    				// define constant indicating that the register_frontent_files was invoked
-    				if($file_id == 'css')
-                    {
-    					if(!defined('MOD_FRONTEND_CSS_REGISTERED')) define('MOD_FRONTEND_CSS_REGISTERED', true);
-    				} else
-                    {
-    					if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_JAVASCRIPT_REGISTERED', true);
-    				}
-    				// ensure that frontend.js or frontend.css is only added once per module type
-    				if(strpos($head_links, $tmp_link) === false)
-                    {
-    					$head_links .= $tmp_link."\n";
-    				}
-    			};
-    		}
-        		// include the Javascript email protection function
-        		if( $file_id != 'css' && file_exists(WB_PATH .'/modules/droplets/js/mdcr.js'))
-                {
-        			$head_links .= '<script src="'.WB_URL.'/modules/droplets/js/mdcr.js" type="text/javascript"></script>'."\n";
-        		}
-                elseif( $file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js'))
-                {
-        			$head_links .= '<script src="'.WB_URL.'/modules/output_filter/js/mdcr.js" type="text/javascript"></script>'."\n";
-        		}
-        }
-        print $head_links;
-    }
-}
-
-/**
- * @internal ralf 2011-08-05 - the following code block is very old and seems to bee no longer used and needed.
- * This block will be removed in LEPTON 1.2   
- *  
-
-// Begin WB < 2.4.x template compatibility code
-	// Make extra_sql accessable through private_sql
-	$private_sql = $extra_sql;
-	$private_where_sql = $extra_where_sql;
-	// Query pages for menu
-	$menu1 = $database->query("SELECT page_id,menu_title,page_title,link,target,visibility$extra_sql FROM ".TABLE_PREFIX."pages WHERE parent = '0' AND $extra_where_sql ORDER BY position ASC");
-	// Check if current pages is a parent page and if we need its submenu
-	if(PARENT == 0) {
-		// Get the pages submenu
-		$menu2 = $database->query("SELECT page_id,menu_title,page_title,link,target,visibility$extra_sql FROM ".TABLE_PREFIX."pages WHERE parent = '".PAGE_ID."' AND $extra_where_sql ORDER BY position ASC");
-	} else {
-		// Get the pages submenu
-		$menu2 = $database->query("SELECT page_id,menu_title,page_title,link,target,visibility$extra_sql FROM ".TABLE_PREFIX."pages WHERE parent = '".PARENT."' AND $extra_where_sql ORDER BY position ASC");
+					// define constant indicating that the register_frontent_files was invoked
+					if($file_id == 'css')
+					{
+						if(!defined('MOD_FRONTEND_CSS_REGISTERED')) define('MOD_FRONTEND_CSS_REGISTERED', true);
+					} else
+					{
+						if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_JAVASCRIPT_REGISTERED', true);
+					}
+					// ensure that frontend.js or frontend.css is only added once per module type
+					if(strpos($head_links, $tmp_link) === false)
+					{
+						$head_links .= $tmp_link."\n";
+					}
+				};
+			}
+				// include the Javascript email protection function
+				if( $file_id != 'css' && file_exists(WB_PATH .'/modules/droplets/js/mdcr.js'))
+				{
+					$head_links .= '<script src="'.WB_URL.'/modules/droplets/js/mdcr.js" type="text/javascript"></script>'."\n";
+				}
+				elseif( $file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js'))
+				{
+					$head_links .= '<script src="'.WB_URL.'/modules/output_filter/js/mdcr.js" type="text/javascript"></script>'."\n";
+				}
+		}
+		print $head_links;
 	}
-// End WB < 2.4.x template compatibility code
-// Include template file
- 
- *
- */
-
+}
 ?>

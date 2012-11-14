@@ -44,8 +44,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 /*
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  FUNCTIONS REQUIRED TO EDIT THE OPTIONAL MODULE CSS FILES
@@ -62,11 +60,26 @@ if(!function_exists('check_module_dir')) {
 	}
 }
 
-// this function checks if the specified optional module file exists
+/**
+ *	Checks if the specified optional module file exists.
+ *
+ */
 if (!function_exists('mod_file_exists')) {
 	function mod_file_exists($mod_dir, $mod_file='frontend.css') {
-  	// check if the module file exists
-		return file_exists(WB_PATH .'/modules/' .$mod_dir .'/' .$mod_file);
+		$found = false;
+		$paths = array(
+			"/",
+			"/css/",
+			"/js/",
+			"/htt/"
+		);
+		foreach($paths as &$p) {
+			if( true == file_exists( WB_PATH .'/modules/'.$mod_dir.$p.$mod_file )) {
+				$found = true;
+				break;
+			}
+		}
+		return $found;
 	}
 }
 

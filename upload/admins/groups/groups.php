@@ -7,13 +7,13 @@
  * NOTICE:LEPTON CMS Package has several different licenses.
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
- * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
- * @link            http://www.LEPTON-cms.org
- * @license         http://www.gnu.org/licenses/gpl.html
+ * @author		  Website Baker Project, LEPTON Project
+ * @copyright	   2004-2010, Website Baker Project
+ * @copyright	   2010-2011, LEPTON Project
+ * @link			http://www.LEPTON-cms.org
+ * @license		 http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: groups.php 1172 2011-10-04 15:26:26Z frankh $
+ * @version		 $Id: groups.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -36,12 +36,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
-
-// Create new database object
-// $database = new database();
 
 if(!isset($_POST['action']) || ($_POST['action'] != "modify" && $_POST['action'] != "delete")) {
 	header("Location: index.php");
@@ -68,7 +63,7 @@ if($_POST['action'] == 'modify')
 	$admin->print_header();
 	// Get existing values
 	$results = $database->query("SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id = '".$_POST['group_id']."'");
-	$group = $results->fetchRow();
+	$group = $results->fetchRow( MYSQL_ASSOC );
 	// Setup template object
 	$tpl = new Template(THEME_PATH.'/templates');
 	$tpl->set_file('page', 'groups_form.htt');

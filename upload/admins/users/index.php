@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'users');
 
@@ -132,7 +130,6 @@ $template->set_var('DISPLAY_NAME', $display_name);
 $template->set_var('EMAIL', $email);
 $template->set_var('NEWUSERHINT', sprintf($TEXT['NEW_USER_HINT'], AUTH_MIN_LOGIN_LENGTH, AUTH_MIN_PASS_LENGTH));
 
-
 // insert urls
 $template->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
@@ -226,21 +223,21 @@ foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name)
 
 // Insert language text and messages
 $template->set_var(array(
-		'TEXT_RESET' => $TEXT['RESET'],
-		'TEXT_ACTIVE' => $TEXT['ACTIVE'],
-		'TEXT_DISABLED' => $TEXT['DISABLED'],
-		'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
-		'TEXT_USERNAME' => $TEXT['USERNAME'],
-		'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-		'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
-		'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
-		'TEXT_EMAIL' => $TEXT['EMAIL'],
-		'TEXT_GROUP' => $TEXT['GROUP'],
-		'TEXT_NONE' => $TEXT['NONE'],
-		'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
-		'USERNAME_FIELDNAME' => $username_fieldname,
-		'CHANGING_PASSWORD' => $MESSAGE['USERS_CHANGING_PASSWORD']
-		)
+	'TEXT_RESET' => $TEXT['RESET'],
+	'TEXT_ACTIVE' => $TEXT['ACTIVE'],
+	'TEXT_DISABLED' => $TEXT['DISABLED'],
+	'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
+	'TEXT_USERNAME' => $TEXT['USERNAME'],
+	'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+	'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
+	'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
+	'TEXT_EMAIL' => $TEXT['EMAIL'],
+	'TEXT_GROUP' => $TEXT['GROUP'],
+	'TEXT_NONE' => $TEXT['NONE'],
+	'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
+	'USERNAME_FIELDNAME' => $username_fieldname,
+	'CHANGING_PASSWORD' => $MESSAGE['USERS_CHANGING_PASSWORD']
+	)
 );
 
 // Parse template for add user form

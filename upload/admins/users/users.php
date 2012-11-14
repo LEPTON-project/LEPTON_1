@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
 
 if(!isset($_POST['action']) OR ($_POST['action'] != "modify" AND $_POST['action'] != "delete")) {
@@ -181,22 +179,22 @@ if($_POST['action'] == 'modify')
 	
 	// Insert text and messages
 	$template->set_var(array(
-			'TEXT_RESET' => $TEXT['RESET'],
-			'TEXT_ACTIVE' => $TEXT['ACTIVE'],
-			'TEXT_DISABLED' => $TEXT['DISABLED'],
-			'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
-			'TEXT_USERNAME' => $TEXT['USERNAME'],
-			'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-			'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
-			'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
-			'TEXT_EMAIL' => $TEXT['EMAIL'],
-			'TEXT_GROUP' => $TEXT['GROUP'],
-			'TEXT_NONE' => $TEXT['NONE'],
-			'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
-			'USERNAME_FIELDNAME' => $username_fieldname,
-			'CHANGING_PASSWORD' => $MESSAGE['USERS_CHANGING_PASSWORD'],
-			'HEADING_MODIFY_USER' => $HEADING['MODIFY_USER']
-			)
+		'TEXT_RESET' => $TEXT['RESET'],
+		'TEXT_ACTIVE' => $TEXT['ACTIVE'],
+		'TEXT_DISABLED' => $TEXT['DISABLED'],
+		'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
+		'TEXT_USERNAME' => $TEXT['USERNAME'],
+		'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+		'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
+		'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
+		'TEXT_EMAIL' => $TEXT['EMAIL'],
+		'TEXT_GROUP' => $TEXT['GROUP'],
+		'TEXT_NONE' => $TEXT['NONE'],
+		'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
+		'USERNAME_FIELDNAME' => $username_fieldname,
+		'CHANGING_PASSWORD' => $MESSAGE['USERS_CHANGING_PASSWORD'],
+		'HEADING_MODIFY_USER' => $HEADING['MODIFY_USER']
+		)
 	);
 	
 	// Parse template object

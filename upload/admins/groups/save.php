@@ -35,8 +35,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups_modify');
 include_once(WB_PATH.'/framework/functions.php');

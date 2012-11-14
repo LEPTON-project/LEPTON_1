@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get system permissions
 if($admin->get_post('advanced') != 'yes')
 {

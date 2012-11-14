@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -49,12 +47,21 @@ if(!isset($_GET['tool'])) {
 }
 
 // Check if tool is installed
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$admin->add_slashes($_GET['tool'])."'");
+$fields = array( 'name', 'directory');
+$query = $database->build_mysql_query(
+	"SELECT",
+	TABLE_PREFIX."addons",
+	$fields,
+	"`type` = 'module' AND `function` = 'tool' AND `directory` = '".$admin->add_slashes($_GET['tool'])."'"
+);
+
+$result = $database->query( $query );
+
 if($result->numRows() == 0) {
 	header("Location: index.php");
 	exit(0);
 }
-$tool = $result->fetchRow();
+$tool = $result->fetchRow( MYSQL_ASSOC );
 
 ?>
 <div class="container">
@@ -71,6 +78,4 @@ if(file_exists(WB_PATH.'/modules/'.$tool['directory'].'/tool.php'))
 } else {
 	$admin->print_error($MESSAGE['GENERIC_ERROR_OPENING_FILE'] );
 }
-
-
 ?>

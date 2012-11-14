@@ -8,7 +8,9 @@
  * @copyright 2011
  * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
  * @version $Id: info.php 1172 2011-10-04 15:26:26Z frankh $
- * 
+ *
+ *	0.1.1	2012-11-14	Change param $output to be passed by reference.
+ *
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -32,16 +34,16 @@ if (defined('WB_PATH')) {
 
 
 
-$module_directory     = 'output_interface';
-$module_name          = 'outputInterface';
-$module_function      = 'snippet';
-$module_version       = '0.10';
-$module_status        = 'Beta';
-$module_platform      = '1.0'; 
-$module_author        = 'Ralf Hertsch, Berlin (Germany)';
-$module_license       = 'GNU General Public License';
-$module_description   = 'Frontend output interface for LEPTON CMS';
-$module_home          = 'http://www.lepton-cms.org';
-$module_guid          = 'C833EA29-0678-4E4E-9C24-C37F3D65A5C3';
+$module_directory	= 'output_interface';
+$module_name		= 'outputInterface';
+$module_function	= 'snippet';
+$module_version		= '0.1.1';
+$module_status		= 'Beta';
+$module_platform	= '1.0.0'; 
+$module_author		= 'Ralf Hertsch, Berlin (Germany), Dietrich Roland Pehlke (last)';
+$module_license		= 'GNU General Public License';
+$module_description	= 'Frontend output interface for LEPTON CMS';
+$module_home		= 'http://www.lepton-cms.org';
+$module_guid		= 'C833EA29-0678-4E4E-9C24-C37F3D65A5C3';
 
 ?>

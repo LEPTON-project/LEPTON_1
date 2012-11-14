@@ -107,7 +107,6 @@
 		{ 
 			$max_loops--;
 		}
-		return $wb_page_data;
 	}
 
 ?>

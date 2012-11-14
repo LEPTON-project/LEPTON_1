@@ -74,7 +74,7 @@ if($query_this_module->numRows() == 1)  // This is a menu_link. Get link of targ
 	$query_tpid = $database->query($sql);
 	if($query_tpid->numRows() == 1)
 	{
-		$res = $query_tpid->fetchRow();
+		$res = $query_tpid->fetchRow( MYSQL_ASSOC );
 		$target_page_id = $res['target_page_id'];
 		$redirect_type = $res['redirect_type'];
 		$anchor = ($res['anchor'] != '0' ? '#'.(string)$res['anchor'] : '');
@@ -120,14 +120,14 @@ if(file_exists(WB_PATH .'/modules/droplets/droplets.php'))
     include_once(WB_PATH .'/modules/droplets/droplets.php');
     if(function_exists('evalDroplets'))
     {
-		$output = evalDroplets($output);
+		evalDroplets($output);
     }
 }
 // Output interface for Addons
 if(file_exists(WB_PATH .'/modules/output_interface/output_interface.php')) {
 	include_once(WB_PATH .'/modules/output_interface/output_interface.php');
 	if(function_exists('output_interface')) {
-		$output = output_interface($output);
+		output_interface($output);
 	}
 }
 

@@ -26,17 +26,14 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
 if (!function_exists('output_interface')) {
 	/**
 	 * Calls registered Addons and enables them to filter the output 
 	 * 
-	 * @param STR $output
-	 * @return mixed
+	 * @param	string	$output	Pass-By-Reference!
+	 * @return	nothing
 	 */
-	function output_interface($output) {
+	function output_interface(&$output) {
 		global $database;
 		$SQL = sprintf("SELECT * FROM %smod_output_interface", TABLE_PREFIX);
 		if (false !== ($result = $database->query($SQL))) {
@@ -54,7 +51,6 @@ if (!function_exists('output_interface')) {
 			trigger_error(sprintf("[%s] %s", __FUNCTION__, $database->get_error()));
 			return false;
 		}
-		return $output;
 	} // outputInterface
 }
 

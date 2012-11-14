@@ -289,45 +289,6 @@ class wb extends SecureCMS
 		return $this->is_group_match( $groups_list, $this->get_groups_id() );
 	}
 
-/* ****************
- * set one or more bit in a integer value
- *
- * @access public
- * @param int $value: reference to the integer, containing the value
- * @param int $bits2set: the bitmask witch shall be added to value
- * @return void
- */
-	public function bit_set( &$value, $bits2set )
-	{
-		$value |= $bits2set;
-	}
-
-/* ****************
- * reset one or more bit from a integer value
- *
- * @access public
- * @param int $value: reference to the integer, containing the value
- * @param int $bits2reset: the bitmask witch shall be removed from value
- * @return void
- */
-	public function bit_reset( &$value, $bits2reset)
-	{
-		$value &= ~$bits2reset;
-	}
-
-/* ****************
- * check if one or more bit in a integer value are set
- *
- * @access public
- * @param int $value: reference to the integer, containing the value
- * @param int $bits2set: the bitmask witch shall be added to value
- * @return void
- */
-	public function bit_isset( $value, $bits2test )
-	{
-		return (($value & $bits2test) == $bits2test);
-	}
-
 	/**
 	 *	Validate supplied email address
 	 *

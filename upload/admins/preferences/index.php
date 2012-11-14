@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // put all inside a function to prevent global vars
 function build_page( &$admin, &$database )
 {
@@ -82,19 +80,6 @@ function build_page( &$admin, &$database )
 		}
 	}
 	
-// ------------------------
-// insert link to user-profile
-	$tpl->set_var('USER_ID', $admin->get_user_id() );
-	$tpl->set_block('main_block', 'show_cmd_profile_edit_block', 'show_cmd_profile_edit');
-	if( $admin->bit_isset($rec_user['statusflags'], USERS_PROFILE_ALLOWED) )
-	{
-		$tpl->set_var('PROFILE_ACTION_URL', ADMIN_URL.'/profiles/index.php');
-		$tpl->parse('show_cmd_profile_edit', 'show_cmd_profile_edit_block', true);
-	}else{
-		$tpl->parse('show_cmd_profile_edit', '');
-	}
-// ------------------------
-
 // read available languages from table addons and assign it to the template
 	$sql  = 'SELECT * FROM `'.TABLE_PREFIX.'addons` ';
 	$sql .= 'WHERE `type` = "language" ORDER BY `directory`';
@@ -163,7 +148,8 @@ $tpl->set_var('INIT_PAGE_SELECT', $select);
 $tpl->set_var('INIT_PAGE_LABEL', $initial_page_language['label_default']);
 
 // assign systemvars to template
-$tpl->set_var(array( 'ADMIN_URL'  => ADMIN_URL,
+$tpl->set_var(array(
+	'ADMIN_URL'  => ADMIN_URL,
 	'WB_URL'     => WB_URL,
 	'WB_PATH'    => WB_PATH,
 	'THEME_URL'  => THEME_URL,

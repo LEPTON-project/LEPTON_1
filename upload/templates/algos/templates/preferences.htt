@@ -13,12 +13,6 @@ $(function(){
 
 <div class="container">
 
-	<!-- BEGIN show_cmd_profile_edit_block -->
-	<form name="CMD_PROFILE_EDIT" action="{PROFILE_ACTION_URL}" method="post">
-			<input type="hidden" name="user_id" value="{USER_ID}" />
-			<input type="submit" name="cmd_profile_edit" value="{TEXT_PROFILES_EDIT}" />
-	</form>
-	<!-- END show_cmd_profile_edit_block -->
 	<h2>{HEADING_MY_SETTINGS}</h2>
 	<form name="{FORM_NAME}" id="{FORM_NAME}" action="{ACTION_URL}" method="post">
 		<div class="c25l">

@@ -36,35 +36,27 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Define that this file is loaded
 if(!defined('TIME_FORMATS_LOADED')) {
 	define('TIME_FORMATS_LOADED', true);
 }
 
-// Create array
-$TIME_FORMATS = array();
-
 // Get the current time (in the users timezone if required)
 $actual_time = time();
 
-// Add values to list
-$TIME_FORMATS['g:i|A'] = date('g:i A', $actual_time);
-$TIME_FORMATS['g:i|a'] = date('g:i a', $actual_time);
-$TIME_FORMATS['H:i:s'] = date('H:i:s', $actual_time);
-$TIME_FORMATS['H:i'] = date('H:i', $actual_time);
-
-// Add "System Default" to list (if we need to)
+// Get "System Default"
+$s = "";
 if(isset($user_time) AND $user_time == true) {
-	if(isset($TEXT['SYSTEM_DEFAULT'])) {
-		$TIME_FORMATS['system_default'] = date(DEFAULT_TIME_FORMAT, $actual_time).' ('.$TEXT['SYSTEM_DEFAULT'].')';
-	} else {
-		$TIME_FORMATS['system_default'] = date(DEFAULT_TIME_FORMAT, $actual_time).' (System Default)';
-	}
+	$s = date(DEFAULT_TIME_FORMAT, $actual_time).' (';
+	$s .= (isset($TEXT['SYSTEM_DEFAULT']) ? $TEXT['SYSTEM_DEFAULT'] : 'System Default').')';
 }
 
-// Reverse array so "System Default" is at the top
-$TIME_FORMATS = array_reverse($TIME_FORMATS, true);
-
+// Add values to list
+$TIME_FORMATS = array(
+	'system_default' => $s,
+	'H:i' =>date('H:i', $actual_time),
+	'H:i:s' => date('H:i:s', $actual_time),
+	'g:i|a' => date('g:i a', $actual_time),
+	'g:i|A' => date('g:i A', $actual_time)
+);
 ?>

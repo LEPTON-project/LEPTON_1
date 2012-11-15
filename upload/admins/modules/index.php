@@ -48,7 +48,7 @@ $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'module_list_block', 'module_list');
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' order by name");
 if($result->numRows() > 0) {
-	while ($addon = $result->fetchRow()) {
+	while ($addon = $result->fetchRow( MYSQL_ASSOC )) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
 		$template->parse('module_list', 'module_list_block', true);

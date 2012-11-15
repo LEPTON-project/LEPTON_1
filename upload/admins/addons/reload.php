@@ -107,7 +107,7 @@ if ($admin->get_permission('admintools') == true)
                         $sql = 'SELECT `directory` FROM `'.TABLE_PREFIX.'addons` WHERE `type` = \'module\' ';
                         if (($res_addons = $database->query($sql)))
                         {
-                            while (($value = $res_addons->fetchRow()))
+                            while ($value = $res_addons->fetchRow( MYSQL_ASSOC ))
                             {
 								if(file_exists(WB_PATH.'/modules/'.$value['directory']))
 								{
@@ -120,7 +120,7 @@ if ($admin->get_permission('admintools') == true)
                                 /**
                                 *	Modul is in use, so we have to warn the user
                                 */
-                                    while ($data = $info->fetchRow())
+                                    while ($data = $info->fetchRow( MYSQL_ASSOC ))
                                     {
                                         $sql = 'SELECT `menu_title` FROM `'.TABLE_PREFIX.'pages` ';
                                         $sql .= 'WHERE `page_id` = '.$data['page_id'].' ';

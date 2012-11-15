@@ -189,7 +189,7 @@ $tpl->set_block('main_block', 'template_list_block', 'template_list');
 $result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`');
 if($result->numRows() > 0)
 {
-	while($addon = $result->fetchRow())
+	while($addon = $result->fetchRow( MYSQL_ASSOC ))
 	{
 		if(file_exists(WB_PATH.'/templates/'.$addon['directory'].'/info.php'))
 		{

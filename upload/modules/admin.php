@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Get page id
 if(isset($_GET['page_id']) && is_numeric($_GET['page_id']))
 {
@@ -77,12 +75,11 @@ include(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
 
 // Get perms
-// $database = new database();
 $sql  = 'SELECT `admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` ';
 $sql .= 'WHERE `page_id` = '.intval($page_id);
 
 $res_pages = $database->query($sql);
-$rec_pages = $res_pages->fetchRow();
+$rec_pages = $res_pages->fetchRow( MYSQL_ASSOC );
 
 $old_admin_groups = explode(',', str_replace('_', '', $rec_pages['admin_groups']));
 $old_admin_users  = explode(',', str_replace('_', '', $rec_pages['admin_users']));
@@ -90,10 +87,10 @@ $old_admin_users  = explode(',', str_replace('_', '', $rec_pages['admin_users'])
 $in_group = FALSE;
 foreach($admin->get_groups_id() as $cur_gid)
 {
-    if (in_array($cur_gid, $old_admin_groups))
+	if (in_array($cur_gid, $old_admin_groups))
 	{
-        $in_group = TRUE;
-    }
+		$in_group = TRUE;
+	}
 }
 if((!$in_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
@@ -159,27 +156,27 @@ if(isset($print_info_banner) && $print_info_banner == true)
 	$template->set_file('page', 'pages_modify.htt');
 	$template->set_block('page', 'main_block', 'main');
 	$template->set_var(array(
-				'PAGE_ID' => $rec_pages['page_id'],
-				'PAGE_TITLE' => ($rec_pages['page_title']),
-				'MODIFIED_BY' => $user['display_name'],
-				'MODIFIED_BY_USERNAME' => $user['username'],
-				'MODIFIED_WHEN' => $modified_ts,
-				'ADMIN_URL' => ADMIN_URL
-				));
+		'PAGE_ID' => $rec_pages['page_id'],
+		'PAGE_TITLE' => ($rec_pages['page_title']),
+		'MODIFIED_BY' => $user['display_name'],
+		'MODIFIED_BY_USERNAME' => $user['username'],
+		'MODIFIED_WHEN' => $modified_ts,
+		'ADMIN_URL' => ADMIN_URL
+		));
 
 	$template->set_block('main_block', 'show_modify_block', 'show_modify');
 	if($modified_ts == 'Unknown')
 	{
-    	$template->set_block('show_modify', '');
+		$template->set_block('show_modify', '');
 		$template->set_var('CLASS_DISPLAY_MODIFIED', 'hide');
 	} else {
 		$template->set_var('CLASS_DISPLAY_MODIFIED', '');
-    	$template->parse('show_modify', 'show_modify_block', true);
+		$template->parse('show_modify', 'show_modify_block', true);
 	}
 
 	$template->set_block('main_block', 'show_section_block', 'show_section');
 	// Work-out if we should show the "manage sections" link
-    $sql  = 'SELECT `section_id` FROM `'.TABLE_PREFIX.'sections` ';
+	$sql  = 'SELECT `section_id` FROM `'.TABLE_PREFIX.'sections` ';
 	$sql .= 'WHERE `page_id` = '.intval($page_id).' AND `module` = "menu_link"';
 	if( ( $res_sections = $database->query($sql) ) && ($database->is_error() == false ) )
 	{
@@ -190,7 +187,7 @@ if(isset($print_info_banner) && $print_info_banner == true)
 		}elseif(MANAGE_SECTIONS == 'enabled')
 		{
 			$template->set_var('TEXT_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
-    		$template->parse('show_section', 'show_section_block', true);
+			$template->parse('show_section', 'show_section_block', true);
 		}else {
 			$template->set_block('show_section', '');
 			$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
@@ -201,12 +198,12 @@ if(isset($print_info_banner) && $print_info_banner == true)
 
 	// Insert language TEXT
 	$template->set_var(array(
-				'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
-				'TEXT_CHANGE' => $TEXT['CHANGE'],
-				'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
-				'TEXT_CHANGE_SETTINGS' => $TEXT['CHANGE_SETTINGS'],
-				'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE']
-				));
+		'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
+		'TEXT_CHANGE' => $TEXT['CHANGE'],
+		'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
+		'TEXT_CHANGE_SETTINGS' => $TEXT['CHANGE_SETTINGS'],
+		'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE']
+		));
 
 	// Parse and print header template
 	$template->parse('main', 'main_block', false);
@@ -217,9 +214,9 @@ if(isset($print_info_banner) && $print_info_banner == true)
 if(isset($update_when_modified) && $update_when_modified == true)
 {
 	$sql  = 'UPDATE `'.TABLE_PREFIX.'pages` ';
-	$sql .= 'SET `modified_when` = '.time().', ';
-	$sql .=     '`modified_by`   = '.intval($admin->get_user_id()).' ';
-	$sql .=     'WHERE page_id   = '.intval($page_id);
+	$sql .= 'SET `modified_when`= '.time().', ';
+	$sql .= '`modified_by`= '.intval($admin->get_user_id()).' ';
+	$sql .= 'WHERE `page_id`= '.intval($page_id);
 	$database->query($sql);
 }
 

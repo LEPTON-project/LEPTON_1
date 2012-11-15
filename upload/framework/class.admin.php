@@ -333,7 +333,7 @@ class admin extends wb {
 		$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '$user_id'";
 		$get_user = $this->db_handle->query($query_user);
 		if($get_user->numRows() != 0) {
-			$user = $get_user->fetchRow();
+			$user = $get_user->fetchRow( MYSQL_ASSOC );
 		} else {
 			$user['display_name'] = 'Unknown';
 			$user['username'] = 'unknown';
@@ -352,7 +352,7 @@ class admin extends wb {
 			$this->print_header();
 			$this->print_error($MESSAGE['PAGES_NOT_FOUND']);
 		}
-		$results_array = $results->fetchRow();
+		$results_array = $results->fetchRow( MYSQL_ASSOC );
 		return $results_array;
 	}	
 	
@@ -432,7 +432,7 @@ class admin extends wb {
 			if($result->numRows())
 				{
 				// check if admin tool directory contains a backend_body.js file to include
-				$tool = $result->fetchRow();
+				$tool = $result->fetchRow( MYSQL_ASSOC );
 				if(file_exists(WB_PATH ."/modules/" .$tool['directory'] ."/$base_file"))
 				{
 					// return link to the backend_body.js file
@@ -494,7 +494,7 @@ class admin extends wb {
 
 			if($result->numRows()) {
 				// check if admin tool directory contains a backend.js or backend.css file to include
-				$tool = $result->fetchRow();
+				$tool = $result->fetchRow( MYSQL_ASSOC );
 				if(file_exists(WB_PATH ."/modules/" .$tool['directory'] ."/$base_file")) {
         			// return link to the backend.js or backend.css file
 					return str_replace("{MODULE_DIRECTORY}", $tool['directory'], $base_link);
@@ -528,7 +528,7 @@ class admin extends wb {
 		}
 	}
 	
-		private function __admin_register_backend_modfiles() {
+	private function __admin_register_backend_modfiles() {
 
 		$files = array(
 			'css'	=> array(

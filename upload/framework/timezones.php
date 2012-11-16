@@ -36,17 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-if (!function_exists('w_debug')) {
-function w_debug($s) {
-	$fp = fopen(WB_PATH.'/_debug_.txt', 'a');
-	fwrite($fp, "$s\r\n");
-	fclose($fp);
-}
-}
-
-//echo " TZ called ";
 $timezone_table = array(
 	"Pacific/Kwajalein",
 	"Pacific/Samoa",

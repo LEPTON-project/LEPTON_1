@@ -35,50 +35,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-if (!function_exists('w_debug')) {
-function w_debug($s) {
-	$fp = fopen(WB_PATH.'/_debug_.txt', 'a');
-	fwrite($fp, "$s\r\n");
-	fclose($fp);
-}
-}
-
-//echo " TZ called ";
-$timezone_table = array(
-	"Pacific/Kwajalein",
-	"Pacific/Samoa",
-	"Pacific/Honolulu",
-	"America/Anchorage",
-	"America/Los_Angeles",
-	"America/Phoenix",
-	"America/Mexico_City",
-	"America/Lima",
-	"America/Caracas",
-	"America/Halifax",
-	"America/Buenos_Aires",
-	"Atlantic/Reykjavik",
-	"Atlantic/Azores",
-	"Europe/London",
-	"Europe/Berlin",
-	"Europe/Kaliningrad",
-	"Europe/Moscow",
-	"Asia/Tehran",
-	"Asia/Baku",
-	"Asia/Kabul",
-	"Asia/Tashkent",
-	"Asia/Calcutta",
-	"Asia/Colombo",
-	"Asia/Bangkok",
-	"Asia/Hong_Kong",
-	"Asia/Tokyo",
-	"Australia/Adelaide",
-	"Pacific/Guam",
-	"Etc/GMT+10",
-	"Pacific/Fiji"
-);
-
-if (!defined("DEFAULT_TIMEZONESTRING")) define("DEFAULT_TIMEZONESTRING", "Europe/Berlin");
+include( WB_PATH."/framework/timezones.php");
 
 ?>

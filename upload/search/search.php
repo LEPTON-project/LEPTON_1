@@ -37,9 +37,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
 global $TEXT;
 global $MESSAGE;
 global $database;
@@ -60,27 +57,27 @@ require_once (WB_PATH . '/search/search_modext.php');
 // Get search settings
 $table = TABLE_PREFIX . 'search';
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'header' LIMIT 1" );
-$fetch_header = $query->fetchRow ();
+$fetch_header = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'footer' LIMIT 1" );
-$fetch_footer = $query->fetchRow ();
+$fetch_footer = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'results_header' LIMIT 1" );
-$fetch_results_header = $query->fetchRow ();
+$fetch_results_header = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'results_footer' LIMIT 1" );
-$fetch_results_footer = $query->fetchRow ();
+$fetch_results_footer = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'results_loop' LIMIT 1" );
-$fetch_results_loop = $query->fetchRow ();
+$fetch_results_loop = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'no_results' LIMIT 1" );
-$fetch_no_results = $query->fetchRow ();
+$fetch_no_results = $query->fetchRow ( MYSQL_ASSOC );
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'module_order' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = 'faqbaker,manual,wysiwyg';
 }
 $search_module_order = $res ['value'];
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'max_excerpt' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = '15';
 }
@@ -90,7 +87,7 @@ if (! is_numeric ( $search_max_excerpt )) {
 }
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_show_description' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = 'true';
 }
@@ -101,7 +98,7 @@ if ($res ['value'] == 'false') {
 }
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_search_description' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = 'true';
 }
@@ -112,7 +109,7 @@ if ($res ['value'] == 'false') {
 }
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_search_keywords' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = 'true';
 }
@@ -124,7 +121,7 @@ if ($res ['value'] == 'false') {
 
 // check, if the old search function is enabled
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_enable_old_search' LIMIT 1" );
-($query->numRows () > 0) ? $res = $query->fetchRow () : $res ['value'] = 'false'; // default is FALSE!
+($query->numRows () > 0) ? $res = $query->fetchRow ( MYSQL_ASSOC ) : $res ['value'] = 'false'; // default is FALSE!
 if ($res ['value'] == 'true') {
 	// the old search function is no longer supported, so prompt a deprecated notice
 	$prompt = sprintf($MESSAGE['SYSTEM_SETTING_NO_LONGER_SUPPORTED'], 'cfg_enable_old_search');
@@ -138,13 +135,13 @@ $cfg_search_non_public_content = ($res['value'] == 'true') ? true : false;
 $cfg_link_non_public_content = '';
 if ($cfg_search_non_public_content) {
 	$query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_link_non_public_content' LIMIT 1" );
-	($query->numRows () > 0) ? $res = $query->fetchRow () : $res ['value'] = ''; 
+	($query->numRows () > 0) ? $res = $query->fetchRow ( MYSQL_ASSOC ) : $res ['value'] = ''; 
 	$cfg_link_non_public_content = $res['value']; 
 }
 
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'cfg_enable_flush' LIMIT 1" );
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = 'false';
 }
@@ -155,7 +152,7 @@ if ($res ['value'] == 'false') {
 }
 $query = $database->query ( "SELECT value FROM $table WHERE name = 'time_limit' LIMIT 1" ); // time-limit per module
 if ($query->numRows () > 0) {
-	$res = $query->fetchRow ();
+	$res = $query->fetchRow ( MYSQL_ASSOC );
 } else {
 	$res ['value'] = '0';
 }
@@ -170,7 +167,7 @@ $search_funcs ['__before'] = array ();
 $search_funcs ['__after'] = array ();
 $query = $database->query ( "SELECT DISTINCT directory FROM " . TABLE_PREFIX . "addons WHERE type = 'module' AND directory NOT LIKE '%_searchext'" );
 if ($query->numRows () > 0) {
-	while ( false !== ($module = $query->fetchRow ()) ) {
+	while ( false !== ($module = $query->fetchRow ( MYSQL_ASSOC )) ) {
 		$file = WB_PATH . '/modules/' . $module ['directory'] . '/search.php';
 		if (! file_exists ( $file )) {
 			$file = WB_PATH . '/modules/' . $module ['directory'] . '_searchext/search.php';
@@ -197,7 +194,7 @@ if ($query->numRows () > 0) {
 $query = $database->query ( "SELECT user_id,username,display_name FROM " . TABLE_PREFIX . "users" );
 $users = array ('0' => array ('display_name' => $TEXT ['UNKNOWN'], 'username' => strtolower ( $TEXT ['UNKNOWN'] ) ) );
 if ($query->numRows () > 0) {
-	while (false !== ( $user = $query->fetchRow() )) {
+	while (false !== ( $user = $query->fetchRow( MYSQL_ASSOC ) )) {
 		$users [$user ['user_id']] = array ('display_name' => $user ['display_name'], 'username' => $user ['username'] );
 	}
 }
@@ -401,7 +398,7 @@ if ($search_normal_string != '') {
 	$get_modules = $database->query ( "SELECT DISTINCT module FROM $table WHERE module != '' " );
 	$modules = array ();
 	if ($get_modules->numRows () > 0) {
-		while (false !== ($module = $get_modules->fetchRow ()) ) {
+		while (false !== ($module = $get_modules->fetchRow ( MYSQL_ASSOC )) ) {
 			$modules [] = $module ['module'];
 		}
 	}
@@ -465,7 +462,7 @@ if ($search_normal_string != '') {
 				ORDER BY s.page_id, s.position ASC
 			" );
 			if ($sections_query->numRows () > 0) {
-				while ( false !== ($res = $sections_query->fetchRow ()) ) {
+				while ( false !== ($res = $sections_query->fetchRow ( MYSQL_ASSOC )) ) {
 					// check if time-limit is exceeded for this module
 					if ($search_time_limit > 0 && (time () - $start_time > $search_time_limit)) {
 						break;
@@ -533,7 +530,7 @@ if ($search_normal_string != '') {
 		WHERE visibility NOT IN ('none','deleted') AND searching = '1' $search_path_SQL $search_language_SQL
 	" );
 	if ($query_pages->numRows () > 0) {
-		while ( false !== ($page = $query_pages->fetchRow ()) ) {
+		while ( false !== ($page = $query_pages->fetchRow ( MYSQL_ASSOC )) ) {
 			if (isset ( $pages_listed [$page ['page_id']] )) {
 				continue;
 			}
@@ -581,7 +578,7 @@ if ($search_normal_string != '') {
 	" );
 	$modules = array ();
 	if ($get_modules->numRows () > 0) {
-		while ( false !== ($module = $get_modules->fetchRow () ) ) {
+		while ( false !== ($module = $get_modules->fetchRow ( MYSQL_ASSOC ) ) ) {
 			$modules [] = $module; // $modules in an array of arrays
 		}
 	}

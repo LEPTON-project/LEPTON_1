@@ -46,7 +46,7 @@ class database {
 	private	$db_handle = false;
 	private	$prompt_on_error = false;
 	private	$override_session_check = false;
-	
+		
 	/**
 	 * Constructor of the class database
 	 */
@@ -135,10 +135,17 @@ class database {
 		if (false !== ($db_handle = mysql_connect($host, DB_USERNAME, DB_PASSWORD))) {
 			// database connection is established
 			$this->set_db_handle($db_handle);
-			if (!mysql_select_db(DB_NAME, $this->get_db_handle())) {
+			if (!mysql_select_db(DB_NAME, $this->db_handle)) {
 				// error, can't select the Lepton DB
-				$this->set_error(sprintf("[MySQL Error] Retrieved a valid handle (<b>%s</b>) but can't select the Lepton database (<b>%s</b>)!", $this->get_db_handle(), DB_NAME));
-				trigger_error($this->get_error(), E_USER_ERROR);
+				$this->set_error(sprintf(
+					"[MySQL Error] Retrieved a valid handle (<b>%s</b>) but can't select the Lepton database (<b>%s</b>)!",
+					$this->db_handle,
+					DB_NAME
+				));
+				trigger_error(
+					$this->get_error(),
+					E_USER_ERROR
+				);
 			}
 			else {
 				$this->set_connected(true);
@@ -147,8 +154,13 @@ class database {
 		else {
 			// error, got no handle - beware, password may be empty!
 			$this->set_db_handle(false);
-			$this->set_error('[MySQL Error] Got no handle for database connection! Please check your database settings!');
-			trigger_error($this->get_error(), E_USER_ERROR);
+			$this->set_error(
+				'[MySQL Error] Got no handle for database connection! Please check your database settings!'
+			);
+			trigger_error(
+				$this->get_error(),
+				E_USER_ERROR
+			);
 		}
 		return $this->is_connected();
 	} // connect()
@@ -162,8 +174,12 @@ class database {
 	 */
 	final protected function disconnect() {
 		if ($this->is_connected()) {
-			if (!mysql_close($this->get_db_handle())) {
-				$this->set_error(sprintf('[MySQL Error #%d] %s', mysql_errno($this->get_db_handle()), mysql_error($this->get_db_handle())));
+			if (!mysql_close($this->db_handle)) {
+				$this->set_error(sprintf(
+					'[MySQL Error #%d] %s',
+					mysql_errno($this->db_handle),
+					mysql_error($this->db_handle)
+				));
 				return false;
 			}
 		}
@@ -188,7 +204,7 @@ class database {
 	public function query($SQL) {
 		if (!isset($_SESSION['LEPTON_SESSION']) && !$this->override_session_check) $this->__initSession();
 		$query = new queryMySQL();
-		if (false !== $query->query($SQL, $this->get_db_handle())) {
+		if (false !== $query->query($SQL, $this->db_handle)) {
 			// proper execution of the query
 			return $query;
 		}
@@ -197,8 +213,8 @@ class database {
 			$this->set_error(sprintf(	'MySQL Query executed from file <b>%s</b> in line <b>%s</b>:<br />[MySQL Error #%d] %s<br /><b>Executed Query:</b><br /><i>%s</i><br />', 
 										$caller[0]['file'], 
 										$caller[0]['line'], 
-										mysql_errno($this->get_db_handle()), 
-										mysql_error($this->get_db_handle()), 
+										mysql_errno($this->db_handle), 
+										mysql_error($this->db_handle), 
 										$SQL));
 			if (true === $this->prompt_on_error) {
 				trigger_error($this->get_error(), E_USER_ERROR);

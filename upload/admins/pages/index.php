@@ -657,10 +657,10 @@ function print_search_form( $id, $display = 'inline-block' ) {
     global $TEXT;
     $section_checked = $page_checked = $title_checked = NULL;
     // ----- create search page/section form -----
-    if ( isset($_GET['search_scope']) && $_GET['search_scope'] == 'section' ) {
+    if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' ) {
         $section_checked = 'checked="checked"';
     }
-    elseif( isset($_GET['search_scope']) && $_GET['search_scope'] == 'page' ) {
+    elseif( isset($_POST['search_scope']) && $_POST['search_scope'] == 'page' ) {
         $page_checked    = 'checked="checked"';
     }
     else {

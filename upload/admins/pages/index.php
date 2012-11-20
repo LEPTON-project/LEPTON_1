@@ -92,8 +92,6 @@ function make_list($parent = 0, $editable_pages = 0) {
 
     print set_node ($parent,$par);
 
-	// $database = new database();
-
 	// Get page list from database
     $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' ';
     $sql .= (PAGE_TRASH != 'inline') ?  'AND `visibility` != \'deleted\' ' : ' ';
@@ -103,7 +101,13 @@ function make_list($parent = 0, $editable_pages = 0) {
 	// Insert values into main page list
 	if($get_pages->numRows() > 0)
 	{
-		while($page = $get_pages->fetchRow())
+		/**
+		 *	Get the info out of the loop to get rit of fifty+x methods-calls.
+		 */
+		$admin_get_perm = $admin->get_permission('pages_modify');
+		$admin_user_id = $admin->get_user_id();
+		
+		while($page = $get_pages->fetchRow( MYSQL_ASSOC ))
 		{
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
@@ -116,21 +120,21 @@ function make_list($parent = 0, $editable_pages = 0) {
 					$in_group = TRUE;
 				}
 			}
-			if(($in_group) || is_numeric(array_search($admin->get_user_id(), $admin_users)))
+			if(($in_group) || is_numeric(array_search($admin_user_id, $admin_users)))
             {
 				if($page['visibility'] == 'deleted')
                 {
 					if(PAGE_TRASH == 'inline')
                     {
 						$can_modify = true;
-						$editable_pages = $editable_pages+1;
+						$editable_pages++;
 					} else {
 						$can_modify = false;
 					}
 				} elseif($page['visibility'] != 'deleted')
                 {
 					$can_modify = true;
-					$editable_pages = $editable_pages+1;
+					$editable_pages++;
 				}
 			} else {
 				if($page['visibility'] == 'private')
@@ -141,30 +145,29 @@ function make_list($parent = 0, $editable_pages = 0) {
 					$can_modify = false;
 				}
 			}
-
+			
+			$admin_can_modify = $admin_get_perm && $can_modify;
+			
 			// Work out if we should show a plus or not
             $sql = 'SELECT `page_id`,`admin_groups`,`admin_users` FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$page['page_id'].' ';
-            $sql .= (PAGE_TRASH != 'inline') ?  'AND `visibility` != \'deleted\' ' : ' ';
-            // $sql .= ' ORDER BY `position` ASC';
+            if (PAGE_TRASH != 'inline') $sql .= 'AND `visibility` != \'deleted\' ';
+           
         	$get_page_subs = $database->query($sql);
 			$num_subs = $get_page_subs->numRows();
-			$par['num_subs'] = $num_subs;
+			$par['num_subs'] = $num_subs;				// why this?
 
-			if($get_page_subs->numRows() > 0)
-            {
-				$display_plus = true;
-			} else {
-				$display_plus = false;
-			}
 			// Work out how many pages there are for this parent
 			$num_pages = $get_pages->numRows();
+
+			$display_plus = ($num_subs > 0) ? true : false;
+	
 			?>
 			<li class="p<?php echo $page['parent']; ?>">
 			<table summary="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>" class="pages_view" cellpadding="0" cellspacing="0">
 			<tr>
 				<td valign="middle" width="20" style="padding-left: <?php if($page['level'] > 0){ echo $page['level']*20; } else { echo '7'; } ?>px;">
 					<?php
-					if($display_plus == true) {
+					if( true === $display_plus ) {
 					?>
 					<a href="javascript:toggle_visibility('p<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>">
 						<img src="<?php echo THEME_URL; ?>/images/<?php if(isset($_COOKIE['p'.$page['page_id']]) && $_COOKIE['p'.$page['page_id']] == '1'){ echo 'minus'; } else { echo 'plus'; } ?>_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" alt="+" />
@@ -173,53 +176,47 @@ function make_list($parent = 0, $editable_pages = 0) {
 					}
 					?>
 				</td>
-				<?php if($admin->get_permission('pages_modify') == true && $can_modify == true) { ?>
 				<td class="list_menu_title">
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-						<?php if($page['visibility'] == 'public') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" class="page_list_rights" />
-						<?php } elseif($page['visibility'] == 'private') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" class="page_list_rights" />
-						<?php } elseif($page['visibility'] == 'registered') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" class="page_list_rights" />
-						<?php } elseif($page['visibility'] == 'hidden') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['HIDDEN']; ?>" class="page_list_rights" />
-						<?php } elseif($page['visibility'] == 'none') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/none_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" class="page_list_rights" />
-						<?php } elseif($page['visibility'] == 'deleted') { ?>
-							<img src="<?php echo THEME_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" class="page_list_rights" />
-						<?php }
-						echo '<span class="modify_link">'.($page['menu_title']).'</span>'; ?>
-					</a>
+				<?php
+					if( true === $admin_can_modify )
+						echo "<a href='".ADMIN_URL."/pages/modify.php?page_id=".$page['page_id']."' title='".$TEXT['MODIFY']."'>\n";
+					
+					switch($page['visibility']) {
+						case 'public':	$img = "visible_16.png"; $t = $TEXT['PUBLIC'];
+							break;
+
+						case 'private':	$img = "private_16.png"; $t = $TEXT['PRIVATE']; 
+							break;
+
+						case 'registered':	$img = "keys_16.png"; $t = $TEXT['REGISTERED'];
+							break;
+
+						case 'hidden':	$img = "hidden_16.png"; $t = $TEXT['HIDDEN'];
+							break;
+
+						case 'none':	$img = "none_16.png"; $t = $TEXT['none'];
+							break;
+
+						case 'deleted':	$img = "deleted_16.png"; $t = $TEXT['DELETED']; 
+							break;
+						
+						default:
+							$img = ""; $t = "No matches found in admins/pages/index.php for the visibility!";
+					}
+
+					echo "<img src='".THEME_URL."/images/".$img."' alt='".$TEXT['VISIBILITY'].":".$t."' class='page_list_rights' />\n";
+					echo (true === $admin_can_modify) ? '<span class="modify_link">'.$page['menu_title'].'</span></a>' : $page['menu_title'];
+				?>
 				</td>
-				<?php } else { ?>
-				<td class="list_menu_title">
-					<?php if($page['visibility'] == 'public') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" class="page_list_rights" />
-					<?php } elseif($page['visibility'] == 'private') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" class="page_list_rights" />
-					<?php } elseif($page['visibility'] == 'registered') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" class="page_list_rights" />
-					<?php } elseif($page['visibility'] == 'hidden') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['HIDDEN']; ?>" class="page_list_rights" />
-					<?php } elseif($page['visibility'] == 'none') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/none_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" class="page_list_rights" />
-					<?php } elseif($page['visibility'] == 'deleted') { ?>
-						<img src="<?php echo THEME_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" class="page_list_rights" />
-					<?php }
-					echo ($page['menu_title']); ?>
-				</td>
-				<?php } ?>
 				<td class="list_page_title">
 					<?php echo ($page['page_title']); ?>
 				</td>
-        <td class="list_page_URL">
-	        <?php echo ($page['link']).PAGE_EXTENSION; ?>
-        </td>        
+				<td class="list_page_URL">
+					<?php echo $page['link'].PAGE_EXTENSION; ?>
+				</td>        
 				<td class="list_page_id">
 					<?php echo $page['page_id']; ?>
 				</td>
-
 				<td class="list_actions">
 					<?php if($page['visibility'] != 'deleted' && $page['visibility'] != 'none') { ?>
 					<a href="<?php echo $admin->page_link($page['link']); ?>" target="_blank" title="<?php echo $TEXT['VIEW']; ?>">
@@ -251,12 +248,10 @@ function make_list($parent = 0, $editable_pages = 0) {
                     $sql .= 'WHERE `page_id` = '.$page['page_id'].' AND `module` != \'menu_link\' ';
                     $query_sections = $database->query($sql);
 
-					// $query_sections = $database->query("SELECT publ_start, publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '{$page['page_id']}' AND module != 'menu_link'");
-
 					if($query_sections->numRows() > 0)
                     {
 						$mdate_display=false;
-						while($mdate_res = $query_sections->fetchRow())
+						while($mdate_res = $query_sections->fetchRow( MYSQL_ASSOC ))
                         {
 							if($mdate_res['publ_start']!='0' || $mdate_res['publ_end']!='0')
                             {
@@ -266,7 +261,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 						}
 						if($mdate_display==1)
                         {
-							$file=$admin->page_is_active($page)?"clock_16.png":"clock_red_16.png";
+							$file=$admin->page_is_active($page) ? "clock_16.png" : "clock_red_16.png";
 							?>
 							<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
 							<img src="<?php echo THEME_URL."/images/$file"; ?>" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />
@@ -334,7 +329,7 @@ function make_list($parent = 0, $editable_pages = 0) {
 				$page_tmp_id = $page['page_id'];
 			}
 			// Get subs
-			$editable_pages=make_list($page['page_id'], $editable_pages);
+			$editable_pages = make_list($page['page_id'], $editable_pages);
             print '</li>'."\n";
 		}
 	}
@@ -421,7 +416,7 @@ $template->set_block('page', 'main_block', 'main');
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
-	$admin_group_name = $get_groups->fetchRow();
+	$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
 	$template->set_var(array(
 		'ID' => 1,
 		'TOGGLE' => '1',
@@ -434,13 +429,14 @@ $template->set_block('page', 'main_block', 'main');
 	);
 	$template->parse('group_list', 'group_list_block', true);
 
-	while($group = $get_groups->fetchRow()) {
+	$admin_groups_id = $admin->get_groups_id();
+	while($group = $get_groups->fetchRow( MYSQL_ASSOC )) {
 		// check if the user is a member of this group
 		$flag_disabled = '';
 		$flag_checked =  '';
 		$flag_cursor =   'pointer';
 		$flag_color =    '';
-		if (in_array($group["group_id"], $admin->get_groups_id())) {
+		if (in_array($group["group_id"], $admin_groups_id)) {
 			$flag_disabled = ''; //' disabled';
 			$flag_checked =  ' checked="checked"';
 			$flag_cursor =   'default';
@@ -470,7 +466,7 @@ $template->set_block('page', 'main_block', 'main');
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block2', 'group_list2');
 	// Insert admin group and current group first
-	$admin_group_name = $get_groups->fetchRow();
+	$admin_group_name = $get_groups->fetchRow( MYSQL_ASSOC );
 	$template->set_var(array(
 		'ID' => 1,
 		'TOGGLE' => '1',
@@ -483,13 +479,13 @@ $template->set_block('page', 'main_block', 'main');
 	);
 	$template->parse('group_list2', 'group_list_block2', true);
 
-	while($group = $get_groups->fetchRow()) {
+	while($group = $get_groups->fetchRow( MYSQL_ASSOC )) {
 		// check if the user is a member of this group
 		$flag_disabled = '';
 		$flag_checked =  '';
 		$flag_cursor =   'pointer';
 		$flag_color =    '';
-		if (in_array($group["group_id"], $admin->get_groups_id())) {
+		if (in_array($group["group_id"], $admin_groups_id)) {
 			$flag_disabled = ''; //' disabled';
 			$flag_checked =  ' checked="checked"';
 			$flag_cursor =   'default';
@@ -511,13 +507,15 @@ $template->set_block('page', 'main_block', 'main');
 
 
 // Parent page list
-// $database = new database();
 function parent_list($parent)
 {
 	global $admin, $database, $template, $field_set;
-	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC";
+	
+	$admin_user_id = $admin->get_user_id();
+	
+	$query = "SELECT `page_id`,`admin_groups`,`admin_users`,`menu_title`,`page_title`,`visibility`,`parent`,`level` FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC";
 	$get_pages = $database->query($query);
-	while($page = $get_pages->fetchRow()) {
+	while($page = $get_pages->fetchRow( MYSQL_ASSOC )) {
 		if($admin->page_is_visible($page)==false)
 			continue;
 		// if parent = 0 set flag_icon
@@ -537,7 +535,7 @@ function parent_list($parent)
 					$in_group = TRUE;
 				}
 			}
-			if(($in_group) || is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+			if(($in_group) || is_numeric(array_search($admin_user_id, $admin_users))) {
 				$can_modify = true;
 			} else {
 				$can_modify = false;
@@ -686,9 +684,6 @@ function print_search_form( $id, $display = 'inline-block' ) {
 function handle_search () {
     global $TEXT, $database, $admin;
     if ( isset($_POST['search']) && isset($_POST['terms']) ) {
-//        echo "<script type=\"text/javascript\">",
- //            "search_form_toggle();",
-  //           "</script>";
         $sql = 'SELECT * FROM '.TABLE_PREFIX.'pages AS p';
         if ( isset($_POST['search_scope']) && $_POST['search_scope'] == 'section' ) {
             $sql .= ' JOIN '.TABLE_PREFIX.'sections AS s ON p.page_id=s.page_id';
@@ -726,9 +721,6 @@ function handle_search () {
                      (
                          $edit
                        ?   "<span style=\"float: right;\">"
-#                         . "<a href=\"#\" onclick=\"find_and_open('".$data['page_id']."');\">"
-#                         . "<img src=\"".THEME_URL."/images/visible_16_1.png\" alt=\"".$TEXT['SHOW']."\" />"
-#                         . "</a>"
 						 . "<a href=\"".ADMIN_URL."/pages/modify.php?page_id=".$data['page_id']."\" title=\"".$TEXT['MODIFY']."\">"
                          . "<img src=\"".THEME_URL."/images/modify_16.png\" alt=\"".$TEXT['MODIFY']."\" />"
                          . "</a>&nbsp;"

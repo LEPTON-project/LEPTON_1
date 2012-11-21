@@ -41,7 +41,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'wysiwyg';
 $module_name		  = 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.0.6';
+$module_version		= '3.0.7';
 $module_platform	= '1.x';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';

@@ -20,7 +20,7 @@
 $module_directory = 'droplets';
 $module_name = 'Droplets';
 $module_function = 'tool';
-$module_version = '1.5.3';
+$module_version = '1.5.4';
 $module_platform = '1.x';
 $module_author = 'Ruud, pcwacht, WebBird, Dietrich Roland Pehlke (last)';
 $module_license = 'GNU General Public License';

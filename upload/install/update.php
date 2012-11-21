@@ -374,7 +374,10 @@ echo '<h3>Current process : updating to LEPTON 1.2.1</h3>';
 $upgrade_modules = array(
     "lib_jquery",               
     "tiny_mce_jq",
-    "output_interface",
+    "captcha_control",
+    "form",
+    "wysiwyg",    
+    "output_interface",        
     "droplets"
 );
 

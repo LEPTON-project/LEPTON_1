@@ -15,35 +15,34 @@
  *
  */
 
- /* //leptoken debug file
-if (!function_exists('t_debug')) {
-function t_debug($s) {
-	$fp = fopen(WB_PATH.'/framework/_debug_token.txt', 'a');
-	fwrite($fp, date('r') ." $s\r\n");
-	fclose($fp);
-}}
-*/
-
 class SecureCMS {
-	var $_salt   = '';
-	var $_reftoken = '';
-
-	function SecureCMS()
+	public $_salt   = '';
+	public $_reftoken = '';
+	
+	/**
+	 *	Constructor of theclass
+	 *
+	 */
+	public function __construct()
 	{
-		$this->_salt = $this->_generate_salt();
+		$this->_generate_salt();
 	}
 
-	function _generate_salt()
+	/**
+	 *	Generating the "salt" within $_SERVER vars|keys.
+	 *
+	 */
+	public function _generate_salt()
 	{
 		// server depending values
- 		$salt  = ( isset($_SERVER['SERVER_SIGNATURE']) ) ? $_SERVER['SERVER_SIGNATURE'] : 'L';
+		$salt  = ( isset($_SERVER['SERVER_SIGNATURE']) ) ? $_SERVER['SERVER_SIGNATURE'] : 'L';
 		$salt .= ( isset($_SERVER['SERVER_SOFTWARE']) ) ? $_SERVER['SERVER_SOFTWARE'] : 'E';
 		$salt .= ( isset($_SERVER['SERVER_NAME']) ) ? $_SERVER['SERVER_NAME'] : 'P';
 		$salt .= ( isset($_SERVER['SERVER_ADDR']) ) ? $_SERVER['SERVER_ADDR'] : 'T';
 		$salt .= ( isset($_SERVER['SERVER_PORT']) ) ? $_SERVER['SERVER_PORT'] : 'ON';
 		$salt .= PHP_VERSION;
 		$salt .= time();
-		return $salt;
+		$this->_salt = $salt;
 	}
 
 /*
@@ -54,7 +53,7 @@ class SecureCMS {
  * requirements: an active session must be available
  * should be called only once for a page!
  */
-	function getToken()
+	public function getToken()
 	{
 		if (function_exists('microtime')) {
 			list($usec, $sec) = explode(" ", microtime());
@@ -64,7 +63,6 @@ class SecureCMS {
 		}
 		$token = substr(md5($time . $this->_salt), 0, 21) . "z" . substr($time, 0, 10);
 		(isset($_SESSION['Tokens'])) ? $_SESSION['Tokens'][] = $token : $_SESSION['Tokens'] = array($token);
-//		t_debug("ref in getToken: ".$this->_reftoken);
 		(isset($_SESSION['Tokens'])) ? $_SESSION['Tokens'][$token] = $this->_reftoken : $_SESSION['Tokens'] = array($token => $this->_reftoken);
 		return $token;
 	}
@@ -77,14 +75,14 @@ class SecureCMS {
  * requirements: an active session must be available
  * this check will prevent from multiple sending a form. history.back() also will never work
  */
-	function checkToken()
+	public function checkToken()
 	{
 		if (!LEPTOKEN_LIFETIME) return true;
-		
+
 		$timelimit = (string) (time() - LEPTOKEN_LIFETIME);  
 		$retval = false;
 		$href = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-		
+
 		if (isset($_GET['leptoken'])) {
 			$tok = $_GET['leptoken'];
 		} elseif (isset($_GET['amp;leptoken'])) {
@@ -96,8 +94,7 @@ class SecureCMS {
 		} else {
 			return $retval;
 		}
-		
-		
+
 		if (isset($_SESSION['Tokens'])) 
 		{
 			// delete dated tokens, except the last one
@@ -111,8 +108,6 @@ class SecureCMS {
 			foreach ($tokens as $token => $ref) {
 				$retval = (($tok == $token) && (($ref == '') || (strpos($href, $ref) > 1)));
 				if ($retval) {
-//					$this->_reftoken = $tok;
-//					t_debug("old ref: $ref  old href: $href  new ref in checkToken: ".$this->_reftoken);
 					break;
 				}
 			}

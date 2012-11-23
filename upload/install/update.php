@@ -12,8 +12,7 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @reformatted 2011-10-04
- * @version     $Id: update.php 1815 2012-03-23 08:28:22Z erpe $
+ *
  */
 
 // set error level
@@ -350,7 +349,7 @@ $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.0\' W
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 1.2.0 successfull!</h3>";
+echo "<h3>update to LEPTON 1.2.0 successfull!</h3><br /><hr /><br />";
 
 
 /**
@@ -389,19 +388,61 @@ foreach ($upgrade_modules as $module)
         require($temp_path);
 } 
 
-/**
- *  reload all addons
- */
-if (file_exists('reload.php')) {
-    include 'reload.php';
-} 
 // at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.1\' WHERE `name` =\'lepton_version\'');
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 1.2.1 successfull!</h3>"; 
+echo "<h3>update to LEPTON 1.2.1 successfull!</h3><br /><hr /><br />"; 
+
+
+/**
+ *  update LEPTON to 1.2.2 , check release
+ */
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "1.2.1", "<"))
+{
+    die("<h4>'>ERROR:UNABLE TO UPDATE, LEPTON Version : " . LEPTON_VERSION . " </h4>");
+}
+echo '<h3>Current process : updating to LEPTON 1.2.2</h3>';
+
+/**
+ *  database modification
+ */
+echo '<h3>no database modifications in this release</h3>';
+
+/**
+ *  run upgrade.php of all modified modules
+ *
+ */
+$upgrade_modules = array(
+    "lib_jquery",               
+    "tiny_mce_jq"
+);
+
+foreach ($upgrade_modules as $module)
+{
+    $temp_path = WB_PATH . "/modules/" . $module . "/upgrade.php";
+
+    if (file_exists($temp_path))
+        require($temp_path);
+} 
+
+/**
+ *  reload all addons
+ */
+if (file_exists('reload.php')) {
+    include 'reload.php';
+} 
+
+// at last: set db to current release-no
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.2\' WHERE `name` =\'lepton_version\'');
+
+/**
+ *  success message
+ */
+echo "<h3>update to LEPTON 1.2.2 successfull!</h3><br /><hr /><br />"; 
 echo "<br /><h3><a href=\"../admins/login/index.php\">please login and check update</></h3>";
 ?>
 </div>

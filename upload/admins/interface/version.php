@@ -12,7 +12,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: version.php 1815 2012-03-23 08:28:22Z erpe $
  *
  */
  
@@ -42,7 +41,7 @@ if (defined('WB_PATH')) {
  *
  */
 if (!defined('CORE')) define('CORE', 'LEPTON');
-if (!defined('VERSION')) define('VERSION', '1.2.1');
+if (!defined('VERSION')) define('VERSION', '1.2.2');
 // for personal subversions only if needed
 if (!defined('SUBVERSION')) define('SUBVERSION', '');
 

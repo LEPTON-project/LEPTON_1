@@ -52,7 +52,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.1.0", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/111_upgrade.php';
+    include 'scripts/111_update.php';
 }
 
 /**
@@ -62,7 +62,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.1.1", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/112_upgrade.php';
+    include 'scripts/112_update.php';
 }
 
 /**
@@ -72,7 +72,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.1.2", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/113_upgrade.php';
+    include 'scripts/113_update.php';
 }
 
 /**
@@ -82,7 +82,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.1.3", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/114_upgrade.php';
+    include 'scripts/114_update.php';
 }
 
 /**
@@ -92,7 +92,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.1.4", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/120_upgrade.php';
+    include 'scripts/120_update.php';
 }
 
 /**
@@ -102,7 +102,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.2.0", "="))
 {
     echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
-    include 'scripts/121_upgrade.php';
+    include 'scripts/121_update.php';
 }
 
 /**

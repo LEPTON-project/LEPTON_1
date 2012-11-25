@@ -8,18 +8,17 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Org. e.V.
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2004-2010, Website Baker
+ * @copyright       2010-2012 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1764 2012-02-15 17:28:38Z webbird $
  *
  */
 
 // check wether to call update.php or start installation
 if (file_exists('../config.php')) {
-    include 'update.php';
+    include 'update/update.php';
     die();
 }
 

@@ -115,6 +115,11 @@ if (file_exists('reload.php')) {
 echo "<h3>reload all addons: successfull</h3>";
 
 /**
+ *  success message
+ */
+echo "<br /><h3>Congratulation, update procedure complete!</h3><br /><hr /><br />";
+
+/**
  *  login message
  */
 

@@ -1,66 +1,23 @@
 ... or not.
 
-0. Preface
-Why this? A readme is a typical document that no one interested, except something is going wrong during the installation ;-)
-Since we are going to gitHub there are some changes that are in the need to explain a little bit more detailed.
-This is not an official documentation - it's more like a developer note. And, if you found a typo, you can't keep it for yourself, you will have to take it to us ;-)
+Why this? A readme is a typical document that no one is interested in, except something is going wrong during the installation ;-)
+Since we went to gitHub there are some changes that should be explained a little bit more detailed.
 
-Kind regards - here we go ...
+1. We will now use the svn-wiki to inform about modifications of LEPTON CMS, developers as well as agencies and users. We are sure these informations are helpful.
+https://github.com/LEPTON-project/LEPTON/wiki
+
+2. Please don't use the repository for productive installations, because this is a developers SVN. 
+https://github.com/LEPTON-project/LEPTON
+You can download all available packages on our homepage 
+http://lepton-cms.org
+in the download area!
+
+3. Please report all issues from current stable release to issue tracker in the svn:
+https://github.com/LEPTON-project/LEPTON/issues
+but please have a look on our forum before you post an issue:
+http://forum.lepton-cms.org/
+
+
+Kind regards
 Dietrich Roland Pehlke - Aldus
 2012-11-12
-
-1. Since 1.2.1 there are couple of new class-methods inside the class.database:
-- get_all
-- list_tables
-- describe_table
-- build_mysql_query
-
-1.1 method "get_all"
-If your query got more than one result, e.g. you want to get all informations of some pages, this one returns a linear list within the assoc. list with the result.
-E.g. the query is "Select 'display_name' from '.TABLE_PREFIX.'users" the storrage-array will hold the display_name of the users.
-Keep in mind that the storrage-array is pass-by-reference, so you will have to declare it first!
-
-$all_names = array();
-$database->get_all(
-    "Select 'display_name' from '.TABLE_PREFIX.'users",
-    $all_names
-);
-
-1.2 method list_tables
-Returns a linear list of all table-names of the database.
-As an optional param you can "strip" e.g. the table_prefix so you can take a quick look for an existing table-name, e.g. if your modul needs a spezific one.
-
-1.3 method describe_table
-Get detailed informations for the table-fields of a given db-table.
-The result is also store in an array passed by reference.
-
-$info = array();
-$database->describe_table( TABLE_PREFIX."mod_code2", $info);
-
-
-1.4 method build_mysql_query
-Helper to build a mysql_query string. Long queries are difficult to manage or to expand, e.g. the save.php of the "news"-modul. (over 12 fields to update!).
-This little method helps to keep the source small and manageable.
-E.g.
-
-$values = 	array(
-	'page_title' => 'example',
-	'menu_title' => 'example'
-);
-	
-$query = $database_instance->build_mysql_query(
-	'update',
-	TABLE_PREFIX."pages",
-	$values,
-	'page_id = '.$page_id
-);
-
-$database->query( $q );
-
-Supported types are "update", "insert", "delete" and "alter".
-Keep in mind that the values have to pass by reference!
-
-2.0 Why on earth "pass-by-reference"? 
-Because you are not in need to return the values - even the values have not to be block-copied to the methods at all!
-Speed, friends!
-For more details take a look at the source-comments.

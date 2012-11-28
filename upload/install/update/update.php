@@ -106,6 +106,16 @@ if (version_compare($lepton_version, "1.2.0", "="))
 }
 
 /**
+ *  update LEPTON to 1.2.2 , check release
+ */
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "1.2.1", "="))
+{
+    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    include 'scripts/122_update.php';
+}
+
+/**
  *  reload all addons
  */
 if (file_exists('reload.php')) {

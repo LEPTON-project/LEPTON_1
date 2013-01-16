@@ -15,8 +15,10 @@
  */
 
 // set error level
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL|E_STRICT);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL|E_STRICT);
+
+
 
 require_once('../config.php');
 global $admin;
@@ -51,7 +53,7 @@ if (version_compare(LEPTON_VERSION, "1.1.0", "<"))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.0", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/111_update.php';
 }
 
@@ -61,7 +63,7 @@ if (version_compare($lepton_version, "1.1.0", "="))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.1", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/112_update.php';
 }
 
@@ -71,17 +73,18 @@ if (version_compare($lepton_version, "1.1.1", "="))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.2", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");;
     include 'scripts/113_update.php';
 }
 
 /**
  *  update LEPTON to 1.1.4 , check release
  */
+mysql_free_result(); 
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.3", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/114_update.php';
 }
 
@@ -91,7 +94,7 @@ if (version_compare($lepton_version, "1.1.3", "="))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.4", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/120_update.php';
 }
 
@@ -101,7 +104,7 @@ if (version_compare($lepton_version, "1.1.4", "="))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.2.0", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/121_update.php';
 }
 
@@ -111,7 +114,7 @@ if (version_compare($lepton_version, "1.2.0", "="))
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.2.1", "="))
 {
-    echo("<h3>Your LEPTON Version : " . LEPTON_VERSION . " </h3>");
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
     include 'scripts/122_update.php';
 }
 

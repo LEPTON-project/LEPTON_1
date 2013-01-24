@@ -52,6 +52,8 @@ if(isset($user_time) && $user_time == true)
 		$s .= (isset($TEXT['SYSTEM_DEFAULT']) ? $TEXT['SYSTEM_DEFAULT'] : 'System Default').')';
 }
 
+global $DATE_FORMATS;
+
 // Add values to list
 $DATE_FORMATS = array(
 	'system_default' => $s,

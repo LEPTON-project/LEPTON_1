@@ -37,8 +37,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 /**
  *	Define that this file has been loaded
  *
@@ -303,7 +301,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 				$query_home_folders = $database->query($sql);
 				if($query_home_folders->numRows() > 0)
 				{
-					while($folder = $query_home_folders->fetchRow())
+					while($folder = $query_home_folders->fetchRow( MYSQL_ASSOC ))
 					{
 						$home_folders[$folder['home_folder']] = $folder['home_folder'];
 					}
@@ -477,7 +475,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 					$sql .= 'WHERE (FIND_IN_SET(\''.$group.'\', `groups_id`) > 0) AND `home_folder` <> \'\' AND `user_id` <> '.$wb->get_user_id();
 					if( ($res_hf = $database->query($sql)) != null )
 					{
-						while( $rec_hf = $res_hf->fetchrow() )
+						while( $rec_hf = $res_hf->fetchrow( MYSQL_ASSOC ) )
 						{
 							$allow_list[] = $rec_hf['home_folder'];
 						}
@@ -617,7 +615,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 		// Get page details
 		$sql = 'SELECT `parent`, `level` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;
 		$query_page = $database->query($sql);
-		$fetch_page = $query_page->fetchRow();
+		$fetch_page = $query_page->fetchRow( MYSQL_ASSOC );
 		$parent = $fetch_page['parent'];
 		$level = $fetch_page['level'];
 		if($level == 1)
@@ -694,7 +692,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 		$query = $database->query($sql);
 		if($query->numRows() > 0)
 		{
-			while($fetch = $query->fetchRow())
+			while($fetch = $query->fetchRow( MYSQL_ASSOC ))
 			{
 				$subs[] = $fetch['page_id'];
 				// Get subs of this sub
@@ -1089,7 +1087,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 		$query_sections = $database->query($sql);
 		if($query_sections->numRows() > 0)
 		{
-			while($section = $query_sections->fetchRow())
+			while($section = $query_sections->fetchRow( MYSQL_ASSOC ))
 			{
 				// Set section id
 				$section_id = $section['section_id'];

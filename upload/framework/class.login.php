@@ -17,7 +17,6 @@
  *
  */
 
-
 // include class.secure.php to protect this file and the whole CMS!
 if (defined('WB_PATH')) {	
 	include(WB_PATH.'/framework/class.secure.php'); 
@@ -37,21 +36,34 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-
 define('LOGIN_CLASS_LOADED', true);
 
 // Load the other required class files if they are not already loaded
 require_once(WB_PATH."/framework/class.admin.php");
-// Get WB version
+// Get LEPTON version
 require_once(ADMIN_PATH.'/interface/version.php');
 
 class login extends admin {
-	function __construct( $config_array ) {
+
+	public $USERS_TABLE = "";
+	public $GROUPS_TABLE = "";
+	public $username_fieldname = "";
+	public $password_fieldname = "";
+	public $max_attemps = 3;
+	public $warning_url = "";
+	public $login_url = "";
+	public $template_dir = "";
+	public $template_file = "";
+	public $frontend = false;
+	public $forgotten_details_app = "";
+	public $max_username_len = 3;
+	public $max_password_len = 6;
+	public $redirect_url = "";
+
+	public function __construct( $config_array ) {
 		// Get language vars
 		global $MESSAGE, $database;
-
+		
 		// Get configuration values
 		$this->USERS_TABLE = $config_array['USERS_TABLE'];
 		$this->GROUPS_TABLE = $config_array['GROUPS_TABLE'];
@@ -138,7 +150,7 @@ class login extends admin {
 	}
 
 	// Authenticate the user (check if they exist in the database)
-	function authenticate() {
+	public function authenticate() {
 		global $database;
 		// Get user information
 		$loginname = ( preg_match('/[\;\=\&\|\<\> ]/',$this->username) ? '' : $this->username );
@@ -231,7 +243,7 @@ class login extends admin {
 	}
 	
 	// Increase the count for login attemps
-	function increase_attemps() {
+	private function increase_attemps() {
 		if(!isset($_SESSION['ATTEMPS'])) {
 			$_SESSION['ATTEMPS'] = 0;
 		} else {
@@ -241,7 +253,7 @@ class login extends admin {
 	}
 	
 	// Display the login screen
-	function display_login() {
+	public function display_login() {
 		// Get language vars
 		global $MESSAGE;
 		global $MENU;
@@ -258,32 +270,28 @@ class login extends admin {
 			$template->set_block('page', 'mainBlock', 'main');
 			
 			$template->set_var(array(
-					'ACTION_URL' => $this->login_url,
-					'ATTEMPS' => $this->get_session('ATTEMPS'),
-					'USERNAME' => $this->username,
-					'USERNAME_FIELDNAME' => $this->username_fieldname,
-					'PASSWORD_FIELDNAME' => $this->password_fieldname,
-					'MESSAGE' => $this->message,
-					'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
-					'MAX_USERNAME_LEN' => $this->max_username_len,
-					'MAX_PASSWORD_LEN' => $this->max_password_len,
-					'WB_URL' => WB_URL,
-					'THEME_URL' => THEME_URL,
-					'VERSION' => VERSION,
-					/**
-					 *	maked as deprecated
-					 */
-					# 'REVISION' => REVISION,
-					'LANGUAGE' => strtolower(LANGUAGE),
-					'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
-					'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
-					'TEXT_USERNAME' => $TEXT['USERNAME'],
-					'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-					'TEXT_LOGIN' => $MENU['LOGIN'],
-					'TEXT_HOME' => $TEXT['HOME'],
-					'PAGES_DIRECTORY' => PAGES_DIRECTORY,
-					'SECTION_LOGIN' => $MENU['LOGIN']
-					)
+				'ACTION_URL' => $this->login_url,
+				'ATTEMPS' => $this->get_session('ATTEMPS'),
+				'USERNAME' => $this->username,
+				'USERNAME_FIELDNAME' => $this->username_fieldname,
+				'PASSWORD_FIELDNAME' => $this->password_fieldname,
+				'MESSAGE' => $this->message,
+				'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
+				'MAX_USERNAME_LEN' => $this->max_username_len,
+				'MAX_PASSWORD_LEN' => $this->max_password_len,
+				'WB_URL' => WB_URL,
+				'THEME_URL' => THEME_URL,
+				'VERSION' => VERSION,
+				'LANGUAGE' => strtolower(LANGUAGE),
+				'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
+				'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
+				'TEXT_USERNAME' => $TEXT['USERNAME'],
+				'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+				'TEXT_LOGIN' => $MENU['LOGIN'],
+				'TEXT_HOME' => $TEXT['HOME'],
+				'PAGES_DIRECTORY' => PAGES_DIRECTORY,
+				'SECTION_LOGIN' => $MENU['LOGIN']
+				)
 			);
 			
 			$charset= (defined('DEFAULT_CHARSET')) ? DEFAULT_CHARSET : "utf-8";
@@ -297,7 +305,7 @@ class login extends admin {
 
 
 	// Warn user that they have had to many login attemps
-	function warn() {
+	public function warn() {
 		header('Location: '.$this->warning_url);
 		exit(0);
 	}

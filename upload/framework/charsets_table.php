@@ -37,8 +37,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 global $iso_8859_2_to_utf8;
 $iso_8859_2_to_utf8 = array(
 	"\x80"=>"\xc2\x80","\x81"=>"\xc2\x81","\x82"=>"\xc2\x82","\x83"=>"\xc2\x83","\x84"=>"\xc2\x84","\x85"=>"\xc2\x85","\x86"=>"\xc2\x86","\x87"=>"\xc2\x87",

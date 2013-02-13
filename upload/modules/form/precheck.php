@@ -1,14 +1,12 @@
 <?php
 
 /**
- *  @module         news
+ *  @module         form
  *  @version        see info.php of this module
- *  @author         Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos)
- *  @copyright      2004-2013 Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke, Christian M. Stefan (Stefek), Jurgen Nijhuis (Argos) 
- *  @license        GNU General Public License
+ *  @authors        Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @copyright      2004-2013 Ryan Djurovich, Rudolph Lartey, John Maats, Dietrich Roland Pehlke 
+ *  @license        see info.php of this module
  *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- * 
  */
 
 // include class.secure.php to protect this file and the whole CMS!

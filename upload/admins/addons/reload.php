@@ -36,8 +36,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
+require_once (WB_PATH.'/framework/addon.precheck.inc.php');
 require_once (WB_PATH.'/framework/class.admin.php');
 // create Admin object with admin header
 // check user permissions for admintools (redirect users with wrong permissions)
@@ -169,28 +168,27 @@ if ($admin->get_permission('admintools') == true)
                         $modules = scan_current_dir(WB_PATH.'/modules');
                         if (sizeof($modules['path']) > 0)
                         {
-                            foreach ($modules['path'] as $value)
+                            foreach ($modules['path'] as &$value)
                             {
-                                $code_version = get_modul_version($value);
-                                $db_version = get_modul_version($value, false);
+                                $code_version	= get_modul_version($value);
+                                $db_version		= get_modul_version($value, false);
                                 if (($db_version != null) && ($code_version != null))
                                 {
-                                    if (version_compare($db_version, $code_version, '!='))
+                                    if (versioncompare($db_version, $code_version, '>'))
                                     {
-                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' :: '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span> ';
+                                        $error_msg[] = '<span class="normal bold red">'.$value.' ( '.$db_version.' > '.$code_version.' ) '.$MESSAGE['GENERIC_MODULE_VERSION_ERROR'].'</span> ';
                                         continue;
                                     }
                                     else
                                     {
                                     	require(WB_PATH.'/modules/'.$value."/info.php");
                                         load_module(WB_PATH.'/modules/'.$value);
-                                        $msg[] = '<span class="normal bold green">'.$value.' :: '.$MESSAGE['ADDON_MODULES_RELOADED'].'</span>';
+                                        $msg[] = '<span class="normal bold green">'.$value.' - '.$MESSAGE['ADDON_MODULES_RELOADED'].'</span>';
                                     }
                                 }
                                 else
                                 {
-
-                                /* not found */
+                                	/* not found */
                                 }
                             }
                         }

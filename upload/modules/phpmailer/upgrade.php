@@ -33,4 +33,17 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
+
+/**
+ *  remove old docs directory from phpmailer 
+ */
+ 
+if (file_exists(WB_PATH . '/modules/phpmailer/docs/extending.html')) {
+    	rm_full_dir( WB_PATH.'/modules/phpmailer/docs' );
+} 
+
+if (file_exists(WB_PATH."/modules/phpmailer/doc_new/info.php")) {
+    rename (WB_PATH."/modules/phpmailer/doc_new", WB_PATH."/modules/phpmailer/docs");
+}
+
 ?>

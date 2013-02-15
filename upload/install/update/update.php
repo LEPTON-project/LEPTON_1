@@ -80,7 +80,6 @@ if (version_compare($lepton_version, "1.1.2", "="))
 /**
  *  update LEPTON to 1.1.4 , check release
  */
-mysql_free_result(); 
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.1.3", "="))
 {

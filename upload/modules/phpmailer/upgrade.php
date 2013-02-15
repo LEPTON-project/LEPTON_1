@@ -7,11 +7,10 @@
  *
  * @module          phpmailer
  * @author          LEPTON Project
- * @copyright       2010-2012, LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: upgrade.php 1813 2012-03-23 06:59:21Z erpe $
  *
  */
 
@@ -33,5 +32,18 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
+
+
+/**
+ *  remove old docs directory from phpmailer 
+ */
+ 
+if (file_exists(WB_PATH . '/modules/phpmailer/docs/extending.html')) {
+    	rm_full_dir( WB_PATH.'/modules/phpmailer/docs' );
+} 
+
+if (file_exists(WB_PATH."/modules/phpmailer/doc_new/index.php")) {
+    rename (WB_PATH."/modules/phpmailer/doc_new", WB_PATH."/modules/phpmailer/docs");
+}
 
 ?>

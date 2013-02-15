@@ -9,11 +9,10 @@
  *
  * @author          Website Baker Project, LEPTON Project
  * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2010-2013, LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: functions.php 1668 2012-01-22 06:31:39Z phpmanufaktur $
  *
  */
 
@@ -206,7 +205,7 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 		{
 			$FILE = array();
 			clearstatcache();
-			$root = empty ($root) ? getcwd() : $root;
+			if (true === empty ($root)) $root = getcwd();
 			if (($handle = opendir($root)))
 			{
 			// Loop through the files and dirs an add to list  DIRECTORY_SEPARATOR
@@ -224,16 +223,9 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 				}
 				$close_verz = closedir($handle);
 			}
-			if (isset ($FILE['path']) && natcasesort($FILE['path']))
-			{
-				$tmp = array();
-				$FILE['path'] = array_merge($tmp, $FILE['path']);
-			}
-			if (isset ($FILE['filename']) && natcasesort($FILE['filename']))
-			{
-				$tmp = array();
-				$FILE['filename'] = array_merge($tmp, $FILE['filename']);
-			}
+			natcasesort($FILE['path']);
+			natcasesort($FILE['filename']);
+
 			return $FILE;
 		}
 	}

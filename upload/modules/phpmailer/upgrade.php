@@ -42,7 +42,7 @@ if (file_exists(WB_PATH . '/modules/phpmailer/docs/extending.html')) {
     	rm_full_dir( WB_PATH.'/modules/phpmailer/docs' );
 } 
 
-if (file_exists(WB_PATH."/modules/phpmailer/doc_new/info.php")) {
+if (file_exists(WB_PATH."/modules/phpmailer/doc_new/index.php")) {
     rename (WB_PATH."/modules/phpmailer/doc_new", WB_PATH."/modules/phpmailer/docs");
 }
 

@@ -42,6 +42,7 @@ $upgrade_modules = array(
     "lib_jquery",               
     "tiny_mce_jq",     
     "form",
+    "phpmailer",    
     "code2",               
     "wysiwyg",      
     "news"

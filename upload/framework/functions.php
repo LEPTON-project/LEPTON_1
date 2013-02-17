@@ -203,7 +203,10 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 	{
 		function scan_current_dir($root = '')
 		{
-			$FILE = array();
+			$FILE = array(
+				'path' => array(),
+				'filename' => array()
+			);
 			clearstatcache();
 			if (true === empty ($root)) $root = getcwd();
 			if (($handle = opendir($root)))

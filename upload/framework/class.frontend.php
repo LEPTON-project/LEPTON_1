@@ -8,8 +8,8 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2004-2010 Website Baker Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -582,11 +582,11 @@ class frontend extends wb {
 		 */
 		if (defined("PAGE_CONTENT") ) {
 			$look_up = array(
-				'/account/css/preferences.css',
-				"/templates/".DEFAULT_THEME."/preferences.css",
-				"/templates/".DEFAULT_THEME."/css/preferences.css",              
 				"/templates/".TEMPLATE.'/css/preferences.css',
-				"/templates/".TEMPLATE.'/preferences.css'
+				"/templates/".TEMPLATE.'/preferences.css',
+				"/templates/".DEFAULT_THEME."/css/preferences.css",              
+				"/templates/".DEFAULT_THEME."/preferences.css",
+				'/account/css/preferences.css'
 			);
 			foreach($look_up as $f) {
 				if (file_exists(WB_PATH.$f)) {

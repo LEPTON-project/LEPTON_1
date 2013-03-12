@@ -578,8 +578,10 @@ class frontend extends wb {
 		/**
 		 *	Needed for the front-end login.
 		 *	Were looking for the preferences css-file.
+     *
+     * will be deleted with 1.2.3
 		 *
-		 */
+		 
 		if (defined("PAGE_CONTENT") ) {
 			$look_up = array(
 				"/templates/".TEMPLATE.'/css/preferences.css',
@@ -595,6 +597,11 @@ class frontend extends wb {
 				}
 			}
 		}
+		*/
+		require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
+		global $lepton_filemanager;
+		$f = $lepton_filemanager->resolve_path( "preferences.css", "/account/css/" );
+		if ($f != NULL) $html .= "\n".$this->__wb_build_link($f)."\n";
 		
 		return $html;
 	}

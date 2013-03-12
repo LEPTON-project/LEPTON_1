@@ -83,6 +83,64 @@ class lepton_filemanager
 	public function __call($name, $arg_array) {
 	
 	}
+	
+	/**
+	 *
+	 *	@param	string	The filename we're looking for.
+	 *	@param	string	A default directory.
+	 *	@param	bool	Return only the path without the filename
+	 *	@return	mixed	The path, the dirname or NULL if nowhere found.
+	 *
+	 */
+	public function resolve_path( $file_name, $base_path = "", $only_path=false) {
+		$temp = explode(".", $file_name);
+		$type = strtolower( array_pop( $temp ) );
+		switch($type) {
+			case 'css':
+				$look_up = array(
+					"/templates/".TEMPLATE.'/css/'.$file_name,
+					"/templates/".TEMPLATE.'/'.$file_name,
+					"/templates/".DEFAULT_THEME."/css/".$file_name,              
+					"/templates/".DEFAULT_THEME."/".$file_name,
+					$base_path.$file_name
+				);
+				break;
+				
+			case 'htt':				
+				$look_up = array(
+					"/templates/".TEMPLATE.'/htt/'.$file_name,
+					"/templates/".TEMPLATE.'/templates/'.$file_name,
+					"/templates/".TEMPLATE.'/'.$file_name,
+					"/templates/".DEFAULT_THEME."/htt/".$file_name,
+					"/templates/".DEFAULT_THEME."/templates/".$file_name,
+					"/templates/".DEFAULT_THEME."/".$file_name,
+					$base_path.$file_name
+				);
+				break;
+
+			case 'js':				
+				$look_up = array(
+					"/templates/".TEMPLATE.'/js/'.$file_name,
+					"/templates/".TEMPLATE.'/scripts/'.$file_name,
+					"/templates/".TEMPLATE.'/'.$file_name,
+					"/templates/".DEFAULT_THEME."/js/".$file_name,
+					"/templates/".DEFAULT_THEME."/scripts/".$file_name,
+					"/templates/".DEFAULT_THEME."/".$file_name,
+					$base_path.$file_name
+				);
+				break;
+			
+			default:
+				return NULL;
+		}
+		foreach($look_up as &$p) { 
+			if (file_exists(WB_PATH.$p)) {
+				if (true === $only_path) $p = dirname( $p );
+				return $p;
+			}
+		}
+		return NULL;
+	}
 }
 
 global $lepton_filemanager;

@@ -4,7 +4,7 @@
  *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2010-2011 CMS-LAB
+ *  @copyright      2010-2013 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
@@ -36,7 +36,7 @@ if (defined('WB_PATH')) {
 $template_directory     = 'lepton';
 $template_name          = 'lepton-start';
 $template_function			= 'template';
-$template_version       = '1.03';
+$template_version       = '1.1.0';
 $template_platform      = '1.0';
 $template_author        = 'CMS-LAB';
 $template_license       = 'http://creativecommons.org/licenses/by/3.0/';

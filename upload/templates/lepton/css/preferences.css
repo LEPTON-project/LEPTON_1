@@ -2,20 +2,20 @@
  *  @template       Lepton-Start
  *  @version        see info.php of this template
  *  @author         cms-lab
- *  @copyright      2010-2011 CMS-LAB
+ *  @copyright      2010-2013 CMS-LAB
  *  @license        http://creativecommons.org/licenses/by/3.0/
  *  @license terms  see info.php of this template
  *  @platform       see info.php of this template
  *  @requirements   PHP 5.2.x and higher
  */
-
+ 
 legend {
 	padding-left: 5px;
 	padding-right: 5px;
 	font-size: 12px;
 	padding-bottom:6px;
 	font-weight: bold;
-	color:#990000;
+	color:#999999;
 }
 fieldset.account_form {
 	padding: 13px;

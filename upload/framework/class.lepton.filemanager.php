@@ -98,34 +98,27 @@ class lepton_filemanager
 		switch($type) {
 			case 'css':
 				$look_up = array(
-					"/templates/".TEMPLATE.'/css/'.$file_name,
-					"/templates/".TEMPLATE.'/'.$file_name,
-					"/templates/".DEFAULT_THEME."/css/".$file_name,              
-					"/templates/".DEFAULT_THEME."/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/css/'.$file_name,
 					$base_path.$file_name
 				);
 				break;
 				
-			case 'htt':				
+			case 'lte':
+			case 'htt':
 				$look_up = array(
-					"/templates/".TEMPLATE.'/htt/'.$file_name,
-					"/templates/".TEMPLATE.'/templates/'.$file_name,
-					"/templates/".TEMPLATE.'/'.$file_name,
-					"/templates/".DEFAULT_THEME."/htt/".$file_name,
-					"/templates/".DEFAULT_THEME."/templates/".$file_name,
-					"/templates/".DEFAULT_THEME."/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE."/".$type."/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE."/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE."/templates/".$file_name,
 					$base_path.$file_name
 				);
 				break;
 
 			case 'js':				
 				$look_up = array(
-					"/templates/".TEMPLATE.'/js/'.$file_name,
-					"/templates/".TEMPLATE.'/scripts/'.$file_name,
-					"/templates/".TEMPLATE.'/'.$file_name,
-					"/templates/".DEFAULT_THEME."/js/".$file_name,
-					"/templates/".DEFAULT_THEME."/scripts/".$file_name,
-					"/templates/".DEFAULT_THEME."/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/js/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/scripts/'.$file_name,
 					$base_path.$file_name
 				);
 				break;

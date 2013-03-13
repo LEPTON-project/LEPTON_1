@@ -39,25 +39,16 @@ if (defined('WB_PATH')) {
 require_once(WB_PATH . '/include/phplib/template.inc');
 
 // see if there exists a template file in "account-htt" folder  inside the current template
-$paths = array(
-	WB_PATH."/templates/".TEMPLATE,
-	WB_PATH."/templates/".TEMPLATE."/templates",
-	WB_PATH."/templates/".DEFAULT_TEMPLATE."/templates",
-	dirname(__FILE__) . '/htt'
+require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
+global $lepton_filemanager;
+$template_path = $lepton_filemanager->resolve_path( 
+	"login_form.htt",
+	'/account/templates/',
+	true
 );
-
-$template_path = NULL;
-foreach($paths as $p) {
-	$temp = $p."/login_form.htt";
-	if (file_exists($temp)) {
-		$template_path = &$p;
-		break;
-	}
-}
-
 if ($template_path === NULL) die("Can't find a valid template for this form!");
 
-$tpl = new Template($template_path);
+$tpl = new Template(WB_PATH.$template_path);
 
 $tpl->set_unknowns('remove');
 
@@ -68,57 +59,27 @@ $tpl->set_unknowns('remove');
  */
 $tpl->set_file('login', 'login_form.htt');
 
-/**	*********
- *	languages
- *
- */
-$tpl->set_block('login', 'languages_values_block', 'languages_values_output');
-
-$query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
-$result = $database->query( $query );
-if (!$result) die ($database->get_error());
-
-while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
-
-	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
-	$tpl->set_var('LANG_SELECTED', $sel);
-	$tpl->set_var(array(
-			'LANG_CODE' 	=>	$data['directory'],
-			'LANG_NAME'		=>	$data['name']
-		)
-	);
-	$tpl->parse('languages_values_output', 'languages_values_block',true);
-}
-
-
 /**
- *
+ *	Building a secure-hash
  *
  */
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-/**
- *
- *
- */
-$r_value = md5( microtime(true)."sah ein knab ein roesslein stehen".$_SERVER['HTTP_USER_AGENT']);
-
-
 $tpl->set_var(array(
-	'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
-	'WB_URL'					=>	WB_URL,
-	'LOGIN_URL'			  =>	LOGIN_URL,
-	'LOGOUT_URL'			=>	LOGOUT_URL,
-	'FORGOT_URL'			=>	FORGOT_URL,  
-	'TEXT_USERNAME'		=>	$TEXT['USERNAME'],
-	'TEXT_PASSWORD'		=>	$TEXT['PASSWORD'],
-	'MESSAGE'					=>	$thisApp->message,  
-	'REDIRECT_URL'		=>	$thisApp->redirect_url,   
-	'TEXT_LOGIN'			=>	$MENU['LOGIN'],
-	'TEXT_LOGOUT'			=>	$MENU['LOGOUT'],
-	'TEXT_RESET'			=>	$TEXT['RESET'],
-	'HASH'						=>	$hash,
+	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
+	'WB_URL'		=>	WB_URL,
+	'LOGIN_URL'		=>	LOGIN_URL,
+	'LOGOUT_URL'	=>	LOGOUT_URL,
+	'FORGOT_URL'	=>	FORGOT_URL,  
+	'TEXT_USERNAME'	=>	$TEXT['USERNAME'],
+	'TEXT_PASSWORD'	=>	$TEXT['PASSWORD'],
+	'MESSAGE'		=>	$thisApp->message,  
+	'REDIRECT_URL'	=>	$thisApp->redirect_url,   
+	'TEXT_LOGIN'	=>	$MENU['LOGIN'],
+	'TEXT_LOGOUT'	=>	$MENU['LOGOUT'],
+	'TEXT_RESET'	=>	$TEXT['RESET'],
+	'HASH'			=>	$hash,
 	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
 	)
 );

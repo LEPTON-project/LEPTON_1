@@ -98,8 +98,8 @@ class lepton_filemanager
 		switch($type) {
 			case 'css':
 				$look_up = array(
-					"/templates/".DEFAULT_TEMPLATE.'/'.$file_name,
 					"/templates/".DEFAULT_TEMPLATE.'/css/'.$file_name,
+					"/templates/".DEFAULT_TEMPLATE.'/'.$file_name,
 					$base_path.$file_name
 				);
 				break;
@@ -107,9 +107,8 @@ class lepton_filemanager
 			case 'lte':
 			case 'htt':
 				$look_up = array(
-					"/templates/".DEFAULT_TEMPLATE."/".$type."/".$file_name,
-					"/templates/".DEFAULT_TEMPLATE."/".$file_name,
 					"/templates/".DEFAULT_TEMPLATE."/templates/".$file_name,
+					"/templates/".DEFAULT_TEMPLATE."/".$file_name,
 					$base_path.$file_name
 				);
 				break;
@@ -118,7 +117,6 @@ class lepton_filemanager
 				$look_up = array(
 					"/templates/".DEFAULT_TEMPLATE.'/js/'.$file_name,
 					"/templates/".DEFAULT_TEMPLATE.'/'.$file_name,
-					"/templates/".DEFAULT_TEMPLATE.'/scripts/'.$file_name,
 					$base_path.$file_name
 				);
 				break;

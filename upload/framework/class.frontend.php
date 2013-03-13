@@ -13,7 +13,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: class.frontend.php 1801 2012-03-12 14:52:10Z erpe $
  *
  */
 
@@ -42,7 +41,6 @@ if (defined('WB_PATH')) {
 require_once(WB_PATH.'/framework/class.wb.php');
 
 /**
- *	@version	2.8.3
  *	@date		2010-10-07
  *	@last		Dietrich Roland Pehlke (Aldus)
  *
@@ -296,9 +294,6 @@ class frontend extends wb {
 	 *	replace all "[wblink{page_id}]" with real links
 	 *	@param	string &$content : reference to global $content
 	 *	@return	nothing
-	 *	@history 	100216 17:00:00 optimise errorhandling, speed, SQL-strict
-	 *				110315 12:00:00	- avoid unnessesary querys and replacements via array_unique.
-	 *								- remove unused vars.
 	 */
 	function preprocess( &$content )
 	{
@@ -574,35 +569,41 @@ class frontend extends wb {
 		
 		if(!defined('MOD_FRONTEND_CSS_REGISTERED')) define('MOD_FRONTEND_CSS_REGISTERED', true);
 		if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_JAVASCRIPT_REGISTERED', true);
-		
+
 		/**
-		 *	Needed for the front-end login.
+		 *	Needed for the front-end login, incl. forgot_form and login.
 		 *	Were looking for the preferences css-file.
-     *
-     * will be deleted with 1.2.3
-		 *
-		 
-		if (defined("PAGE_CONTENT") ) {
-			$look_up = array(
-				"/templates/".TEMPLATE.'/css/preferences.css',
-				"/templates/".TEMPLATE.'/preferences.css',
-				"/templates/".DEFAULT_THEME."/css/preferences.css",              
-				"/templates/".DEFAULT_THEME."/preferences.css",
-				'/account/css/preferences.css'
-			);
-			foreach($look_up as $f) {
-				if (file_exists(WB_PATH.$f)) {
-					$html .= "\n".$this->__wb_build_link($f)."\n";
-					break;
-				}
+		 *	The .htt counterpart is placed inside the "template"-dir of the FE-template,
+		 *	as fallback inside the accout/htt directory.
+		 */
+		
+		if(isset($_SERVER['SCRIPT_FILENAME'])) {
+			$script = explode("/", $_SERVER['SCRIPT_FILENAME']);
+			$script = array_pop($script);
+			$fallback = "/account/css/";
+			switch($script) {
+			case "preferences.php":
+				$filename = "preferences_form.css";
+				break;
+			case "forgot.php":
+				$filename = "forgot_form.css";
+				break;
+			case "login.php":
+				$filename = "login_form.css";
+				break;
+			default:
+				$filename = NULL;
+			}
+			if ($filename != NULL) {
+				require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
+				global $lepton_filemanager;
+				$f = $lepton_filemanager->resolve_path(
+					$filename,	// looking for this file
+					$fallback		// fall back directory
+				);
+				if ($f != NULL) $html .= "\n".$this->__wb_build_link($f)."\n";
 			}
 		}
-		*/
-		require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
-		global $lepton_filemanager;
-		$f = $lepton_filemanager->resolve_path( "preferences.css", "/account/css/" );
-		if ($f != NULL) $html .= "\n".$this->__wb_build_link($f)."\n";
-		
 		return $html;
 	}
 	

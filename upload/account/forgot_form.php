@@ -35,11 +35,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
-// Create new database object
-// $database = new database();
-
 // Check if the user has already submitted the form, otherwise show it
 if(isset($_POST['email']) && $_POST['email'] != "" &&
     preg_match("/([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}/i", $_POST['email'])) {
@@ -126,25 +121,18 @@ if(!isset($message)) {
 require_once(WB_PATH . '/include/phplib/template.inc');
 
 // see if there exists a template file in "account-htt" folder  inside the current template
-$paths = array(
-	WB_PATH."/templates/".TEMPLATE,
-	WB_PATH."/templates/".TEMPLATE."/templates",
-	WB_PATH."/templates/".DEFAULT_TEMPLATE."/templates",
-	dirname(__FILE__) . '/htt'
-);
 
-$template_path = NULL;
-foreach($paths as $p) {
-	$temp = $p."/forgot_form.htt";
-	if (file_exists($temp)) {
-		$template_path = &$p;
-		break;
-	}
-}
+require_once( dirname( __FILE__)."/../framework/class.lepton.filemanager.php" );
+global $lepton_filemanager;
+$template_path = $lepton_filemanager->resolve_path( 
+	"forgot_form.htt",
+	'/account/htt/',
+	true
+);
 
 if ($template_path === NULL) die("Can't find a valid template for this form!");
 
-$tpl = new Template($template_path);
+$tpl = new Template(WB_PATH.$template_path);
 
 $tpl->set_unknowns('remove');  
 
@@ -154,29 +142,6 @@ $tpl->set_unknowns('remove');
  */
 $tpl->set_file('forgot', 'forgot_form.htt');
 
-/**	*********
- *	languages
- *
- */
-$tpl->set_block('forgot', 'languages_values_block', 'languages_values_output');
-
-$query = "SELECT `directory`,`name` from `".TABLE_PREFIX."addons` where `type`='language'";
-$result = $database->query( $query );
-if (!$result) die ($database->get_error());
-
-while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
-
-	$sel = (LANGUAGE == $data['directory']) ? " selected='selected'" : "";
-	$tpl->set_var('LANG_SELECTED', $sel);
-	$tpl->set_var(array(
-			'LANG_CODE' 	=>	$data['directory'],
-			'LANG_NAME'		=>	$data['name']
-		)
-	);
-	$tpl->parse('languages_values_output', 'languages_values_block',true);
-}
-
-
 /**
  *
  *
@@ -184,40 +149,38 @@ while( false != ($data = $result->fetchRow( MYSQL_ASSOC ) ) ) {
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-/**
- *
- *
- */
-$r_value = md5( microtime(true)."sah ein knab ein roesslein stehen".$_SERVER['HTTP_USER_AGENT']);
+$redirect_url = (isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : "");
 
 $tpl->set_var(array(
 	'TEMPLATE_DIR' 		=>	TEMPLATE_DIR,
-	'WB_URL'					=>	WB_URL,
-	'URL'			        =>	URL,
-	'FORGOT_URL'			=>	FORGOT_URL,  
-	'TEXT_FORGOT'			=>	$MENU['FORGOT'],  
+	'WB_URL'			=>	WB_URL,
+	'URL'			    =>	$redirect_url,
+	'FORGOT_URL'		=>	FORGOT_URL,  
+	'TEXT_FORGOT'		=>	$MENU['FORGOT'],  
 	'MESSAGE_COLOR'		=>	$message_color,
-	'MESSAGE'		      =>	$message,  
-	'TEXT_EMAIL'		  =>	$TEXT['EMAIL'],
-	'SET_DISPLAY_FORM'		  =>	'if(!isset($display_form) OR $display_form != false) {',
-	'SET_DISPLAY_FORM_END'	=>	'}',  
+	'MESSAGE'		    =>	$message,  
+	'TEXT_EMAIL'		=>	$TEXT['EMAIL'],
 	'DISPLAY_EMAIL'		=>	$email,   
-	'TEXT_SEND_DETAILS'			=>	$TEXT['SEND_DETAILS'],
-	'TEXT_LOGOUT'			=>	$MENU['LOGOUT'],
-	'TEXT_RESET'			=>	$TEXT['RESET'],
-	'HASH'						=>	$hash,
+	'TEXT_SEND_DETAILS'	=>	$TEXT['SEND_DETAILS'],
+	'TEXT_LOGOUT'		=>	$MENU['LOGOUT'],
+	'TEXT_RESET'		=>	$TEXT['RESET'],
+	'HASH'				=>	$hash,
 	'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS']
 	)
 );
 
 unset($_SESSION['result_message']);
 
-// for use in template <!-- BEGIN/END comment_block -->
 $tpl->set_block('forgot', 'comment_block', 'comment_replace'); 
 $tpl->set_block('comment_replace', '');
 
+if(!isset($display_form) OR $display_form != false) {
+
+} else {
+	$tpl->set_block('forgot', 'form_block', 'form_block_ref');
+	$tpl->set_block('form_block_ref', '');
+}
 // ouput the final template
 $tpl->pparse('output', 'forgot');
-
 
 ?>

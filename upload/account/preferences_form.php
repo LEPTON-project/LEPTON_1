@@ -160,11 +160,6 @@ foreach($TIME_FORMATS AS $format => $title) {
 $hash = sha1( microtime().$_SERVER['HTTP_USER_AGENT'] );
 $_SESSION['wb_apf_hash'] = $hash;
 
-/**
- *
- *
- */
-$r_value = md5( microtime(true)."sah ein knab ein roesslein stehen".$_SERVER['HTTP_USER_AGENT']);
 
 $tpl->set_var(array(
 	'TEMPLATE_DIR' 				=>	TEMPLATE_DIR,

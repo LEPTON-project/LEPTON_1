@@ -42,6 +42,15 @@ if (file_exists($temp_path)) {
 	}
 }
 
+ //delete file from account/css
+$temp_path = WB_PATH."/account/css/preferences.css";
+if (file_exists($temp_path)) {
+	$result = unlink ($temp_path);
+	if (false === $result) {
+		echo "Cannot delete file ".$temp_path.". Please check file permissions and ownership or delete file manually.";
+	}
+}
+
 /**
  *  remove old directory account/htt
  */

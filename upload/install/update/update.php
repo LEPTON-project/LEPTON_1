@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2012 LEPTON Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -120,9 +120,9 @@ if (version_compare($lepton_version, "1.2.1", "="))
 /**
  *  reload all addons
  */
-if (file_exists('reload.php')) {
-    include 'reload.php';
-} 
+if (file_exists(dirname(__FILE__).'/reload.php')) {
+    require_once dirname(__FILE__).'/reload.php';
+}
 
 echo "<h3>reload all addons: successfull</h3>";
 
@@ -130,6 +130,26 @@ echo "<h3>reload all addons: successfull</h3>";
  *  success message
  */
 echo "<br /><h3>Congratulation, update procedure complete!</h3><br /><hr /><br />";
+
+/**
+ *  support info
+ */
+?>
+
+<div style="text-align:center;">
+<table style="text-align: left; width: 100%;" border="0" cellspacing="2" cellpadding="2">
+<tbody>
+<tr>
+<td align="center" valign="middle"><h3>Please consider a donation to support LEPTON.<br /> <br /></h3></td>
+</tr>
+<tr>
+<td style="text-align: center;" align="left" valign="middle"><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_s-xclick" /> <input name="hosted_button_id" type="hidden" value="DF6TFNAE7F7DJ" /> <input alt="PayPal &mdash; The safer, easier way to donate online." name="submit" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" type="image" /> <img src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" border="0" alt="" width="1" height="1" /></form></td>
+</tr>
+</tbody>
+</table>
+</div>
+<?php
+echo "<br /><a href='http://www.lepton-cms.org/english/contact.php' target='_blank'><h3>or support LEPTON in another way </h3></a><br /><hr /><br />";
 
 /**
  *  login message

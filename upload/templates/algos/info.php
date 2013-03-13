@@ -4,11 +4,10 @@
  *  @template       Algos Backend-Theme
  *  @version        see info.php of this template
  *  @author         Jurgen Nijhuis, Dietrich Roland Pehlke
- *  @copyright      2009-2012 Jurgen Nijhuis, Dietrich Roland Pehlke
+ *  @copyright      2009-2013 Jurgen Nijhuis, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
- *  @requirements   PHP 5.2.x and higher
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -34,7 +33,7 @@ if (defined('WB_PATH')) {
 $template_directory		= 'algos';
 $template_name				= 'Algos Theme';
 $template_function		= 'theme';
-$template_version			= '1.3.4';
+$template_version			= '1.3.5';
 $template_platform		= '1.x';
 $template_author			= 'Jurgen Nijhuis, Dietrich Roland Pehlke, Bernd Michna (last)';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';

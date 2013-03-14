@@ -433,26 +433,20 @@ class frontend extends wb {
 	 */
 	function print_under_construction() {
 		global $MESSAGE;
-
-		$search_files = array(
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/templates/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/htt/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_TEMPLATE."/under_construction.htt",
-			WB_PATH."/templates/".DEFAULT_THEME."/templates/under_construction.htt"			
+		global $lepton_filemanager;
+		
+		if ((!isset($lepton_filemanager)) ||(!is_object($lepton_filemanager)))
+			require_once( dirname( __FILE__)."/class.lepton.filemanager.php" );
+			
+		$template_file = $lepton_filemanager->resolve_path( 
+			"under_construction.htt",
+			"/templates/".DEFAULT_THEME."/templates/"
 		);
-
-		$template_file = NULL;
-		foreach($search_files as $f) {
-			if (file_exists($f)) {
-				$template_file = &$f;
-				break;
-			}
-		}
 
 		if ($template_file === NULL) {
 			$html = "<p>".$MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION']."\n<br />".$MESSAGE['GENERIC_PLEASE_CHECK_BACK_SOON']."</p>";
 		} else {
-			$html = file_get_contents($template_file);
+			$html = file_get_contents(WB_PATH.$template_file);
 			$values = array(
 				'{TITLE}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],
 				'{UNDER_CONSTRUCTION}' => $MESSAGE['GENERIC_WEBSITE_UNDER_CONSTRUCTION'],

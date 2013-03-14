@@ -47,7 +47,7 @@ if (file_exists($temp_path)) {
  *  remove old directory account/htt
  */
 
-if (file_exists(WB_PATH . '/account/htt/preferences.htt')) {
+if (file_exists(WB_PATH . '/account/htt/preferences_form.htt')) {
       rm_full_dir( WB_PATH.'/account/htt' );
 }
 echo "<h3>delete directory account/htt: successfull</h3>";

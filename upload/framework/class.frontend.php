@@ -591,6 +591,9 @@ class frontend extends wb {
 			case "login.php":
 				$filename = "login_form.css";
 				break;
+			case "signup.php":
+				$filename = "signup_form.css";
+				break;
 			default:
 				$filename = NULL;
 			}

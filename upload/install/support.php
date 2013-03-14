@@ -39,7 +39,7 @@
  *  success message
  */
 echo "<br /><h3>Congratulation, you have successfully installed LEPTON</h3><br />";
-echo "<br /><h3>Please help us to maintain and develop this CMS</h3><br /><hr /><br />";
+echo "<br /><h3>Help us to maintain and develop this CMS</h3><br /><hr /><br />";
 /**
  *  support info
  */

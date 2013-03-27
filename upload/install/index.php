@@ -8,8 +8,8 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker
- * @copyright       2010-2012 LEPTON Project
+ * @copyright       2004-2010 Website Baker
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -121,7 +121,7 @@ function test_pass_length() {
 }
 
 </script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://lepton-cms.org/_packinstall/jquery.min.js"></script>
 <script type="text/javascript" src="http://lepton-cms.org/_packinstall/formtowizard.js"></script>
 <link rel="stylesheet" href="http://lepton-cms.org/_packinstall/formtowizard.css" type="text/css" />
 <script type="text/javascript">
@@ -145,7 +145,7 @@ function test_pass_length() {
 </tr>
 </table>
 <div id="wizzard">
-<form name="website_baker_installation_wizard" id="SignupForm" action="save.php" method="post" onsubmit="return test_pass_length();">
+<form name="lepton_installation_wizard" id="SignupForm" action="save.php" method="post" onsubmit="return test_pass_length();">
 <input type="hidden" name="url" value="" />
 <input type="hidden" name="username_fieldname" value="admin_username" />
 <input type="hidden" name="password_fieldname" value="admin_password" />

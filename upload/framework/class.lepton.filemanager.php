@@ -103,7 +103,6 @@ class lepton_filemanager
 				);
 				break;
 				
-			case 'html':
 			case 'lte':
 			case 'htt':
 				$look_up = array(

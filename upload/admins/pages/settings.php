@@ -438,6 +438,8 @@ foreach($menu AS $number => $name)
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
 
+if (false == PAGE_LANGUAGES) $template->set_var('DISPLAY_LANGUAGE_LIST', 'display:none;');
+
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
 $result = $database->query($sql);
 // M.f.i! drp

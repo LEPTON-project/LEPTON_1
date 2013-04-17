@@ -11,6 +11,8 @@ $().ready(function() {
     mode : "textareas",
     plugins :   "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist,dropleps,pagelink",
 
+	entity_encoding : "{$encoding}",
+
 /* switch between relative and absolute image paths  
  * for relative urls switch convert_url to true 
  * notice: pagelink [wblink3] is not working with relative URLs
@@ -19,7 +21,6 @@ $().ready(function() {
     remove_script_host : true,
     relative_urls : false,    
     document_base_url : "{$LEPTON_URL}",
-
     
 	valid_elements : ""
 +"@[id|class|style|title|dir<ltr?rtl|lang|xml::lang|onclick|ondblclick|"

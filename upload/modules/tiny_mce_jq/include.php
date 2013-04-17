@@ -3,7 +3,7 @@
  *  @module         TinyMCE-jQ
  *  @version        see info.php of this module
  *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2010-2011 erpe, Dietrich Roland Pehlke (Aldus)
+ *  @copyright      2010-2013 erpe, Dietrich Roland Pehlke (Aldus)
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
@@ -32,8 +32,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
-
 
 global $id_list;
 global $database;

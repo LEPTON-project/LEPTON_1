@@ -94,7 +94,9 @@ $_SESSION['wb_apf_hash'] = $hash;
 ob_start();
 	call_captcha();
 	$captcha = ob_get_clean();
-	
+
+$submitted_when = time();
+
 $tpl->set_var(array(
 	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
 	'WB_URL'		=>	WB_URL,
@@ -110,9 +112,11 @@ $tpl->set_var(array(
 	'TEXT_LOGIN'		=>	$MENU['LOGIN'],
 	'TEXT_RESET'		=>	$TEXT['RESET'],
 	'HASH'				=>	$hash, 
-	'TEXT_VERIFICATION' => $TEXT['VERIFICATION']
+	'TEXT_VERIFICATION' => $TEXT['VERIFICATION'],
+	'submitted_when'	=> $submitted_when
 	)
 );
+$_SESSION['submitted_when'] = $submitted_when;
 
 unset($_SESSION['result_message']);
 

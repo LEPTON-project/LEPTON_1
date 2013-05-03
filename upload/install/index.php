@@ -39,7 +39,7 @@ if(!defined('SESSION_STARTED')) {
 
 // Function to highlight input fields which contain wrong/missing data
 function field_error($field_name='') {
-	if(!defined('SESSION_STARTED') || $field_name == '') return;
+	if(!defined('SESSION_STARTED') || $field_name == '') return "";
 	if(isset($_SESSION['ERROR_FIELD']) && $_SESSION['ERROR_FIELD'] == $field_name) {
 		return ' class="wrong"';
 	}
@@ -155,10 +155,9 @@ function test_pass_length() {
 <script type="text/javascript" src="http://lepton-cms.org/_packinstall/formtowizard.js"></script>
 <link rel="stylesheet" href="http://lepton-cms.org/_packinstall/formtowizard.css" type="text/css" />
 <script type="text/javascript">
-
-        $(document).ready(function(){
-            $("#SignupForm").formToWizard({ submitButton: 'SaveAccount' })
-        });
+	$(document).ready(function(){
+		$("#SignupForm").formToWizard({ submitButton: 'SaveAccount' })
+	});
 </script>
 </head>
 <body>
@@ -509,12 +508,12 @@ ksort($DEFAULT_LANGUAGE);
 			<td colspan="5"><h1>Please enter your Administrator account details below...</h1></td>
 		</tr>
 		<tr>
-			<td style="color: #666666;width:15%;">Username: (min. 3 chars)</td>
+			<td style="color: #666666;width:15%;">Username: (min. <?php echo AUTH_MIN_LOGIN_LENGTH; ?> chars)</td>
 			<td style="width:30%;">
 				<input <?php echo field_error('admin_username');?> onblur="test_user_length();" type="text" tabindex="14" name="admin_username" id="admin_username" style="width: 90%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
 			</td>
 			<td style="width:3%;">&nbsp;</td>
-			<td style="color: #666666;width:15%;">Password: (min. 6 chars!)</td>
+			<td style="color: #666666;width:15%;">Password: (min. <?php echo AUTH_MIN_PASS_LENGTH; ?> chars!)</td>
 			<td style="width:30%;">
 				<input <?php echo field_error('admin_password');?> onblur="test_pass_length();" type="password" tabindex="16" name="admin_password" id="admin_password" style="width: 90%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
 			</td>

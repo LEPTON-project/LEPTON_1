@@ -118,33 +118,35 @@ function change_os(type) {
 }
 
 function test_user_length() {
- var ref = document.getElementById("admin_username");
- if (ref) {
-    if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
-   return true;
-  } else {
-   alert("Sorry - the username has to be between "+AUTH_MAX_LOGIN_LENGTH+" and "+AUTH_MIN_LOGIN_LENGTH+"  chars!");
-   ref.focus();
-   return false;
-  }
- } else { alert("call");
-  return false;
- }
+	var ref = document.getElementById("admin_username");
+	if (ref) {
+		if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
+			return true;
+		} else {
+			alert("Sorry - the username has to be between "+AUTH_MAX_LOGIN_LENGTH+" and "+AUTH_MIN_LOGIN_LENGTH+"  chars!");
+			ref.focus();
+			return false;
+		}
+ 	} else {
+ 		alert("Error: ref not found!");
+		return false;
+	}
 }
 
 function test_pass_length() {
- var ref = document.getElementById("admin_password");
- if (ref) {
-    if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
-   return true;
-  } else {
-   alert("Sorry - the password has to be between "+AUTH_MAX_PASS_LENGTH+" and "+AUTH_MIN_PASS_LENGTH+" chars!");
-   ref.focus();
-   return false;
-  }
- } else { alert("call");
-  return false;
- }
+	var ref = document.getElementById("admin_password");
+	if (ref) {
+		if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
+			return true;
+		} else {
+			alert("Sorry - the password has to be between "+AUTH_MAX_PASS_LENGTH+" and "+AUTH_MIN_PASS_LENGTH+" chars!");
+			ref.focus();
+			return false;
+		}
+	} else {
+		alert("Error: ref not found!");
+  		return false;
+	}
 }
 
 </script>

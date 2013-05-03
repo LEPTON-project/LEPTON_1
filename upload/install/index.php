@@ -16,11 +16,19 @@
  *
  */
 
+if (!defined("WB_PATH")) define('WB_PATH', dirname(__FILE__).'/..');
+
+// define error level
+require_once(dirname(__FILE__).'/../admins/interface/er_levels.php'); 
+ 
 // check wether to call update.php or start installation
 if (file_exists('../config.php')) {
     include 'update/update.php';
     die();
 }
+
+// get max and min length of pw and usernames
+require_once(dirname(__FILE__).'/../framework/sys.constants.php');
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
@@ -90,6 +98,10 @@ if (substr(php_uname('s'), 0, 7) == "Windows") {
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link href="http://lepton-cms.org/_packinstall/style.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
+var AUTH_MAX_LOGIN_LENGTH = <?php echo AUTH_MAX_LOGIN_LENGTH; ?>;
+var AUTH_MIN_LOGIN_LENGTH = <?php echo AUTH_MIN_LOGIN_LENGTH; ?>;
+var AUTH_MAX_PASS_LENGTH = <?php echo AUTH_MAX_PASS_LENGTH; ?>;
+var AUTH_MIN_PASS_LENGTH = <?php echo AUTH_MIN_PASS_LENGTH; ?>;
 function confirm_link(message, url) {
 	if(confirm(message)) location.href = url;
 }
@@ -105,24 +117,40 @@ function change_os(type) {
 	}
 }
 
+function test_user_length() {
+ var ref = document.getElementById("admin_username");
+ if (ref) {
+    if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
+   return true;
+  } else {
+   alert("Sorry - the username has to be between "+AUTH_MAX_LOGIN_LENGTH+" and "+AUTH_MIN_LOGIN_LENGTH+"  chars!");
+   ref.focus();
+   return false;
+  }
+ } else { alert("call");
+  return false;
+ }
+}
+
 function test_pass_length() {
-	var ref = document.getElementById("admin_password");
-	if (ref) {
-		if (ref.value.length < 6) {
-			alert("Sorry - the password has have to contain min. 6 chars!");
-			ref.focus();
-			return false;
-		} else {
-			return true;
-		}
-	} else { alert("call");
-		return false;
-	}
+ var ref = document.getElementById("admin_password");
+ if (ref) {
+    if ( (ref.value.length < AUTH_MAX_LOGIN_LENGTH ) && (ref.value.length > AUTH_MIN_LOGIN_LENGTH ) ) {    
+   return true;
+  } else {
+   alert("Sorry - the password has to be between "+AUTH_MAX_PASS_LENGTH+" and "+AUTH_MIN_PASS_LENGTH+" chars!");
+   ref.focus();
+   return false;
+  }
+ } else { alert("call");
+  return false;
+ }
 }
 
 </script>
 <script type="text/javascript" src="https://raw.github.com/LEPTON-project/LEPTON_2/master/upload/modules/lib_jquery/jquery-core/jquery-core.min.js"></script>
 <script type="text/javascript" src="https://raw.github.com/LEPTON-project/LEPTON_2/master/upload/modules/lib_jquery/jquery-core/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="http://lepton-cms.org/_packinstall/formtowizard.js"></script>
 <link rel="stylesheet" href="http://lepton-cms.org/_packinstall/formtowizard.css" type="text/css" />
 <script type="text/javascript">
 
@@ -481,7 +509,7 @@ ksort($DEFAULT_LANGUAGE);
 		<tr>
 			<td style="color: #666666;width:15%;">Username: (min. 3 chars)</td>
 			<td style="width:30%;">
-				<input <?php echo field_error('admin_username');?> type="text" tabindex="14" name="admin_username" style="width: 90%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
+				<input <?php echo field_error('admin_username');?> onblur="test_user_length();" type="text" tabindex="14" name="admin_username" id="admin_username" style="width: 90%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
 			</td>
 			<td style="width:3%;">&nbsp;</td>
 			<td style="color: #666666;width:15%;">Password: (min. 6 chars!)</td>

@@ -8,12 +8,12 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
- * @copyright       2010-2011, LEPTON Project
+ * @copyright       2004-2010 Website Baker Project
+ * @copyright       2010-2013 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: signup2.php 1172 2011-10-04 15:26:26Z frankh $
+ *
  *
  */
 
@@ -80,7 +80,7 @@ if(ENABLED_CAPTCHA) {
 }
 if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
-// Generate a random password then update the database with it
+// Generate a random password then update database
 $new_pass = '';
 $salt = "abchefghjkmnpqrstuvwxyz0123456789";
 srand((double)microtime()*1000000);
@@ -99,7 +99,7 @@ if($results->numRows() > 0) {
 	print_error(6);
 }
 
-// Check if the email already exists
+// Check if email already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($email)."'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS_EMAIL_TAKEN'])) {
@@ -112,7 +112,7 @@ if($results->numRows() > 0) {
 // MD5 supplied password
 $md5_password = md5($new_pass);
 
-// Inser the user into the database
+// Insert new user into the database
 $query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$email')";
 $database->query($query);
 

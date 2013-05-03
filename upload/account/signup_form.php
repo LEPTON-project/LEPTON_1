@@ -97,12 +97,8 @@ ob_start();
 
 $submitted_when = time();
 
-$tpl->set_var(array(
-	'TEMPLATE_DIR'	=>	TEMPLATE_DIR,
-	'WB_URL'		=>	WB_URL,
-	'SIGNUP_URL'	=>	SIGNUP_URL,
-	'LOGOUT_URL'	=>	LOGOUT_URL,
-	'FORGOT_URL'	=>	FORGOT_URL,  
+$tpl->set_var(array(  
+	'SIGNUP_URL'	=>	SIGNUP_URL,  
 	'TEXT_SIGNUP'	=>	$TEXT['SIGNUP'],
 	'TEXT_USERNAME'		=>	$TEXT['USERNAME'],
 	'TEXT_DISPLAY_NAME'	=>	$TEXT['DISPLAY_NAME'],

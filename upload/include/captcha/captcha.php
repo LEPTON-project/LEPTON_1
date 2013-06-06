@@ -58,14 +58,25 @@ if(!function_exists('display_captcha_real')) {
 
 // called from an <iframe>
 if(isset($_GET['display_captcha_X986E21'])) {
+
+	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">';
+	//note, this is set to utf-8 on purpose, because this file is truely utf-8 coded.
+	echo '<head><meta http-equiv="content-type" content="text/html; charset=utf-8" /><title>Captcha</title></head>
+	<body>';
+   
 	switch(CAPTCHA_TYPE) {
-	case 'calc_image':
-	case 'calc_ttf_image':
-	case 'ttf_image':
-	case 'old_image':
-		display_captcha_real('image');
-		break;
+		case 'calc_image':
+		case 'calc_ttf_image':
+		case 'ttf_image':
+		case 'old_image':
+			display_captcha_real('image');
+			break;
 	}
+
+	echo '</body>
+	</html>';
+
 	exit(0);
 }
 

@@ -10,7 +10,14 @@
  
 include_once('../../../../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
-require_once(WB_PATH.'/framework/class.login.php');
+
+if (file_exists(ADMIN_PATH . '/login/class.login.php')) {
+    require_once (ADMIN_PATH . '/login/class.login.php');
+}
+else {
+      require_once(WB_PATH.'/framework/class.login.php');
+}
+
 
 	class Auth
 	{

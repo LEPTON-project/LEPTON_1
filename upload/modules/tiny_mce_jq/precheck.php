@@ -41,8 +41,8 @@ else
 // Checking Requirements
 
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '1.0',
-    'OPERATOR' => '>='
+    'VERSION' => '2.0',
+    'OPERATOR' => '<'
 );
 
 $PRECHECK['WB_ADDONS']      = array(

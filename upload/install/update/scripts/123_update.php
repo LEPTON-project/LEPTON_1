@@ -47,9 +47,10 @@ if (file_exists($temp_path)) {
  *
  */
 $upgrade_modules = array(
-    "lib_jquery", 
+    "lib_jquery",
     "news",
-    "phpmailer",                       
+    "phpmailer",
+    "show_menu2",
     "tiny_mce_jq"
 );
 

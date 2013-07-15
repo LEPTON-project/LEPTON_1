@@ -33,8 +33,8 @@ if (file_exists($temp_path)) {
 	}
 }
 
- //delete file from phpmailer
-$temp_path = WB_PATH."/modules/phpmailer/README";
+ //delete file from admins/media
+$temp_path = ADMIN_PATH."/media/readme.de.txt";
 if (file_exists($temp_path)) {
 	$result = unlink ($temp_path);
 	if (false === $result) {

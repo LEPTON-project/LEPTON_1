@@ -8,7 +8,6 @@
  * @link            http://www.LEPTON-cms.org
  * @license         copyright, all rights reserved
  * @license_terms   please see info.php of this module
- * @version         $Id: info.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -36,7 +35,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.1.3';
+$module_version		= '0.1.4';
 $module_platform	= '1.0';
 $module_author		= 'Ralf Hertsch, Dietrich Roland Pehlke';
 $module_license		= 'copyright, all rights reserved';
@@ -46,7 +45,9 @@ $module_guid		= "237D63F7-4199-48C7-89B2-DF8E2D8AEE5F";
 
 /**
  *
- *	0.1.3	2011-02-09	- Bugfix inside c_init_page for default param 3 in method update_user.
+ *	0.1.4	Bugfix: missing backtick in SQL query causes an error at startup of the backend tool
+ *
+ *	0.1.3	Bugfix inside c_init_page for default param 3 in method update_user.
  *						- Add german language file within some translations.
  *
  */

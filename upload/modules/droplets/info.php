@@ -10,10 +10,6 @@
  * @link			      http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.4.9 and higher
- * @version         $Id$
- * @filesource		  $HeadURL$
- * @lastmodified    $Date$
  *
  */
 
@@ -32,6 +28,8 @@ $module_guid = '9F2AC2DF-C3E1-4E15-BA4C-2A86E37FE6E5';
 /**
  * Version history
  *
+ *	1.5.4	2013-11-22	added missing content return at evalDroplets()
+ * 
  *	1.5.3	2012-11-14	remove return in evalDroplets as the content is passed by reference.
  *
  * v1.51 - Bianka Martinovic ("WebBird")

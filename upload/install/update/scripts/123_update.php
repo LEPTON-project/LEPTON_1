@@ -60,6 +60,7 @@ $upgrade_modules = array(
     "news",
     "phpmailer",
     "show_menu2",
+    "droplets",    
     "tiny_mce_jq"
 );
 

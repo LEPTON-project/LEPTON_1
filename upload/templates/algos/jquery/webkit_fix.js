@@ -7,30 +7,10 @@
  *  @license terms  see info.php of this template
  *  @platform       LEPTON, see info.php of this template
  *  @requirements   PHP 5.2.x and higher
+ *  @todo            WebKit is no longer supported at jQuery 1.9 - Forms should be changed to HTML5!
  */
 
 jQuery(document).ready(function()
 {
-	if ( $.browser.webkit || $.browser.safari )
-	{
-		$('input[type=text]').eq(0).focus();
-		var _interval = window.setInterval(function ()
-		{
-			var autofills = $('input:-webkit-autofill');
-			if (autofills.length > 0)
-			{
-				window.clearInterval(_interval); // stop polling
-				autofills.each(function()
-				{
-					var clone = $(this).clone(true, true);
-					$(this).after(clone).remove();
-				});
-				$('input[type=text]').eq(0).focus();
-			}
-		}, 200);
-	}
-	else
-	{
-		$('input[type=text]').eq(0).focus();
-	}
+    $('input[type=text]').eq(0).focus();
 });

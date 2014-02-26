@@ -143,7 +143,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 		} 
 		else { 
 			/**
-			 *	Try to et all wysiwyg sections... on the page...
+			 *	Try to get all wysiwyg sections on the page ...
 			 *	Keep in Mind that there could be also a wysiwyg inside an admin-tool!
 			 */
 			$elements = "";
@@ -184,7 +184,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 		$use_toolbar_set = 0;
 				
 		if (true === file_exists($path)) {
-		  require_once($path);
+			require_once($path);
 			$query = "SELECT `menu`,`skin`,`height`,`width` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_jq'";
 			$result= $database->query( $query );
 			if (!$result) die ("Error: ".$database->get_error() );

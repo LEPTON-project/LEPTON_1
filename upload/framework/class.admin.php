@@ -60,12 +60,12 @@ class admin extends wb {
 	);
 	
 	/**
-	 *
+	 *	Private storage for HTML stuff
 	 */
 	private $html_output_storage = "";
 	
 	/**
-	 *
+	 *	Private boolean for droplets-support in the backend.
 	 *
 	 */
 	private $droplets_ok = false;

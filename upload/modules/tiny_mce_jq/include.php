@@ -115,7 +115,7 @@ function get_template_name( &$css_path = "") {
  * @param STR $content	The content to edit.
  * @param INT $width	The width of the editor, not overwritten by wysiwyg-admin.
  * @param INT $height	The height of the editor, not overwritten by wysiwyg-admin.
- * @param BOOL $prompt	Direct output to the client via echo (true) or returnd as HTML-textarea (false)?
+ * @param BOOL $prompt	Direct output to the client via echo (true) or returnd as HTML-textarea (false)? Must be a boolean!
  * @return MIXED		Could be a BOOL or STR (textarea-tags).
  *
  */
@@ -254,22 +254,40 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 	);
 	
 	$result = $parser->get(WB_PATH.'/modules/tiny_mce_jq/htt/textarea.htt', $data);
-	if ($prompt) {
+	if (true === $prompt) {
 		echo $result;
 		return true;
 	}
 	return $result;
 } // show_wysiwyg_editor()
 
+/**
+ *	Keep in mind that this class is only for LEPTON 1.x as for LEPTON 2.x we're using Twig!
+ *	This class "fakes" the Dwoo (-engine) way of handling templates.
+ *	Please keep also in mind that this modul is only for the LEPTON 1.x series; for the
+ *	LEPTON 2.x series there is a recoded one at all!
+ *
+ */
 class c_tiny_mce_parser
 {
 	public $width = '100%';
 	public $height = '250px';
 	
+	/**
+	 *	Standard constructor of the class
+	 */
 	public function __construct() {
 	
 	}
 	
+	/**
+	 *	Public function for the 'output' - "fakes" the Dwoo-Way of handling templates.
+	 *	
+	 *	@param	string	A complete path to a given template. 
+	 *	@param	array	An two dimensional array within the given data
+	 *	@return	string	Parsed template string.
+	 *
+	 */
 	public function get( $aTemplatePath, &$data) {
 		$result = file_get_contents($aTemplatePath);
 		

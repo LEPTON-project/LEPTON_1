@@ -41,11 +41,22 @@ if (!isset($admin) || !is_object($admin)) die();
 $lang = dirname(__FILE__)."/languages/".LANGUAGE.".php";
 include( file_exists($lang) ? $lang : dirname(__FILE__)."/languages/EN.php" );
 
-require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+/**
+ *	New way to get information about the used editor.
+ */
+if (!defined("LEPTON_PATH") ) define("LEPTON_PATH", WB_PATH);
 
-if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();
+$look_up = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
+if (file_exists($look_up)) {
+	require_once( $look_up );
+	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new editorinfo();
 
-$editor_info = $editor_ref->info('all');
+} else {
+
+	// Backwards compatible to 0.2.x
+	require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
+	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();
+}
 
 $table = TABLE_PREFIX."mod_wysiwyg_admin";
 
@@ -83,7 +94,18 @@ if (isset($_POST['job'])) {
 
 $query = "SELECT `id`,`skin`,`menu`,`height`,`width` from `".$table."` where `editor`='".WYSIWYG_EDITOR."'limit 0,1";
 $result = $database->query ($query );
-$data = $result->fetchRow( MYSQL_ASSOC );
+if ($result->numRows() == 1) {
+	$data = $result->fetchRow( MYSQL_ASSOC );
+} else {
+	$database->query("INSERT into ".$table." (editor, skin, menu, width, height) values ('".WYSIWYG_EDITOR."','','', '100%', '250px')");
+	$data = array(
+		'id'	=> mysql_insert_id(),
+		'skin' => '',
+		'menu' => '',
+		'width' => '100%',
+		'height' => '250px'
+	);
+}
 
 $primes = array(
 	'176053', '176063', '176081', '176087', '176089', '176123', '176129', '176153', '176159',

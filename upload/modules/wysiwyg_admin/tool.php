@@ -68,9 +68,16 @@ if (isset($_POST['job'])) {
 	if ($_POST['job']=="save") {
 		if (isset($_SESSION['wysiwyg_admin']) && $_POST['salt'] === $_SESSION['wysiwyg_admin']) {
 			
-			unset($_SESSION['wysiwyg_admin']);
-			
-			$_POST = array_map("mysql_real_escape_string",$_POST);
+			/**
+			 *	Keep in Mind, that we can use a LEPTON-CMS 1.3.x under PHP 5.4.10 at all.
+			 *	Since 1.3.0 we're using PDO inside class.database!
+			 *	Keep also in mind, that using PDO we're not in the need to escape the mysql-queries.
+			 *	(Since PHP 5.5.x 'mysql_real_escape_string' is deprecated!)
+			 *
+			 */
+			if (false == $database->db_handle instanceof PDO ) {
+				$_POST = array_map("mysql_real_escape_string",$_POST);
+			}
 			
 			/**
 			 *	Time?

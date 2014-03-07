@@ -1143,7 +1143,6 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 	function load_module($directory, $install = false)
 	{
 		global $database, $admin, $MESSAGE ;
-
 		if(is_dir($directory) && file_exists($directory."/info.php"))
 		{
 			global $module_name , $module_license , $module_author , $module_directory,
@@ -1158,36 +1157,36 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 			if(isset($module_name))
 			{
 				
-				$module_function = strtolower($module_function);
-				
 				// Check that it doesn't already exist
-				$sqlwhere = "WHERE `type` = 'module' AND `directory` = '".$module_directory."'";
-				$sql  = "SELECT COUNT(*) FROM `".TABLE_PREFIX."addons` ".$sqlwhere;
-				if( $database->get_one($sql) ) {
-					$sql  = "UPDATE `".TABLE_PREFIX."addons` SET ";
-				} else {
-					$sql  = "INSERT INTO `".TABLE_PREFIX."addons` SET ";
-					$sqlwhere = '';
-				}
+				$sqlwhere = "`type` = 'module' AND `directory` = '".$module_directory."'";
+				$sql  = "SELECT COUNT(*) FROM `".TABLE_PREFIX."addons` WHERE ".$sqlwhere;
+
+				$job = $database->get_one($sql) ? "UPDATE" : "INSERT" ;
 				
-				$sql .= "`directory` = '".$module_directory."',";
-				$sql .= "`name` = '".$module_name."',";
-				$sql .= "`description`= '".$module_description."',";
-				$sql .= "`type`= 'module',";
-				$sql .= "`function` = '".(strtolower($module_function))."',";
-				$sql .= "`version` = '".$module_version."',";
-				$sql .= "`platform` = '".$module_platform."',";
-				$sql .= "`author` = '".$module_author."',";
-				$sql .= "`license` = '".$module_license."'";
-				if ( isset( $module_guid ) ) {
-				    $sql .= ", `guid` = '".$module_guid."'";
-        }
-				$sql .= $sqlwhere;
-				
-				$database->query($sql);
-				
+				$fields = array(
+					"directory"	=> $module_directory,
+					"name"		=> $module_name,
+					"description"	=> $module_description,
+					"type"		=> 'module',
+					"function"	=> strtolower($module_function),
+					"version"	=> $module_version,
+					"platform"	=> $module_platform,
+					"author"	=> $module_author,
+					"license"	=> $module_license,
+					"guid"		=> ( isset( $module_guid ) ? $module_guid : "" )
+				);
+
+				$database->query(
+					$database->build_mysql_query(
+						$job,
+						TABLE_PREFIX."addons",
+						array_map( "addslashes", $fields ),
+						$sqlwhere
+					)
+				);
+
 				if($database->is_error()) $admin->print_error( $database->get_error() );
-				
+
 				/**
 				 *	Run installation script
 				 *
@@ -1220,37 +1219,36 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 			global $template_license, $template_directory, $template_author, $template_version,
 			$template_function, $template_description, $template_platform, $template_name, $template_guid;
 				
-				// Check that it doesn't already exist
-				$sqlwhere = "WHERE `type` = 'template' AND `directory` = '".$template_directory."'";
-				$sql  = "SELECT COUNT(*) FROM `".TABLE_PREFIX."addons` ".$sqlwhere;
-				if( $database->get_one($sql) ) {
-					$sql  = "UPDATE `".TABLE_PREFIX."addons` SET ";
-				} else {
-					$sql  = "INSERT INTO `".TABLE_PREFIX."addons` SET ";
-					$sqlwhere = "";
-				}
-				$sql .= "`directory` = '".$template_directory."',";
-				$sql .= "`name` = '".$template_name."',";
-				$sql .= "`description`= '".$template_description."',";
-				$sql .= "`type`= 'template',";
-				$sql .= "`function` = '".$template_function."',";
-				$sql .= "`version` = '".$template_version."',";
-				$sql .= "`platform` = '".$template_platform."',";
-				$sql .= "`author` = '".$template_author.'\', ';
-				$sql .= "`license` = '".$template_license."', ";
-				if (isset($template_guid)) {
-				    $sql .= "`guid` = '".$template_guid."' ";
-				}
-				else {
-				    $sql .= "`guid` = '' ";
-				}
-				$sql .= $sqlwhere;
-				
-				$database->query($sql);
-				
-				if($database->is_error()) $admin->print_error( $database->get_error() );
-
-			}
+			// Check that it doesn't already exist
+			$sqlwhere = "`type` = 'template' AND `directory` = '".$template_directory."'";
+			$sql  = "SELECT COUNT(*) FROM `".TABLE_PREFIX."addons` WHERE ".$sqlwhere;
+			
+			$job = $database->get_one($sql) ? "UPDATE" : "INSERT";
+			
+			$fields = array(
+				"directory" => $template_directory,
+				"name" 		=> $template_name,
+				"description" => $template_description,
+				"type"		=>'template',
+				"function"	=> strtolower($template_function),
+				"version"	=> $template_version,
+				"platform"	=> $template_platform,
+				"author"	=> $template_author,
+				"license"	=> $template_license,
+				"guid"		=> ( isset( $template_guid ) ? $template_guid : "" )
+			);
+			
+			$database->query(
+				$database->build_mysql_query(
+					$job,
+					TABLE_PREFIX."addons",
+					array_map( "addslashes", $fields ),
+					$sqlwhere
+				)
+			);
+			
+			if($database->is_error()) $admin->print_error( $database->get_error() );
+		}
 	}
 	
 	/**
@@ -1273,32 +1271,37 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 					(!isset($language_guid))
 					)
 				{
-				  $admin->print_error( $MESSAGE["LANG_MISSING_PARTS_NOTICE"], $language_name );
+					$admin->print_error( $MESSAGE["LANG_MISSING_PARTS_NOTICE"], $language_name );
 				}
 				
 				// Check that it doesn't already exist
 				$sqlwhere = 'WHERE `type` = \'language\' AND `directory` = \''.$language_code.'\'';
 				$sql  = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'addons` '.$sqlwhere;
-				if( $database->get_one($sql) ) {
-					$sql  = 'UPDATE `'.TABLE_PREFIX.'addons` SET ';
-				} else {
-					$sql  = 'INSERT INTO `'.TABLE_PREFIX.'addons` SET ';
-					$sqlwhere = '';
-				}
-				$sql .= '`directory` = \''.$language_code.'\', ';
-				$sql .= '`name` = \''.$language_name.'\', ';
-				$sql .= '`type`= \'language\', ';
-				$sql .= '`version` = \''.$language_version.'\', ';
-				$sql .= '`platform` = \''.$language_platform.'\', ';
-				$sql .= '`author` = \''.addslashes($language_author).'\', ';
-				$sql .= '`license` = \''.addslashes($language_license).'\', ';
-				$sql .= '`guid` = \''.$language_guid.'\', ';
-				$sql .= '`description` = \'\'  ';
-				$sql .= $sqlwhere;
-				$database->query($sql);
+
+				$job = ( $database->get_one($sql)  ? "UPDATE" : "INSERT" );
+
+				$fields = array(
+					"directory"	=> $language_code,
+					"name" 		=> $language_name,
+					"type"		=> "language",
+					"version" 	=> $language_version,
+					"platform" 	=> $language_platform,
+					"author" 	=> $language_author,
+					"license" 	=> $language_license,
+					"guid" 		=> $language_guid,
+					"description" => ""
+				);
+
+				$database->query(
+					$database->build_mysql_query(
+						$job,
+						TABLE_PREFIX."addons",
+						array_map( "addslashes", $fields ),
+						$sqlwhere
+					)
+				);
 				
 				if($database->is_error()) $admin->print_error( $database->get_error() );
-
 			}
 		}
 	}
@@ -1316,26 +1319,32 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 	
 		global $database, $admin, $MESSAGE;
 		global $module_license, $module_author  , $module_name, $module_directory,
-           $module_version, $module_function, $module_guid, $module_description,
-           $module_platform;
+			$module_version, $module_function, $module_guid, $module_description,
+			$module_platform;
 
-    $fields = array(
-				'version'	    => $module_version,
-				'description' => ($module_description),
-				'platform'	  => $module_platform,
-				'author'	    => ($module_author),
-				'license'	    => ($module_license),
-				'guid'		    => ($module_guid)
-			);
+		$fields = array(
+			'version'	=> $module_version,
+			'description' => $module_description,
+			'platform'	=> $module_platform,
+			'author'	=> $module_author,
+			'license'	=> $module_license,
+			'guid'		=> $module_guid
+		);
 
-			$sql  = 'UPDATE `'.TABLE_PREFIX.'addons` SET ';
-			foreach($fields as $key=>$value) $sql .= "`".$key."`='".$value."',";
-			$sql = substr($sql, 0, -1)." WHERE `directory`= '".$module_directory."'";
+		$database->query(
+			$database->build_mysql_query(
+				'UPDATE',
+				TABLE_PREFIX.'addons',
+				array_map('addslashes', $fields),
+				"`directory`= '".$module_directory."'"
+			)
+		);
 
-			$database->query($sql);
+		if($database->is_error()) $admin->print_error( $database->get_error() );
 
-			if($database->is_error()) $admin->print_error( $database->get_error() );
-			
+		if($upgrade == true) {
+			if(file_exists($directory.'/upgrade.php')) require($directory.'/upgrade.php');
+		}
 	}	// end of function 'upgrade_module'
 
 	// extracts the content of a string variable from a string (save alternative to including files)

@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2013 LEPTON Project
+ * @copyright       2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -18,7 +18,7 @@
  ini_set('display_errors', 1);
  error_reporting(E_ALL|E_STRICT);
 
-echo '<h3>Current process : updating to LEPTON 1.2.4</h3>';
+echo '<h3>Current process : updating to LEPTON 1.3.0</h3>';
 
 /**
  *  modifications
@@ -45,11 +45,11 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
 
 
 // at last: set db to current release-no
-$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.2.4\' WHERE `name` =\'lepton_version\'');
+$database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.3.0\' WHERE `name` =\'lepton_version\'');
 
 /**
  *  success message
  */
-echo "<h3>update to LEPTON 1.2.4 successfull!</h3><br /><hr /><br />";
+echo "<h3>update to LEPTON 1.3.0 successfull!</h3><br /><hr /><br />";
 
 ?>

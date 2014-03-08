@@ -8,7 +8,7 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          LEPTON Project
- * @copyright       2010-2013 LEPTON Project
+ * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
@@ -135,7 +135,7 @@ $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "s
 if (version_compare($lepton_version, "1.2.3", "="))
 {
     echo("<h3>Your LEPTON Version :$lepton_version </h3>");
-    include 'scripts/124_update.php';
+    include 'scripts/130_update.php';
 }
 
 /**

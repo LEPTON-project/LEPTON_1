@@ -98,20 +98,46 @@ $result = $database->query ($query );
 if ($result->numRows() == 1) {
 	$data = $result->fetchRow( MYSQL_ASSOC );
 } else {
-	$database->query("INSERT into ".$table." (editor, skin, menu, width, height) values ('".WYSIWYG_EDITOR."','','', '100%', '250px')");
+
+	$lookup = WB_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
+	if (file_exists($lookup)) {
 	
-	$last_insert_id = (true === $database->db_handle instanceof PDO )
-		? $database->db_handle->lastInsertId()
-		: $database->getOne("SELECT LAST_INSERT_ID()")
-		;
+		require_once( $lookup );
+		$editor_info = new editorinfo();
+		$editor_info->wysiwyg_admin_init( $database );
+		
+		$last_insert_id = (true === $database->db_handle instanceof PDO )
+			? $database->db_handle->lastInsertId()
+			: $database->getOne("SELECT LAST_INSERT_ID()")
+			;
+		
+		$toolbars = array_keys( $editor_info->toolbars );
+		
+		$data = array(
+			'id'	=> $last_insert_id,
+			'skin' => $editor_info->skins[0],
+			'menu' => $toolbars[0],
+			'width' => $editor_info->default_width,
+			'height' => $editor_info->default_height
+		);
+
+	} else {
+		// no editor-info avaible - so we have to use empty values
+		$database->query("INSERT into ".$table." (editor, skin, menu, width, height) values ('".WYSIWYG_EDITOR."','','', '100%', '250px')");
 	
-	$data = array(
-		'id'	=> $last_insert_id,
-		'skin' => '',
-		'menu' => '',
-		'width' => '100%',
-		'height' => '250px'
-	);
+		$last_insert_id = (true === $database->db_handle instanceof PDO )
+			? $database->db_handle->lastInsertId()
+			: $database->getOne("SELECT LAST_INSERT_ID()")
+			;
+		
+		$data = array(
+			'id'	=> $last_insert_id,
+			'skin' => '',
+			'menu' => '',
+			'width' => '100%',
+			'height' => '250px'
+		);
+	}
 }
 
 $primes = array(

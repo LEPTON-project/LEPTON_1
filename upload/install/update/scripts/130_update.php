@@ -30,7 +30,8 @@ echo '<h3>Current process : updating to LEPTON 1.3.0</h3>';
  *
  */
 $upgrade_modules = array(
-    "lib_jquery",   
+    "lib_jquery",
+    "wysiwyg_admin",       
     "tiny_mce_jq"
 );
 

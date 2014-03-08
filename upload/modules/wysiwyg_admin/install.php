@@ -70,6 +70,27 @@ foreach($jobs as $query) {
 	if ( $database->is_error() ) $errors[] = $database->get_error();
 }
 
+/**
+ *	Looking for editors
+ *
+ */
+$all = array();
+$database->get_all(
+	"SELECT `directory` from `".TABLE_PREFIX."addons` where `function`='wysiwyg'", 
+	$all
+);
+
+foreach($all as $ref) {
+	$lookup = dirname(__FILE__)."/../".$ref['directory']."/class.editorinfo.php";
+	if (file_exists($lookup)) {
+		require_once($lookup);
+		$editor_info = new editorinfo();
+		$editor_info->wysiwyg_admin_init( $database );
+			
+		unset( $editor_info );
+	}
+}
+
 /** 
  *	Any errors to display?
  *

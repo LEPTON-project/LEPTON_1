@@ -1176,11 +1176,13 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 					"guid"		=> ( isset( $module_guid ) ? $module_guid : "" )
 				);
 
+				$fields = array_map( "addslashes", $fields );
+				
 				$database->query(
 					$database->build_mysql_query(
 						$job,
 						TABLE_PREFIX."addons",
-						array_map( "addslashes", $fields ),
+						$fields,
 						$sqlwhere
 					)
 				);
@@ -1238,11 +1240,13 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 				"guid"		=> ( isset( $template_guid ) ? $template_guid : "" )
 			);
 			
+			$fields = array_map( "addslashes", $fields );
+			
 			$database->query(
 				$database->build_mysql_query(
 					$job,
 					TABLE_PREFIX."addons",
-					array_map( "addslashes", $fields ),
+					$fields,
 					$sqlwhere
 				)
 			);
@@ -1292,11 +1296,13 @@ if (!defined('FUNCTIONS_FILE_LOADED')) {
 					"description" => ""
 				);
 
+				$fields = array_map( "addslashes", $fields );
+				
 				$database->query(
 					$database->build_mysql_query(
 						$job,
 						TABLE_PREFIX."addons",
-						array_map( "addslashes", $fields ),
+						$fields,
 						$sqlwhere
 					)
 				);

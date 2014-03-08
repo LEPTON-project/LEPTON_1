@@ -129,7 +129,7 @@ if (version_compare($lepton_version, "1.2.2", "="))
 }
 
 /**
- *  update LEPTON to 1.2.4 , check release
+ *  update LEPTON to 1.3.0 , check release
  */
 $lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
 if (version_compare($lepton_version, "1.2.3", "="))

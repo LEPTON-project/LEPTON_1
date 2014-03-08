@@ -53,7 +53,7 @@ if (file_exists($look_up)) {
 
 } else {
 	echo "<p><h3 style='color:#FF0000;'>WARNING: use of obsolete drivers!</h3></p>";
-	echo "<p style='color:#FF0000;'>Please place a class.editorinfo.php inside the currend wysiwyg-editor!</p>";
+	echo "<p style='color:#FF0000;'>Please place a class.editorinfo.php inside the current wysiwyg-editor!</p>";
 	// Backwards compatible to 0.2.x
 	require_once( dirname(__FILE__)."/driver/".WYSIWYG_EDITOR."/c_editor.php");
 	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new c_editor();

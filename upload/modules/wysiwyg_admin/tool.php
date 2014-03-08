@@ -68,16 +68,10 @@ if (isset($_POST['job'])) {
 	if ($_POST['job']=="save") {
 		if (isset($_SESSION['wysiwyg_admin']) && $_POST['salt'] === $_SESSION['wysiwyg_admin']) {
 			
-			/**
-			 *	Keep in Mind, that we can use a LEPTON-CMS 1.3.x under PHP 5.4.10 at all.
-			 *	Since 1.3.0 we're using PDO inside class.database!
-			 *	Keep also in mind, that using PDO we're not in the need to escape the mysql-queries.
-			 *	(Since PHP 5.5.x 'mysql_real_escape_string' is deprecated!)
-			 *
-			 */
-			if (false == $database->db_handle instanceof PDO ) {
-				$_POST = array_map("mysql_real_escape_string",$_POST);
-			}
+			$values =  (false == $database->db_handle instanceof PDO )	
+				? array_map("mysql_real_escape_string",$_POST)
+				: array_map("addslashes",$_POST)
+				;
 			
 			/**
 			 *	Time?
@@ -88,10 +82,10 @@ if (isset($_POST['job'])) {
 			if ($test_time <= (60*5)) {
 			
 				$q  = "update `".$table."` set ";
-				$q .= "`skin`='".$_POST['skin']."',";
-				$q .= "`menu`='".$_POST['menu']."',";
-				$q .= "`width`='".$_POST['width']."',";
-				$q .= "`height`='".$_POST['height']."' where id='".$_POST['id']."'";
+				$q .= "`skin`='".$values['skin']."',";
+				$q .= "`menu`='".$values['menu']."',";
+				$q .= "`width`='".$values['width']."',";
+				$q .= "`height`='".$values['height']."' where id='".$values['id']."'";
 		
 				$database->query( $q );
 			}
@@ -105,8 +99,14 @@ if ($result->numRows() == 1) {
 	$data = $result->fetchRow( MYSQL_ASSOC );
 } else {
 	$database->query("INSERT into ".$table." (editor, skin, menu, width, height) values ('".WYSIWYG_EDITOR."','','', '100%', '250px')");
+	
+	$last_insert_id = (true === $database->db_handle instanceof PDO )
+		? $database->db_handle->lastInsertId()
+		: $database->getOne("SELECT LAST_INSERT_ID()")
+		;
+	
 	$data = array(
-		'id'	=> mysql_insert_id(),
+		'id'	=> $last_insert_id,
 		'skin' => '',
 		'menu' => '',
 		'width' => '100%',

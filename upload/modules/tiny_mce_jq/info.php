@@ -36,7 +36,7 @@ if (defined('WB_PATH')) {
 $module_directory     = 'tiny_mce_jq';
 $module_name          = 'TinyMCE-jQ';
 $module_function      = 'WYSIWYG';
-$module_version       = '3.5.10.0';
+$module_version       = '3.5.10.1';
 $module_platform      = '1.x';
 $module_author        = 'erpe, Aldus';
 $module_home          = 'http://lepton-cms.org';
@@ -46,6 +46,8 @@ $module_license_terms  = '-';
 $module_description   = 'TinyMCE 3.5.10 - build date:(2013-10-24)<br>with Ajax Image File Manager and image editor<BR> allows you to edit the content of a page and see media image folder.<BR>To link your template css file to the styles in tinymce you need to edit the <b>include.php</b> file inside this module.';
 
 /**
+ *	3.5.10.1	2014-03-08	- Update for WYSIWYG-ADMIN 1.0.2 and L* 1.3.0
+ *	
  *	3.5.10.0	2013-10-24	- Update to tiny_mce 3.5.10.
  *
  *	3.5.9.0	2013-10-10	- Update to tiny_mce 3.5.9.

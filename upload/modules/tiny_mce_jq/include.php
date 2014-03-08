@@ -179,6 +179,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 			:	WB_URL .'/templates/' .$template_name .$temp_css_path;
 		
 		$path = WB_PATH."/modules/wysiwyg_admin/driver/tiny_mce_jq/c_editor.php";
+		$path = dirname(__FILE__)."/class.editorinfo.php";
 		
 		$toolbar_set = array();
 		$use_toolbar_set = 0;
@@ -188,9 +189,11 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 			$query = "SELECT `menu`,`skin`,`height`,`width` from `".TABLE_PREFIX."mod_wysiwyg_admin` where `editor`='tiny_mce_jq'";
 			$result= $database->query( $query );
 			if (!$result) die ("Error: ".$database->get_error() );
+			
 			$data = $result->fetchRow( MYSQL_ASSOC );
-			$tiny_mce_jq = new c_editor();
-			$ref = &$tiny_mce_jq->toolbar_sets[ $data['menu'] ];
+			$tiny_mce_jq = new editorinfo();
+			
+			$ref = &$tiny_mce_jq->toolbars[ $data['menu'] ];
 			if ($ref) {
 				$use_toolbar_set = 1;
 				foreach($ref as $key=>&$str) {

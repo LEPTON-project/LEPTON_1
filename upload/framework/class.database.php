@@ -49,10 +49,25 @@ global $database;
 
 class database
 {
-    
+	/**
+	 *	Private var for the error-messages.
+	 */
     private	$error = '';
+    
+    /**
+     *	Public database-handle.
+     */
     public	$db_handle = false;
+    
+    /**
+     *	Private var for the error-message-handling.
+     *	If set to 'true' the process will stop at the first (db/query) error
+     */
     private	$prompt_on_error = false;
+    
+    /**
+     *	Private var to handle the session_check.
+     */
     private	$override_session_check = false;
     
     /**
@@ -460,8 +475,7 @@ class database
         }
         
         return $q;
-    }
-    
+    }    
 } // class database
 
 final class queryMySQL

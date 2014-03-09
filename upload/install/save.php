@@ -442,7 +442,7 @@ $config_content = "" .
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
-"define('DB_PORT', '$database_port');\n";
+"define('DB_PORT', '$database_port');\n".
 "define('DB_USERNAME', '$database_username');\n".
 "define('DB_PASSWORD', '$database_password');\n".
 "define('DB_NAME', '$database_name');\n".

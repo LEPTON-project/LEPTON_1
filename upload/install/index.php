@@ -458,7 +458,7 @@ ksort($DEFAULT_LANGUAGE);
             <tr>
                 <td width="120" style="color: #666666;">DB-Port:</td>
                 <td width="230">
-                    <input <?php echo field_error('database_port');?> type="text" tabindex="7" name="database_port" style="width: 98%;" value="<?php echo ('3306'); ?>" />
+                    <input <?php echo field_error('database_port');?> type="text" tabindex="7" name="database_port" style="width: 98%;" value="3306" />
                 </td>
         </tr>        
           <tr>

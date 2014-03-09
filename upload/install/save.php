@@ -299,6 +299,11 @@ if(!isset($_POST['database_host']) || $_POST['database_host'] == '') {
 } else {
 	$database_host = $_POST['database_host'];
 }
+/**
+ *	Try to get the database port.
+ */
+$database_port = isset($_POST['database_port']) ? $_POST['database_port']: "3306";
+
 // Check if user has entered a database username
 if(!isset($_POST['database_username']) || $_POST['database_username'] == '') {
 	set_error('Please enter a database username','database_username');
@@ -437,7 +442,7 @@ $config_content = "" .
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
-"define('DB_PORT', '". $_POST['database_port'] ."');\n";
+"define('DB_PORT', '$database_port');\n";
 "define('DB_USERNAME', '$database_username');\n".
 "define('DB_PASSWORD', '$database_password');\n".
 "define('DB_NAME', '$database_name');\n".

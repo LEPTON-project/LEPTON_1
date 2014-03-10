@@ -1,15 +1,13 @@
 <?php
 
 /**
- *  @module         TinyMCE-jQ
- *  @version        see info.php of this module
- *  @authors        erpe, Dietrich Roland Pehlke (Aldus)
- *  @copyright      2010-2014 erpe, Dietrich Roland Pehlke (Aldus)
- *  @license        GNU General Public License
- *  @license terms  see info.php of this module
- *  @platform       see info.php of this module
- *  @requirements   PHP 5.2.x and higher
- *
+ *	@module			wysiwyg Admin
+ *	@version		see info.php of this module
+ *	@authors		Dietrich Roland Pehlke
+ *	@copyright		2010-2014 Dietrich Roland Pehlke
+ *	@license		GNU General Public License
+ *	@license terms	see info.php of this module
+ *	@platform		see info.php of this module
  */
 
 // include class.secure.php to protect this file and the whole CMS!
@@ -45,11 +43,9 @@ $PRECHECK['VERSION']        = array(
     'OPERATOR' => '<'
 );
 
-$PRECHECK['WB_ADDONS']      = array(
-    'wysiwyg_admin' => array(
-        'VERSION' => '1.0.0',
-        'OPERATOR' => '>='
-    ),
+$PRECHECK['VERSION']        = array(
+    'VERSION' => '1.3.0',
+    'OPERATOR' => '>='
 );
 
 ?>

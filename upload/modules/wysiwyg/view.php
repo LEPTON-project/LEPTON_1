@@ -36,12 +36,8 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 // Get content
-$get_content = $database->query("SELECT `content` FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id` = '".$section_id."'");
-$fetch_content = $get_content->fetchRow( MYSQL_ASSOC );
-$content = $fetch_content['content'];
+$content = $database->get_one("SELECT `content` FROM `".TABLE_PREFIX."mod_wysiwyg` WHERE `section_id` = '".$section_id."'");
 
 echo $content;
 

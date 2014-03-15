@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 /**
  *	Get page content
  *
@@ -68,7 +66,7 @@ if(!isset($wysiwyg_editor_loaded)) {
 				$id_list[] = 'content'.$temp_id;
 			}
 
-			require_once( WB_PATH."/modules/wysiwyg/classes/pathfinder.php");
+			require_once( WB_PATH."/modules/wysiwyg/classes/pathfinder_php5.php");
 			$wb_path_info = new c_pathfinder($database);
 			
 			require_once(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');

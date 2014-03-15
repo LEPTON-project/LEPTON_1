@@ -35,12 +35,10 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 $module_directory	= 'wysiwyg';
 $module_name		  = 'WYSIWYG';
 $module_function	= 'page';
-$module_version		= '3.0.8';
+$module_version		= '3.1.0';
 $module_platform	= '1.x';
 $module_author		= 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license		= 'GNU General Public License';

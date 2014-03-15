@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 // Norwegian Moduledescription
 $module_description = 'Denne modulen lar deg redigere innholdet p&aring; websidene dine med et grafisk redigerings verkt&oslash;y';
 

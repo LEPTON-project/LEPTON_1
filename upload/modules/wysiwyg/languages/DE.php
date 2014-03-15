@@ -36,10 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
- 
- 
-
 // Deutsche Modulbeschreibung
 $module_description = 'Dieses Modul erm&ouml;glicht die Bearbeitung von Seiteninhalten mit Hilfe eines grafischen Editors';
 

@@ -36,6 +36,4 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 ?>

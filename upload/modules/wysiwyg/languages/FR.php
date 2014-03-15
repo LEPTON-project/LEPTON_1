@@ -36,9 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
- 
- 
 //Module Description
 $module_description = 'Ce module permet de modifier le contenu de la page &agrave; l&apos;aide d&apos;un &eacute;diteur graphique';
 

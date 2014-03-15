@@ -35,7 +35,6 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
-
  
 global $database, $section_id, $page_id;
 

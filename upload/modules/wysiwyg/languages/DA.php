@@ -36,9 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
- 
-
 // Dansk modulbeskrivelse
 $module_description = 'Dette modul g&oslash;r det muligt at redigere sideindhold ved hj&aelig;lp af en grafisk editor.';
 

@@ -36,8 +36,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
- 
-
 // Dutch 
 $module_description = 'Deze module laat je toe om de inhoud van een pagina te bewerken door middel van WYSIWYG';
 

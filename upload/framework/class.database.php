@@ -223,6 +223,28 @@ class database
 			return $return_val;
 		}
     } // query()
+
+    /**
+     * Prepare and exec a SQL query and return a handle to queryMySQL
+     * @param  STR $SQL - the query string to execute
+     * @param $params
+     * @return  RESOURCE or NULL for error
+     */
+    public function prepare($SQL, $params)
+    {
+      $result = new queryMySQL( $this->db_handle );
+      $return_val =  $result->prepare( $SQL , $params);
+      $err = $this->db_handle->errorInfo();
+      if ($err[2] != "")
+      {
+        $this->set_error($err[2]);
+        return NULL;
+      }
+      else
+      {
+        return $return_val;
+      }
+    } // prepare()
     
     /**
      *	Execute a SQL query and return the first row of the result array
@@ -531,7 +553,20 @@ final class queryMySQL
         $this->query_result = $this->pdo->query($SQL);
         return $this;
     } // query()
-    
+
+    /**
+     * Prepare and execute a MySQL query statement and return the resource or false on error
+     *
+     * @param string $SQL query
+     * @param array $params
+     * @return object  This
+     */
+    public function prepare($SQL, $params){
+        $this->query_result = $this->pdo->prepare($SQL);
+        $this->query_result->execute($params);
+        return $this;
+    }
+
     /**
      * Return the number of rows of the query result
      *

@@ -35,8 +35,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 /**
  *	1.8.3	2011-01-28
  *			- Bugfix inside edit_area_full.js for Safari.

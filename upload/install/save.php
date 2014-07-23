@@ -486,16 +486,6 @@ if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
 	set_error('It appears the Absolute path that you entered is incorrect');
 }
 
-// Try connecting to database
-if(!@mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
-	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'.mysql_error());
-}
-
-// Try to create the database
-mysql_query('CREATE DATABASE `'.$database_name.'`');
-
-// Close the mysql connection
-mysql_close();
 
 // Re-connect to the database, this time using in-build database class
 require_once(WB_PATH.'/framework/class.login.php');

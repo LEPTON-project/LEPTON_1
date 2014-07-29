@@ -149,11 +149,16 @@ if (true === $submit_ok) {
 	}
 	
 	if (count($errors) == 0) {
-		$q = "UPDATE `".TABLE_PREFIX."users` SET ";
-		foreach($fields as $key=>$value) $q .= "`".$key."`='".mysql_real_escape_string($value)."', ";
-		$q = substr($q, 0, -2) . " WHERE `user_id`='".$_SESSION['USER_ID']."'";
+
+		$q = $database->build_mysql_query(
+			"update",
+			TABLE_PREFIX."users",
+			$fields,
+			"`user_id`='".$_SESSION['USER_ID']."'"
+		);
+		$stmt = $database->db_handle->prepare( $q );
+		$result = $stmt->execute();
 	
-		$database->query( $q );
 		if ($database->is_error()) {
 			$errors[] = $database->get_error()."<br /><br />Query was:".$q."<br /><br />";
 		} else {

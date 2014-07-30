@@ -433,14 +433,21 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 					} else {
 						$submitted_by = 0;
 					}
-					$email_body = $wb->add_slashes($email_body);
 					
-					$query 	= "INSERT INTO `".TABLE_PREFIX."mod_form_submissions`";
-					$query .= "(`page_id`,`section_id`,`submitted_when`,`submitted_by`,`body`) ";
-					$query .= "VALUES ('".PAGE_ID."','".$section_id."','".time()."','";
-					$query .= mysql_real_escape_string($submitted_by)."','".mysql_real_escape_string($email_body)."')";
-					
-					$database->query( $query );
+					$fields = array(
+						'page_id'		=> PAGE_ID,
+						'section_id'	=> $section_id,
+						'submitted_when'	=> TIME(),
+						'submitted_by'		=> $submitted_by,
+						'body'				=> $wb->add_slashes($email_body)
+					);
+					$query = $database->build_mysql_query(
+						'INSERT',
+						TABLE_PREFIX."mod_form_submissions",
+						$fields
+					);
+					$statement = $database->db_handle->prepare( $query );
+					$result = $statement->execute();
 					
 					// Make sure submissions table isn't too full
 					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");

@@ -512,11 +512,11 @@ function getAddonInfos($addon_id_dir)
 	if (is_numeric($addon_id_dir)) {
 		$sql = "SELECT * FROM `$table` WHERE `addon_id` = '" . (int) $addon_id_dir . "'";
 	} else {
-		$sql = "SELECT * FROM `$table` WHERE `directory` = '" . add_slashes(strip_tags($addon_id_dir)) . "'";
+		$sql = "SELECT * FROM `$table` WHERE `directory` = '" . addslashes(strip_tags($addon_id_dir)) . "'";
 	}
 	
 	$results = $database->query($sql);
-	if ($results && $row = $results->fetchRow()) return $row;
+	if ($results && $row = $results->fetchRow( MYSQL_ASSOC )) return $row;
 	return false;	
 }
 

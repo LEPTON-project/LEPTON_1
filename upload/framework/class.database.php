@@ -213,7 +213,7 @@ class database
 		$return_val =  $result->query( $SQL );
 		$err = $this->db_handle->errorInfo();
 		
-		if ( ( is_array($err) ) && ($err[2] != "") )
+	if ( ( is_array($err) ) && (isset($err[2]) ))
 		{
 			$this->set_error($err[2]);
 			return NULL;

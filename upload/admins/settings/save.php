@@ -199,7 +199,7 @@ function save_settings(&$admin, &$database)
 
     $settings['sec_anchor'] = isset ($settings['sec_anchor']) ? $settings['sec_anchor'] : $old_settings['sec_anchor'];
 /**
- *	M.f.i.	Pages_directory could be emty
+ *	M.f.i.	Pages_directory could be empty
  */
 	$settings['pages_directory'] = isset ($settings['pages_directory']) ? '/'.$settings['pages_directory'] : $old_settings['pages_directory'];
 	$bad = array('"','`','!','@','#','$','%','^','&','*','=','+','|',';',':',',','?'	);
@@ -322,7 +322,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name` FROM `'.TABLE_PREFIX.'settings` ';
         $sql .= 'ORDER BY `name`';
         $results = $database->query($sql);
-        while ($row = $results->fetchRow())
+        while ($row = $results->fetchRow( MYSQL_ASSOC ))
         {
         // get fieldname from table and store it
             $setting_name = $row['name'];
@@ -350,7 +350,7 @@ function save_settings(&$admin, &$database)
         $sql = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'search` ';
         $sql .= 'WHERE `extra` = ""';
         $res_search = $database->query($sql);
-        while ($row = $res_search->fetchRow())
+        while ($row = $res_search->fetchRow( MYSQL_ASSOC ))
         {
             $old_value = $row['value'];
             $post_name = 'search_'.$row['name'];

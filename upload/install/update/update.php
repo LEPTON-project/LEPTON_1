@@ -165,8 +165,6 @@ if (file_exists(dirname(__FILE__).'/reload.php')) {
     require_once dirname(__FILE__).'/reload.php';
 }
 
-echo "<h3>reload all addons: successfull</h3>";
-
 /**
  *  success message
  */

@@ -94,7 +94,7 @@ if (! defined ( 'WB_PATH' )) {
 			$admin_dir.'/pages/trash.php',
 			$admin_dir.'/preferences/save.php',
 			$admin_dir.'/profiles/index.php',
-      $admin_dir.'/settings/ajax_testmail.php',      
+			$admin_dir.'/settings/ajax_testmail.php',      
 			$admin_dir.'/settings/index.php',
 			$admin_dir.'/settings/save.php',
 			$admin_dir.'/start/index.php',
@@ -117,10 +117,10 @@ if (! defined ( 'WB_PATH' )) {
 			'/include/captcha/captchas/ttf_image.php',
 			'/include/captcha/captcha.php',
 			'/modules/edit_module_files.php',
-      '/modules/menu_link/save.php',
-      '/modules/wrapper/save.php',
-      '/modules/jsadmin/move_to.php',
-      '/search/index.php'
+			'/modules/menu_link/save.php',
+			'/modules/wrapper/save.php',
+			'/modules/jsadmin/move_to.php',
+			'/search/index.php'
 		);
 } // end if filemanager exists
 		$allowed = false;

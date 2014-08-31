@@ -25,7 +25,7 @@ if (true === $debug) {
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
-	session_name('wb_session_id');
+	session_name('lepton-session-id');
 	session_start();
 	define('SESSION_STARTED', true);
 }

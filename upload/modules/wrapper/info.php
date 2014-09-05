@@ -39,7 +39,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'wrapper';
 $module_name = 'Wrapper';
 $module_function = 'page';
-$module_version = '2.7.2.1';
+$module_version = '2.7.2.2';
 $module_platform = '1.x';
 $module_author = 'Ryan Djurovich, Dietrich Roland Pehlke (last)';
 $module_license = 'GNU General Public License';
@@ -47,8 +47,11 @@ $module_description = 'This module allows you to wrap your site around another u
 $module_guid      = 'a5830654-06f3-402a-9d25-a03c53fc5574';
 
 /**
+ *	2.7.2.2	2014-09-05	- Remove filed 'width' and 'wtype' from install.php.
+ *						- Some codecleanings; remove empty lines and tabs.
+ *
  *	2.7.2.1	2012-03-01	- added columns to table
- *						  (
+ *
  *	2.7.1	2010-11-02	- Bugfix inside the html-template to get valid output.
  *						  (Remove missplaced '</form>' closing tag)
  *						- Move the html-template inside the "htt" folder.

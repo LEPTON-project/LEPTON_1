@@ -36,9 +36,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 // Delete page from mod_wrapper
-$database->query("DELETE FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'");
+$database->query("DELETE FROM `".TABLE_PREFIX."mod_wrapper` WHERE `section_id` = '$section_id'");
 
 ?>

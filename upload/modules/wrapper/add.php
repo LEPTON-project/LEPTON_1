@@ -36,10 +36,9 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
 global $database, $page_id, $section_id;
 
 // Insert an extra row into the database
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_wrapper (`page_id`, `section_id`, `height`, `url`) VALUES ('$page_id', '$section_id', '400', '')");
+$database->query("INSERT INTO `".TABLE_PREFIX."mod_wrapper` (`page_id`, `section_id`, `height`, `url`) VALUES ('$page_id', '$section_id', '400', '')");
 
 ?>

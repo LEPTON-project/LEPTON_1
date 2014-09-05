@@ -35,8 +35,6 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-
-
 if(defined('WB_URL')) {
 	
 	// Create table
@@ -46,8 +44,6 @@ if(defined('WB_URL')) {
 		. ' `page_id` INT NOT NULL DEFAULT \'0\','
 		. ' `url` TEXT NOT NULL,'
 		. ' `height` INT NOT NULL DEFAULT \'0\','
-		. ' `width` INT NOT NULL DEFAULT \'0\','
-		. ' `wtype` VARCHAR(50) NOT NULL DEFAULT \'0\','
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
 	$database->query($mod_wrapper);

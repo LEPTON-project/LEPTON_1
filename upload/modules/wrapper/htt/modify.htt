@@ -1,5 +1,4 @@
 <!-- BEGIN main_block -->
-<div>
 <form action="{WB_URL}/modules/wrapper/save.php" method="post">
 
 <input type="hidden" name="page_id" value="{PAGE_ID}" />
@@ -34,5 +33,4 @@
 </table>
 
 </form>
-
 <!-- END main_block -->

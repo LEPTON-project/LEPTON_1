@@ -39,11 +39,6 @@ else
 // Checking Requirements
 
 $PRECHECK['VERSION']        = array(
-    'VERSION' => '2.0',
-    'OPERATOR' => '<'
-);
-
-$PRECHECK['VERSION']        = array(
     'VERSION' => '1.3.0',
     'OPERATOR' => '>='
 );

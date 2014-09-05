@@ -36,6 +36,10 @@ if (defined('WB_PATH')) {
 // end include class.secure.php
 
 /**
+ *
+ *	1.8.4	2014-09-05
+ *			- Add class.editorinfo.php for WYSIWYG-Admin (support) for Lepton 1.3.0
+ *
  *	1.8.3	2011-01-28
  *			- Bugfix inside edit_area_full.js for Safari.
  *
@@ -44,9 +48,9 @@ if (defined('WB_PATH')) {
 $module_directory = 'edit_area';
 $module_name = 'Editarea';
 $module_function = 'WYSIWYG';
-$module_version = '1.8.3';
-$module_platform = '1.x';
-$module_author = 'Christophe Dolivet, Christian Sommer';
+$module_version = '1.8.4';
+$module_platform = '1.3.0';
+$module_author = 'Christophe Dolivet, Christian Sommer, Dietrich Roland Pehlke (last)';
 $module_license = 'GNU General Public License';
 $module_description = 'Small and easy code editor';
 $module_home = 'http://www.cdolivet.com';

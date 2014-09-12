@@ -191,7 +191,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height, $prompt=true
 			if (!$result) die ("Error: ".$database->get_error() );
 			
 			$data = $result->fetchRow( MYSQL_ASSOC );
-			$tiny_mce_jq = new editorinfo();
+			$tiny_mce_jq = new editorinfo_TINY_MCE_JQ();
 			
 			$ref = &$tiny_mce_jq->toolbars[ $data['menu'] ];
 			if ($ref) {

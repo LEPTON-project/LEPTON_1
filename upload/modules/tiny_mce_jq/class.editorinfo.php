@@ -4,20 +4,20 @@
  *	First experimental version of a (new) WYSIWYG-Admin support (-class).
  *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
  *
- *	@version	0.1.2
- *	@date		2014-03-08
+ *	@version	0.1.3
+ *	@date		2014-09-12
  *	@author		Dietrich Roland Pehlke (CMS-LAB)
  *
  */
  
-class editorinfo
+class editorinfo_TINY_MCE_JQ
 {
 
 	protected $name		= "tiny_mce_jq";
 	
 	protected $guid		= "D7F14EAA-6E8B-4FDB-B4B8-54616905DA3C";
 
-	protected $version	= "0.1.2";
+	protected $version	= "0.1.3";
 
 	protected $author	= "Dietrich Roland Pehkle (Aldus)";
 	

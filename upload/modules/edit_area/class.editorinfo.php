@@ -4,19 +4,19 @@
  *	First experimental version of a (new) WYSIWYG-Admin support (-class).
  *	Some informations about skin(-s) and used toolbar(-s) and there definations inside this file.
  *
- *	@version	0.1.2
- *	@date		2014-09-05
+ *	@version	0.1.3
+ *	@date		2014-09-12
  *	@author		Dietrich Roland Pehlke (CMS-LAB)
  *
  */
  
-class editorinfo
+class editorinfo_EDIT_AREA
 {
 	protected $name		= "Edit Area";
 	
 	protected $guid		= "F49BF196-B137-4D0F-BDF2-6712DAE076BD";
 
-	protected $version	= "0.1.2";
+	protected $version	= "0.1.3";
 
 	protected $author	= "Dietrich Roland Pehkle (Aldus)";
 	

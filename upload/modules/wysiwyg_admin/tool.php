@@ -49,7 +49,7 @@ if (!defined("LEPTON_PATH") ) define("LEPTON_PATH", WB_PATH);
 $look_up = LEPTON_PATH."/modules/".WYSIWYG_EDITOR."/class.editorinfo.php";
 if (file_exists($look_up)) {
 	require_once( $look_up );
-	if (!isset($editor_ref) || !is_object($editor_ref)) $editor_ref = new editorinfo();
+	if (!isset($editor_ref) || !is_object($editor_ref)) eval( "\$editor_ref = new editorinfo_".strtoupper(WYSIWYG_EDITOR)."();" );
 
 } else {
 	echo "<p><h3 style='color:#FF0000;'>WARNING: use of obsolete drivers!</h3></p>";

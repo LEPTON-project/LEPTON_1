@@ -104,7 +104,7 @@ if ($result->numRows() == 1) {
 	if (file_exists($lookup)) {
 	
 		require_once( $lookup );
-		$editor_info = new editorinfo();
+		eval( "\$editor_info = new editorinfo_".strtoupper(WYSIWYG_EDITOR)."();" );
 		$editor_info->wysiwyg_admin_init( $database );
 		
 		$last_insert_id = (true === $database->db_handle instanceof PDO )

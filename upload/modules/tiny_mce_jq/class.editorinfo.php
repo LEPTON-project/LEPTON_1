@@ -147,7 +147,7 @@ class editorinfo_TINY_MCE_JQ
 					$toolbars = array_keys( $this->toolbars );
 					
 					$fields = array(
-						'editor'	=> "ckeditor_4",
+						'editor'	=> $this->name,
 						'skin'		=> $this->skins[0],		// first entry
 						'menu'		=> $toolbars[0],		// first entry
 						'width'		=> $this->default_width,

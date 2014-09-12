@@ -476,7 +476,72 @@ class database
         }
         
         return $q;
-    }    
+    }
+    
+        /**
+     *	Public "shortcut" for preparing and executeing a single mySqlQuery.
+     *
+     *	@since	LEPTON 2.0
+     *
+     *	@param	string	A valid mySQL query.
+     *	@param	bool	Fetch the result - default is false.
+     *	@param	array	A storage array for the fetched results. Pass by reference!
+     *
+     */
+    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
+    	$oStatement=$this->db_handle->prepare($aQuery);
+    	$oStatement->execute();
+    	if ( true === $bFetch ) $aStorage = $oStatement->fetchAll();
+    }
+    
+    /**
+     *	Public function to build and execute a mySQL query direct.
+     *	Use this function/method for update and insert values only.
+     *	As for a simple select you can use "prepare_and_execute" above.
+     *
+     *	@param	string	A "job"-type: this time only "update" and "insert" are supported.
+     *	@param	string	A valid tablename (incl. table-prefix).
+     *	@param	array	An array within the table-field-names and values. Pass by reference!
+     *	@param	string	An optional condition for "update" - this time a simple string.
+     *	@return	mixed	NULL if fails, otherwise true.
+     *
+     */
+    public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
+    
+    	switch( strtolower($type) ) {
+    		case 'update':
+    			$q = "UPDATE `". $table_name ."` SET ";
+    			foreach($table_values as $field => $value) {
+    				$q .= "`". $field ."`= :".$field.", ";
+    			}
+    			$q = substr($q, 0, -2) . (($condition != "") ? " WHERE " . $condition : "");
+    			break;
+   			
+   			case 'insert':
+   				$keys = array_keys($table_values);
+                $q = "INSERT into `" . $table_name . "` (`";
+                $q .= implode("`,`", $keys) . "`) VALUES (:";
+                $q .= implode(", :", $keys) . ")";
+               
+                break;
+            
+   			default:
+   				die("<build_and_execute>:: type unknown!");
+   				break; 
+    	}
+
+    	$oStatement = $this->db_handle->prepare( $q );
+    	$oStatement->execute( $table_values );
+	
+		$err = $this->db_handle->errorInfo();
+		if ($err[2] != "")
+		{
+			$this->set_error($err[2]);
+			return NULL;
+		} else {
+			return TRUE;
+		}
+    }  
 } // class database
 
 final class queryMySQL

@@ -478,20 +478,56 @@ class database
         return $q;
     }
     
-        /**
-     *	Public "shortcut" for preparing and executeing a single mySqlQuery.
+    /**
+     *	Public "shortcut" for executeing a single mySql-query without passing values.
      *
      *	@since	LEPTON 2.0
      *
      *	@param	string	A valid mySQL query.
      *	@param	bool	Fetch the result - default is false.
      *	@param	array	A storage array for the fetched results. Pass by reference!
+     *	@param	bool	Try to get all entries. Default is true.
      *
      */
-    public function prepare_and_execute( $aQuery="", $bFetch=false, &$aStorage=array() ) {
+    public function execute_query( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	$oStatement->execute();
-    	if ( true === $bFetch ) $aStorage = $oStatement->fetchAll();
+    	if ( true === $bFetch ){
+    		$aStorage = (true === $bFetchAll)
+    			? $oStatement->fetchAll()
+    			: $oStatement->fetch()
+    			;
+    	}
+    	$err = $this->db_handle->errorInfo();
+		if ($err[2] != "") $this->error = $err[2];
+    }
+    
+    /**
+     *	Public function for prepare a given query within marker and execute it.
+     *
+     *	@since	LEPTON 2.0
+     *	@see	execute_query, build_and_execute
+     *
+     *	@param	string	A valid mySQL query string within marker ('?' or ':name').
+     *	@param	array	A valid array within the values. Type depending on the query. Pass by reference.
+     *	@param	bool	Boolean for fetching the result(-s). Default is false.
+     *	@param	array	Optional array to store the results. Pass by reference.
+     *	@param	bool	Try to get all entries. Default is true.
+     *	@return	nothing
+     *
+     */
+    public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
+		$oStatement=$this->db_handle->prepare($sQuery);
+    	$oStatement->execute( $aValues );
+   	   	if ( true === $bFetch ){
+    		$aStorage = (true === $bFetchAll)
+    			? $oStatement->fetchAll()
+    			: $oStatement->fetch()
+    			;
+    	}
+    	
+    	$err = $this->db_handle->errorInfo();
+		if ($err[2] != "") $this->error = $err[2];
     }
     
     /**
@@ -503,7 +539,7 @@ class database
      *	@param	string	A valid tablename (incl. table-prefix).
      *	@param	array	An array within the table-field-names and values. Pass by reference!
      *	@param	string	An optional condition for "update" - this time a simple string.
-     *	@return	mixed	NULL if fails, otherwise true.
+     *	@return	bool	False if fails, otherwise true.
      *
      */
     public function build_and_execute( $type, $table_name, &$table_values, $condition="" ) {
@@ -536,12 +572,12 @@ class database
 		$err = $this->db_handle->errorInfo();
 		if ($err[2] != "")
 		{
-			$this->set_error($err[2]);
-			return NULL;
+			$this->error = $err[2];
+			return FALSE;
 		} else {
 			return TRUE;
 		}
-    }  
+    }
 } // class database
 
 final class queryMySQL

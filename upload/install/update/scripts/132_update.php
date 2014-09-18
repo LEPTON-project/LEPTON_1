@@ -33,7 +33,10 @@ $upgrade_modules = array(
     "lib_jquery",
     "edit_area",
 	"wysiwyg_admin",
-    "wrapper",	
+    "wrapper",
+	"code2",
+	"news",
+	"show_menu2,		
     "tiny_mce_jq"
 );
 

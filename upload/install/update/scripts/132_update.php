@@ -36,7 +36,7 @@ $upgrade_modules = array(
     "wrapper",
 	"code2",
 	"news",
-	"show_menu2,		
+	"show_menu2",
     "tiny_mce_jq"
 );
 

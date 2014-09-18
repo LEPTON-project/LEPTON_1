@@ -50,11 +50,11 @@ echo "<h3>run upgrade.php of modified modules: successfull</h3>";
 echo '<h5>Current process : ceate new config file</h5>';
 // copy config file
 
-$file = 'config.php';
-$newfile = 'config_sik.php';
+$file = WB_PATH.'/config.php';
+$newfile = WB_PATH.'/config_sik.php';
 
 if (!copy($file, $newfile)) {
-    echo "failed to copy $file...\n";
+    die ("failed to copy $file...\n");
 }
 
 // prepare config file
@@ -88,7 +88,7 @@ $config_content = "" .
 "?>";
 
 // Check if the file exists and is writable first.
-$config_filename = 'config.php';
+$config_filename = WB_PATH.'/config.php';
 if(($handle = @fopen($config_filename, 'w')) === false) {
 	set_error("Cannot open the configuration file ($config_filename)");
 } else {

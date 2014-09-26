@@ -21,9 +21,10 @@
 echo '<h3>Current process : updating to LEPTON 1.3.2</h3>';
 
 /**
- *  modifications
+ *  database modifications
  */
-
+// drop unique key
+$database->execute_query("ALTER TABLE `".TABLE_PREFIX."addons` DROP INDEX `type`;");
 
 /**
  *  run upgrade.php of all modified modules

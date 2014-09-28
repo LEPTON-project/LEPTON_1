@@ -23,8 +23,7 @@ echo '<h3>Current process : updating to LEPTON 1.3.2</h3>';
 /**
  *  database modifications
  */
-// drop unique key
-$database->execute_query("ALTER TABLE `".TABLE_PREFIX."addons` DROP INDEX `type`;");
+
 
 /**
  *  run upgrade.php of all modified modules
@@ -108,6 +107,9 @@ echo "<h3>config file written successfully</h3>";
 // at last: set db to current release-no
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.3.2\' WHERE `name` =\'lepton_version\'');
 
+// drop unique key: if update script stops here installation has been updated from WB. Update process was complete. Please log in backend
+echo "<h3>if update script stops here installation has been updated from WB. Update process is complete. Please login in backend</h3>";
+$database->execute_query("ALTER TABLE `".TABLE_PREFIX."addons` DROP INDEX `type`;");
 /**
  *  success message
  */

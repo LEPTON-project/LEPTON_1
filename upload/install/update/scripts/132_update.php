@@ -23,7 +23,8 @@ echo '<h3>Current process : updating to LEPTON 1.3.2</h3>';
 /**
  *  database modifications
  */
-
+// GUID is part of config.php and not needed in database 
+$database->query( "DELETE FROM `".TABLE_PREFIX."settings` WHERE `name`= 'lepton_guid'" );
 
 /**
  *  run upgrade.php of all modified modules

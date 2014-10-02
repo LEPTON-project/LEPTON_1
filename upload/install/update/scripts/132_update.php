@@ -67,7 +67,7 @@ $config_content = "" .
 "\n".
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
-"\n\n// Upgraded to LEPTON 1.3.2\n".
+"\n\n// new since LEPTON 1.3.2\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '".DB_HOST."');\n".
 "define('DB_PORT', '".DB_PORT."');\n".
@@ -109,7 +109,7 @@ echo "<h3>config file written successfully</h3>";
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.3.2\' WHERE `name` =\'lepton_version\'');
 
 // drop unique key: if update script stops here installation has been updated from WB. Update process was complete. Please log in backend
-echo "<h3>if update script stops here installation has been updated from WB. Update process is complete. Please login in backend</h3>";
+echo "<h3>if update script stops here installation has been updated from WB. Update process is complete anyway. Please login in backend</h3>";
 $database->execute_query("ALTER TABLE `".TABLE_PREFIX."addons` DROP INDEX `type`;");
 /**
  *  success message

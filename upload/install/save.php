@@ -389,7 +389,8 @@ if($admin_password != $admin_repassword) {
 // Include WB functions file
 $wb_path = str_replace(array('/install','\install'), '', dirname(__FILE__));
 require_once($wb_path.'/framework/functions.php');
-
+/*
+// not needed anymore
 if (array_key_exists('SERVER_ADDR', $_SERVER)) {
     $server_addr = $_SERVER['SERVER_ADDR'];
     // if IP is not valid assume localhost!
@@ -397,7 +398,7 @@ if (array_key_exists('SERVER_ADDR', $_SERVER)) {
 } else {
     $server_addr = '127.0.0.1';
 }
-
+*/
 // create a new GUID for this installation
 $lepton_guid = createGUID();
 // define service vars
@@ -438,8 +439,9 @@ if (file_exists($wb_path.'/install/lepton.info')) {
 $config_content = "" .
 "<?php\n".
 "\n".
-"if(defined('WB_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
+"if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
+"\n\n// installation LEPTON 1.3.2 or higher\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
 "define('DB_PORT', '$database_port');\n".
@@ -448,17 +450,18 @@ $config_content = "" .
 "define('DB_NAME', '$database_name');\n".
 "define('TABLE_PREFIX', '$table_prefix');\n".
 "\n".
-"define('WB_SERVER_ADDR', '".$server_addr."');\n".
-"define('WB_PATH', dirname(__FILE__));\n".
-"define('WB_URL', '$wb_url');\n".
-"define('ADMIN_PATH', WB_PATH.'/admins');\n".
-"define('ADMIN_URL', '$wb_url/admins');\n".
+"define('LEPTON_PATH', dirname(__FILE__));\n".
+"define('LEPTON_URL', '$wb_url');\n".
+"define('ADMIN_PATH', LEPTON_PATH.'/admins');\n".
+"define('ADMIN_URL', LEPTON_URL.'/admins');\n".
 "\n".
 "define('LEPTON_GUID', '".$lepton_guid."');\n".
 "define('LEPTON_SERVICE_FOR', '".$lepton_service_for."');\n".
 "define('LEPTON_SERVICE_ACTIVE', ".$lepton_service_active.");\n".
+"define('WB_URL', LEPTON_URL);\n".
+"define('WB_PATH', LEPTON_PATH);\n".
 "\n".
-"if (!defined('LEPTON_INSTALL')) require_once(WB_PATH.'/framework/initialize.php');\n".
+"if (!defined('LEPTON_INSTALL')) require_once(LEPTON_PATH.'/framework/initialize.php');\n".
 "\n".
 "?>";
 

@@ -67,7 +67,7 @@ $config_content = "" .
 "\n".
 "if(defined('LEPTON_PATH')) { die('By security reasons it is not permitted to load \'config.php\' twice!! ".
 "Forbidden call from \''.\$_SERVER['SCRIPT_NAME'].'\'!'); }\n\n".
-"\n\n// new since LEPTON 1.3.2\n".
+"\n\n// new during update to LEPTON 1.3.2\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '".DB_HOST."');\n".
 "define('DB_PORT', '".DB_PORT."');\n".

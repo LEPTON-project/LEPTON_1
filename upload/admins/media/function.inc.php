@@ -95,8 +95,9 @@ function fsize($size)
 
 function __unserialize($sObject)
 {
-// found in php manual :-)
-    $__ret = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject);
+    $__ret = preg_replace_callback('!s:(\d+):"(.*?)";!', function($matches){
+      return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
+    }, $sObject);
     return unserialize($__ret);
 }
 

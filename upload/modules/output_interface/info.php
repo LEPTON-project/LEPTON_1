@@ -37,7 +37,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'output_interface';
 $module_name		= 'outputInterface';
 $module_function	= 'snippet';
-$module_version		= '0.1.1';
+$module_version		= '0.1.2';
 $module_status		= 'Beta';
 $module_platform	= '1.0.0'; 
 $module_author		= 'Ralf Hertsch, Berlin (Germany), Dietrich Roland Pehlke (last)';

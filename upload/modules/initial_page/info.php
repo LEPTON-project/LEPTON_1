@@ -35,7 +35,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'initial_page';
 $module_name		= 'Initial Page';
 $module_function	= 'tool';
-$module_version		= '0.1.4';
+$module_version		= '0.1.5';
 $module_platform	= '1.0';
 $module_author		= 'Ralf Hertsch, Dietrich Roland Pehlke';
 $module_license		= 'copyright, all rights reserved';

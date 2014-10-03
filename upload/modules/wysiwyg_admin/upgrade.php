@@ -30,7 +30,7 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-  
+  $database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_editor_admin`");
 
 
 ?>

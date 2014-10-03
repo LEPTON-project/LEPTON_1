@@ -35,9 +35,7 @@ if (defined('WB_PATH')) {
 
 $table = TABLE_PREFIX ."mod_initial_page";
 
-$jobs = array("DROP TABLE IF EXISTS `".$table."`");
-
-$jobs[] = "CREATE TABLE `".$table."` (
+$jobs[] = "CREATE TABLE IF NOT EXISTS `".$table."` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`user_id` INT(11) NOT NULL DEFAULT '1',
 	`init_page` TEXT NOT NULL,

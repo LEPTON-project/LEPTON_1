@@ -34,10 +34,8 @@ global $database;
 global $admin;
 
 $table = TABLE_PREFIX .'mod_output_interface';
-$database->query("DROP TABLE IF EXISTS `$table`");
-if ($database->is_error()) $admin->print_error($database->get_error());
 
-$database->query("CREATE TABLE `$table` (
+$database->query("CREATE TABLE IF NOT EXISTS `$table` (
 	`module_directory` VARCHAR(64) NOT NULL DEFAULT '',
 	`module_name` VARCHAR(64) NOT NULL DEFAULT '',
 	`timestamp` TIMESTAMP,

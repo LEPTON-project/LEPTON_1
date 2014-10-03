@@ -41,10 +41,9 @@ if (defined('WB_PATH')) {
 // add new rows to table "settings"
 
 $table = TABLE_PREFIX ."mod_jsadmin";
-$database->query("DROP TABLE IF EXISTS `$table`");
 
 $database->query("
-	CREATE TABLE `$table` (
+	CREATE TABLE IF NOT EXISTS `$table` (
     `id` INT(11) NOT NULL DEFAULT '0',
 		`name` VARCHAR(255) NOT NULL DEFAULT '0',
 		`value` INT(11) NOT NULL DEFAULT '0',

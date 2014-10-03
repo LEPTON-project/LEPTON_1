@@ -32,7 +32,7 @@ if (defined('WB_PATH')) {
 $module_directory	= 'wysiwyg_admin';
 $module_name		= 'wysiwyg Admin';
 $module_function	= 'tool';
-$module_version		= '1.0.4';
+$module_version		= '1.0.5';
 $module_platform	= '1.3.0';
 $module_author		= 'Dietrich Roland Pehlke (Aldus)';
 $module_license		= '<a href="http://www.gnu.org/licenses/lgpl.html" target="_blank">lgpl</a>';

@@ -42,7 +42,7 @@ if (defined('WB_PATH')) {
 $module_directory = 'jsadmin';
 $module_name = 'Javascript Admin';
 $module_function = 'tool';
-$module_version = '1.3.0';
+$module_version = '1.3.1';
 $module_platform = '1.x';
 $module_author = 'Stepan Riha, Swen Uth';
 $module_license	= 'BSD License';

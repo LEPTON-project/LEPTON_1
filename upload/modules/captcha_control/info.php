@@ -7,11 +7,11 @@
  *
  *
  * @author          Thomas Hornik (thorn),LEPTON Project
- * @copyright       2008-2012, Thomas Hornik (thorn),LEPTON Project
+ * @copyright       2008-2011, Thomas Hornik (thorn),LEPTON Project
+ * @copyright       2010-2014  LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: info.php 1687 2012-01-23 09:25:47Z erpe $
  *
  */
  
@@ -24,8 +24,8 @@ V1.0 - inital version
 
 */
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -48,7 +48,7 @@ if (defined('WB_PATH')) {
 $module_directory 	= 'captcha_control';
 $module_name 		  	= 'Captcha and Advanced-Spam-Protection (ASP) Control';
 $module_function 		= 'tool';
-$module_version 		= '1.03';
+$module_version 		= '1.04';
 $module_platform 		= '1.x';
 $module_author 	  	= 'Thomas Hornik (thorn),LEPTON Project';
 $module_license 		= 'GNU General Public License';

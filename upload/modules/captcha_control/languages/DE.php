@@ -8,10 +8,10 @@
  *
  * @author          Thomas Hornik (thorn),LEPTON Project
  * @copyright       2008-2011, Thomas Hornik (thorn),LEPTON Project
+ * @copyright       2010-2014  LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see info.php of this module
- * @version         $Id: DE.php 458 2011-02-07 10:13:27Z erpe $
  *
  */
 

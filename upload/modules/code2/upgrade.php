@@ -60,7 +60,7 @@ if ($database->is_error() ) {
 
 		} else {
 
-			$admin->print_success( "Update Table for modul 'code2' with success." );
+			$admin->print_success( "Update table for module 'code2' with success." );
 		}
 	}
 }

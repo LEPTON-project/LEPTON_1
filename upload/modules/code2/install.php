@@ -34,17 +34,11 @@ $table = TABLE_PREFIX."mod_code2";
 
 $all_jobs = array();
 
-/**
- *	Delete the table
- */
-$query = "DROP TABLE IF EXISTS `".$table."`";
-
-$all_jobs[] = $query;
 
 /**
  *	Creating the table new
  */
-$query  = "CREATE TABLE `".$table."` (";
+$query  = "CREATE TABLE IF NOT EXISTS `".$table."` (";
 $query .= "`section_id`	INT NOT NULL DEFAULT '0',";
 $query .= "`page_id`	INT NOT NULL DEFAULT '0',";
 $query .= "`whatis`		INT NOT NULL DEFAULT '0',";

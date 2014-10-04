@@ -31,7 +31,11 @@ $database->query( "DELETE FROM `".TABLE_PREFIX."settings` WHERE `name`= 'lepton_
  *
  */
 $upgrade_modules = array(
-    "lib_jquery",
+    "captcha_control",
+    "initial_page",
+    "jsadmin",
+	"output_interface",
+    "lib_jquery",	
     "edit_area",
 	"wysiwyg_admin",
     "wrapper",

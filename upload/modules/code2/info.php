@@ -4,7 +4,7 @@
  *  @module         code2
  *  @version        see info.php of this module
  *  @authors        Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
- *  @copyright      2004-2013 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
+ *  @copyright      2004-2014 Ryan Djurovich, Chio Maisriml, Thomas Hornik, Dietrich Roland Pehlke
  *  @license        GNU General Public License
  *  @license terms  see info.php of this module
  *  @platform       see info.php of this module
@@ -14,7 +14,7 @@
 $module_directory       = 'code2';
 $module_name            = 'Code2';
 $module_function        = 'page';
-$module_version         = '2.2.7';
+$module_version         = '2.2.8';
 $module_platform        = '1.x';
 $module_author          = 'Ryan Djurovich, Chio Maisriml, Thorn, Aldus.';
 $module_license         = 'GNU General Public License';
@@ -24,7 +24,11 @@ $module_home            = 'http://www.lepton-cms.org';
 $module_guid            = 'e5e36d7f-877a-4233-8dac-e1481c681c8d';
 
 
-/*
+/**
+ *
+ *	2.2.8	2014-10-04	- Codechanges for LEPTON-CMS 1.3 - last changes for LEPTON CMS 1 series.
+ *						- Remove obsolete code from install.php.
+ *
  *	2.2.3	2011-12-21	- Update/rework secure-block in the module files.
  *
  *	2.2.2	2011-08-06	- Bugfix for { and } inside HTML/PHP-Code.

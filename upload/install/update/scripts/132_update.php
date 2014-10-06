@@ -40,6 +40,7 @@ $upgrade_modules = array(
 	"wysiwyg_admin",
     "wrapper",
 	"code2",
+	"droplets",
 	"news",
 	"show_menu2",
     "tiny_mce_jq"

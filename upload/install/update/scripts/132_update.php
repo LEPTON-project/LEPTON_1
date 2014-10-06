@@ -113,7 +113,7 @@ echo "<h3>config file written successfully</h3>";
 $database->query('UPDATE `' . TABLE_PREFIX . 'settings` SET `value` =\'1.3.2\' WHERE `name` =\'lepton_version\'');
 
 // drop unique key: if update script stops here installation has been updated from WB. Update process was complete. Please log in backend
-echo "<h3>if update script stops here installation has been updated from WB. Update process is complete anyway. Please login in backend</h3>";
+echo "<h3>if update script stops here installation has been updated from WB. Update process is complete anyway. Please login in backend and reload all addons manually</h3>";
 $database->execute_query("ALTER TABLE `".TABLE_PREFIX."addons` DROP INDEX `type`;");
 /**
  *  success message

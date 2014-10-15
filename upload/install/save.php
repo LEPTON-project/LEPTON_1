@@ -562,7 +562,7 @@ $database->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLAT
 	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `publ_start` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
 	       . ' `publ_end` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
-	       . ' `name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT \'no name\' ,'
+	       . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'no name\' ,'
 	       . ' PRIMARY KEY ( `section_id` ) '
 	       . ' )';
 	$database->query($sections);

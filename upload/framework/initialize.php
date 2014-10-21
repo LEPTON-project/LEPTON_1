@@ -50,9 +50,9 @@ if (file_exists(dirname(__FILE__).'/class.database.php')) {
 	// Get website settings (title, keywords, description, header, and footer)
 
 	$sql = 'SELECT `name`,`value` FROM `'.TABLE_PREFIX.'settings` ORDER BY `name`';
-	$storrage = array();
-	$database->get_all( $sql, $storrage );
-	foreach($storrage as &$row) {
+	$storage = array();
+	$database->get_all( $sql, $storage );
+	foreach($storage as &$row) {
 		if (preg_match( '/^[0-7]{1,4}$/', $row['value'] ) == true) {
 			$value = $row['value'];
 		}

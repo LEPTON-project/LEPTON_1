@@ -159,6 +159,16 @@ if (version_compare($lepton_version, "1.3.1", "="))
 }
 
 /**
+ *  update LEPTON to 1.3.3 , check release
+ */
+$lepton_version = $database->get_one("SELECT `value` from `" . TABLE_PREFIX . "settings` where `name`='lepton_version'");
+if (version_compare($lepton_version, "1.3.2", "="))
+{
+    echo("<h3>Your LEPTON Version :$lepton_version </h3>");
+    include 'scripts/133_update.php';
+}
+
+/**
  *  reload all addons
  */
 if (file_exists(dirname(__FILE__).'/reload.php')) {
@@ -198,10 +208,10 @@ echo "<br /><h3><a href=' ".ADMIN_URL."/login/index.php'>please login and check 
 </div>
 <div id="update-footer">
       <!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-      <a href="http://wwww.lepton-cms.org" title="Lepton CMS">Lepton Core</a> is released under the
+      <a href="http://wwww.lepton-cms.org" title="LEPTON CMS">LEPTON Core</a> is released under the
       <a href="http://www.gnu.org/licenses/gpl.html" title="Lepton Core is GPL">GNU General Public License</a>.
       <!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-        <br /><a href="http://wwww.lepton-cms.org" title="Lepton CMS">Lepton CMS Package</a> is released under several different licenses.
+        <br /><a href="http://wwww.lepton-cms.org" title="LEPTON CMS">LEPTON CMS Package</a> is released under several different licenses.
 </div>
 </body>
 </html>

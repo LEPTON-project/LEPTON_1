@@ -121,8 +121,9 @@ if($query_sections->numRows() > 0) {
 			}
 			if (isset($_POST['section_name'][$section_id])) {
 				if (strlen($sql) > 0) $sql .= ",";
-				$sql .= " `name`='".htmlspecialchars($_POST['section_name'][$section_id])."'";
+				$sql .= " `name`='".$admin->add_slashes($_POST['section_name'][$section_id])."'";
 			}
+			
 			$query = "UPDATE ".TABLE_PREFIX."sections SET ".$sql." WHERE section_id = '".$section_id."' LIMIT 1";
 			if($sql != '') {
 				$database->query($query);

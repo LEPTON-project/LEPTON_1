@@ -23,7 +23,10 @@ echo '<h3>Current process : updating to LEPTON 1.3.3</h3>';
 /**
  *  database modifications
  */
-
+//modify search settings
+echo '<h5>Current process : modify search table</h5>';
+$database->query("UPDATE `" .TABLE_PREFIX."search` SET `value` ='false' WHERE `name` ='cfg_enable_old_search'");
+echo '<h5>modify search table: successfull</h5>';
 
 /**
  *  run upgrade.php of all modified modules

@@ -514,11 +514,15 @@ class database
     public function execute_query( $aQuery="", $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
     	$oStatement=$this->db_handle->prepare($aQuery);
     	$oStatement->execute();
-    	if ( true === $bFetch ){
-    		$aStorage = (true === $bFetchAll)
-    			? $oStatement->fetchAll()
-    			: $oStatement->fetch()
-    			;
+    	
+    	if ($oStatement->rowCount() > 0) {
+    	
+    		if ( true === $bFetch ){
+    			$aStorage = (true === $bFetchAll)
+    				? $oStatement->fetchAll()
+    				: $oStatement->fetch()
+    				;
+    		}
     	}
     	$err = $this->db_handle->errorInfo();
 		if ($err[2] != "") $this->error = $err[2];
@@ -541,13 +545,15 @@ class database
     public function prepare_and_execute( $sQuery="", &$aValues=array(), $bFetch=false, &$aStorage=array(), $bFetchAll=true ) {
 		$oStatement=$this->db_handle->prepare($sQuery);
     	$oStatement->execute( $aValues );
-   	   	if ( true === $bFetch ){
-    		$aStorage = (true === $bFetchAll)
-    			? $oStatement->fetchAll()
-    			: $oStatement->fetch()
-    			;
-    	}
     	
+    	if ($oStatement->rowCount() > 0) {
+			if ( true === $bFetch ){
+    			$aStorage = (true === $bFetchAll)
+    				? $oStatement->fetchAll()
+    				: $oStatement->fetch()
+    				;
+    		}
+    	}
     	$err = $this->db_handle->errorInfo();
 		if ($err[2] != "") $this->error = $err[2];
     }

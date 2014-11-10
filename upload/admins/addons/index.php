@@ -8,12 +8,11 @@
  * Please see the individual license in the header of each single file or info.php of modules and templates.
  *
  * @author          Website Baker Project, LEPTON Project
- * @copyright       2004-2010, Website Baker Project
+ * @copyright       2004-2010 Website Baker Project
  * @copyright       2010-2014 LEPTON Project
  * @link            http://www.LEPTON-cms.org
  * @license         http://www.gnu.org/licenses/gpl.html
  * @license_terms   please see LICENSE and COPYING files in your package
- * @version         $Id: index.php 1172 2011-10-04 15:26:26Z frankh $
  *
  */
  
@@ -117,9 +116,9 @@ $tpl->set_var(array(
 /**
  *	Parsing the blocks ...
  */
-if ( $admin->get_permission('modules') == true) $tpl->parse('main_block', "modules_block", true);
-if ( $admin->get_permission('templates') == true) $tpl->parse('main_block', "templates_block", true);
-if ( $admin->get_permission('languages') == true) $tpl->parse('main_block', "languages_block", true);
+if ( $admin->get_permission('modules') == true) $tpl->parse('modules', "modules_block", true);
+if ( $admin->get_permission('templates') == true) $tpl->parse('templates', "templates_block", true);
+if ( $admin->get_permission('languages') == true) $tpl->parse('languages', "languages_block", true);
 if ( isset($_GET['advanced']) && $admin->get_permission('admintools') == true)
 {
 	$tpl->parse('main_block', "reload_block", true);

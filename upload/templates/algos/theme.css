@@ -400,8 +400,8 @@ table.pages_view tr:hover {
 .header_sections_list {
 	font-weight: bold;
 }
-.page_list .page_list {
-	display: none;
+.page_list {
+	background: #EEEEEE;
 }
 
 /* media */

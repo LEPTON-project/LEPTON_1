@@ -39,8 +39,9 @@ function wb_handle_copy() {
     // add new droplet
     $result = $database->query($query);
     if( ! $database->is_error() ) {
-        $new_id = mysql_insert_id();
-        echo header( "Location: ".WB_URL."/modules/droplets/modify_droplet.php?droplet_id=$new_id" );
+        $new_id = $database->get_one("SELECT LAST_INSERT_ID()");
+        $leptoken = (isset($_GET['leptoken'])) ? "&leptoken=".$_GET['leptoken'] : "";
+        echo header( "Location: ".WB_URL."/modules/droplets/modify_droplet.php?droplet_id=$new_id".$leptoken );
     }
     else {
         echo "ERROR: ", $database->get_error();

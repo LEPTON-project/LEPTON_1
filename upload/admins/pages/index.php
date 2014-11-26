@@ -329,9 +329,14 @@ function make_list($parent = 0, &$editable_pages = 0) {
   $template->set_block('page_sublist_loop_block', 'link_move_down_block', 'link_move_down');
   $template->set_block('page_sublist_loop_block', 'link_delete_block', 'link_delete');
   $template->set_block('page_sublist_loop_block', 'link_add_block', 'link_add');
-  if (isset ($_COOKIE['p'.$parent]) && $_COOKIE['p'.$parent] == '1'){
-    $template->set_var('DISPLAY', ' style="display:block"');
-  }
+  
+	if (!isset($_COOKIE["p".$parent])) $_COOKIE["p".$parent] = "1";
+	
+	if (isset ($_COOKIE['p'.$parent]) && $_COOKIE['p'.$parent] == '1'){
+		$template->set_var('DISPLAY', ' style="display:block"');
+	} else {
+		$template->set_var('DISPLAY', ' style="display:none"');
+	}
 
   // Get page list from database
   $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' ';
@@ -360,6 +365,7 @@ function make_list($parent = 0, &$editable_pages = 0) {
       $template->set_var('HEADING_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
       $template->set_var('HEADING_ADD_PAGE', $HEADING['ADD_PAGE']);
       $template->set_var('PAGE_TITLE', $page['page_title']);
+		$template->set_var('MENU_TITLE', $page['menu_title']);
       $template->set_var('PAGE_LINK', $page['link'].PAGE_EXTENSION);
       $template->set_var('PAGE_ID', $page['page_id']);
       $template->set_var('PAGE_URL', $admin->page_link($page['link']));
@@ -412,6 +418,9 @@ function make_list($parent = 0, &$editable_pages = 0) {
       $template->set_var('EXPAND', '');
       if( true === $display_plus ) {
         $sign = 'plus';
+ 
+       	if(!isset($_COOKIE['p'.$page['page_id']])) $_COOKIE['p'.$page['page_id']] = '0';
+ 
         if(isset($_COOKIE['p'.$page['page_id']]) && $_COOKIE['p'.$page['page_id']] == '1'){ $sign = 'minus'; }
         $theme_url = THEME_URL;
         $expand = <<<EXPAND

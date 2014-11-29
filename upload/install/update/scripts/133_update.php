@@ -33,8 +33,8 @@ echo '<h5>modify search table: successfull</h5>';
  *
  */
 $upgrade_modules = array(
-    "lib_jquery",	
-    "tiny_mce_jq"
+    "news",	
+    "droplets"
 );
 
 foreach ($upgrade_modules as $module)

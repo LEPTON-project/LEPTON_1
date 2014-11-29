@@ -7,7 +7,7 @@
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
  * @copyright       2009-2010, Website Baker Org. e.V.
- * @link			      http://www.websitebaker2.org/
+ * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
  *
@@ -16,7 +16,7 @@
 $module_directory = 'droplets';
 $module_name = 'Droplets';
 $module_function = 'tool';
-$module_version = '1.5.5';
+$module_version = '1.5.6';
 $module_platform = '1.x';
 $module_author = 'Ruud, pcwacht, WebBird, Dietrich Roland Pehlke (last)';
 $module_license = 'GNU General Public License';
